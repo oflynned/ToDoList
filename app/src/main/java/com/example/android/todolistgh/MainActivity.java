@@ -127,4 +127,34 @@ public class MainActivity extends AppCompatActivity {
             horizontalLL.addView(newCheckBox, p3);
         }
     }
+
+    public void clearCompletedTasks(View view) {
+
+
+        if (count == 0) {
+            Toast.makeText(this, "There are no tasks to clear", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            LinearLayout newTask = (LinearLayout) findViewById(R.id.verticalLL);         //find the parent vertical linear layout
+
+            for (int i = 1; i <= countCopy; i++)                                         //set up loop- initialise i to 1
+            {
+                //LinearLayout maskLayout = (LinearLayout) findViewById(count);          //find the horizontal linear layout containing the first check box
+                if (arrayx[i] == true) {
+                    CheckBox mask = (CheckBox) findViewById((3 + i));                    //find the first check box
+
+                    if (mask.isChecked()) {
+                        LinearLayout maskLayout = (LinearLayout) mask.getParent();
+                        maskLayout.removeAllViews();
+                        newTask.removeView(maskLayout);                                  //if check box is checked, remove the entire horizontal linear layout from the parent vertical linear layout
+                        //((ViewGroup) maskLayout.getParent()).removeView(maskLayout);
+                        //((ViewManager)maskLayout.getParent()).removeView(maskLayout);
+                        arrayx[i] = false;
+                        count--;
+                    }
+
+                }
+            }
+        }
+    }
 }
