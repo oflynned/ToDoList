@@ -5,12 +5,22 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    int count = 0;
+    int countCopy = 0;
+    boolean[] arrayx = new boolean[100];
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,5 +58,73 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void parseNewTask(View view) {
+        String date;
+        String task;
+
+        EditText newTaskDate = (EditText) findViewById(R.id.newDate);
+        EditText newTaskDescription = (EditText) findViewById(R.id.newDescription);
+        date = newTaskDate.getText().toString();
+        task = newTaskDescription.getText().toString();
+        addNewTask(date, task);
+        newTaskDate.setText("");
+        newTaskDescription.setText("");
+    }
+
+    public void addNewTask(String date, String task) {
+
+        if (countCopy == 100) {
+            Toast.makeText(this, "Too many tasks added", Toast.LENGTH_SHORT).show();
+        }
+        else {
+
+            count++;
+            countCopy++;
+
+            TextView newDateTextView = new TextView(this);
+            newDateTextView.setText(date);
+            //newDateTextView.setId((1 + count));
+            newDateTextView.setGravity(Gravity.CENTER);
+
+            TextView newTaskTextView = new TextView(this);
+            newTaskTextView.setText(task);
+            newTaskTextView.setGravity(Gravity.CENTER);
+            //newTaskTextView.setId((2 + count));
+
+            CheckBox newCheckBox = new CheckBox(this);
+            newCheckBox.setGravity(Gravity.CENTER);
+            newCheckBox.setId((3 + count));
+            arrayx[count] = true;
+            /*
+            LinearLayout horizontalLL = new LinearLayout(this);
+
+            LinearLayout newTask = (LinearLayout) findViewById(R.id.verticalLL);
+
+            newTask.addView(horizontalLL);
+            horizontalLL.addView(newDateTextView);
+            horizontalLL.addView(newTaskTextView);
+            horizontalLL.addView(newCheckBox);
+            */
+            LinearLayout newTask = (LinearLayout) findViewById(R.id.verticalLL);
+            LinearLayout horizontalLL = new LinearLayout(this);
+            horizontalLL.setId(count);
+            horizontalLL.setWeightSum(1f);
+            newTask.addView(horizontalLL);
+
+            LinearLayout.LayoutParams p1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            p1.weight = 0.33f;
+
+            LinearLayout.LayoutParams p2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            p2.weight = 0.33f;
+
+            LinearLayout.LayoutParams p3 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            p3.weight = 0.33f;
+
+            horizontalLL.addView(newDateTextView, p1);
+            horizontalLL.addView(newTaskTextView, p2);
+            horizontalLL.addView(newCheckBox, p3);
+        }
     }
 }
