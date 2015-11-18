@@ -25,10 +25,11 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp">
 
+
             <TextView
                 android:text="@string/title"
                 android:textSize="24sp"
-                android:textColor="#000000"
+                android:textColor="#ff00ff"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
