@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
             CheckBox newCheckBox = new CheckBox(this);                                      //create a new CheckBox which will contain information on whether or not the task has been completed
             newCheckBox.setGravity(Gravity.CENTER);                                         //set the gravity of this CheckBox to: "center"
-            newCheckBox.setId((3 + count));                                                 //issue this CheckBox a unique id, so that we can later scan all CheckBoxes to detect which ones are checked
+            newCheckBox.setId(count);                                                 //issue this CheckBox a unique id, so that we can later scan all CheckBoxes to detect which ones are checked
             arrayx[count] = true;                                                           //set the component of arrayx corresponding to this new task to "true", indicating that this task is live and HAS NOT been completed and cleared
 
             LinearLayout newTask = (LinearLayout) findViewById(R.id.verticalLL);            //find the parent vertical linear layout that contains all the tasks created (NOTE: this is the root vertical linear layout)
