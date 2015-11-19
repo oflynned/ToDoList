@@ -150,7 +150,6 @@ public class MainActivity extends AppCompatActivity {
                         arrayx[i] = false;
                         count--;
                     }
-
                 }
             }
         }
