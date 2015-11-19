@@ -152,6 +152,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
+            if (count == 0) {
+                Toast.makeText(this, "All tasks completed!", Toast.LENGTH_SHORT).show();    //if all tasks have been cleared, notify user that all tasks have been completed
+            }
         }
     }
 }
