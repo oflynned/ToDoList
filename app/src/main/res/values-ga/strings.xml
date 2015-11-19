@@ -3,7 +3,7 @@
     <string name="app_name">LiostaADhéanamh</string>
     <string name="action_settings">Socruithe</string>
     <string name="title">Liosta a Dhéanamh</string>
-    <string name="newTask">Tasc Nua</string>
+    <string name="newTask">+</string>
     <string name="newDueDate">ll/mm</string>
     <string name="newDescription">cur síos</string>
     <string name="addNewTask">Cuir</string>
@@ -11,4 +11,8 @@
     <string name="description">Cuir Síos</string>
     <string name="completedyorn">Déanta?</string>
     <string name="clearCompleted">Glan</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="memo">Meamram</string>
+    <string name="notes">nótaí</string>
+    <string name="enterNote">Cuir isteach nóta</string>
 </resources>

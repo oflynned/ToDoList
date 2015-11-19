@@ -28,7 +28,7 @@
             android:layout_marginRight="8dp">
 
             <Button
-                android:text="Memo"
+                android:text="@string/memo"
                 android:textColor="#6c35cb"
                 android:id="@+id/clickbutton"
                 android:onClick="openMemo"

@@ -11,4 +11,8 @@
     <string name="description">Description</string>
     <string name="completedyorn">Achevé?</string>
     <string name="clearCompleted">Effacer</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="memo">Memo</string>
+    <string name="notes">notes</string>
+    <string name="enterNote">Entrer une note</string>
 </resources>
