@@ -145,8 +145,6 @@ public class MainActivity extends AppCompatActivity {
                         LinearLayout maskLayout = (LinearLayout) mask.getParent();          //find the horizontal linear layout containing the first check box
                         maskLayout.removeAllViews();                                        //remove all the views from the horizontal linear layout containing the 2 TextBoxes and CheckBox for that particular task
                         newTask.removeView(maskLayout);                                     //remove the physical horizontal linear layout from the parent vertical linear layout
-                        //((ViewGroup) maskLayout.getParent()).removeView(maskLayout);
-                        //((ViewManager)maskLayout.getParent()).removeView(maskLayout);
                         arrayx[i] = false;
                         count--;
                     }
