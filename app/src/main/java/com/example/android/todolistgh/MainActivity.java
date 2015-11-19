@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     int count = 0;                                                                          //count tracks the number of CheckBoxes at any given moment in time
     int countCopy = 0;                                                                      //countCopy is never reduced- we need this to ensure that even if CheckBoxes in the middle are deleted, we still reach the latest CheckBox when checking to see which tasks are completed
     boolean[] arrayx = new boolean[100];                                                    //arrayx stores the existence state of any task (i.e. if the task has been created, set to true...if the task has been completed and cleared, set to false)- NOTE that the max number of tasks created is set to 100
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
 
             CheckBox newCheckBox = new CheckBox(this);                                      //create a new CheckBox which will contain information on whether or not the task has been completed
             newCheckBox.setGravity(Gravity.CENTER);                                         //set the gravity of this CheckBox to: "center"
-            newCheckBox.setId((3 + count));                                                 //issue this CheckBox a unique id, so that we can later scan all CheckBoxes to detect which ones are checked
-            arrayx[count] = true;                                                           //set the component of arrayx corresponding to this new task to "true", indicating that this task is live and HAS NOT been completed and cleared
+            newCheckBox.setId((3 + countCopy));                                             //issue this CheckBox a unique id, so that we can later scan all CheckBoxes to detect which ones are checked
+            arrayx[countCopy] = true;                                                       //set the component of arrayx corresponding to this new task to "true", indicating that this task is live and HAS NOT been completed and cleared
             /*
             LinearLayout horizontalLL = new LinearLayout(this);
 
