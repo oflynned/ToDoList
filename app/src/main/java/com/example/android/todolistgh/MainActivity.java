@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
             count++;                                                                        //increment count by 1
             countCopy++;                                                                    //increment countCopy by 1
-
+            
             TextView newDateTextView = new TextView(this);                                  //create a new TextView which will contain the due date of the new task to be added
             newDateTextView.setText(date);                                                  //set this due date to be the date passed to this function from the parseNewTask function
             newDateTextView.setGravity(Gravity.CENTER);                                     //set the gravity of this TextView to: "center"
@@ -112,13 +112,15 @@ public class MainActivity extends AppCompatActivity {
             newTask.addView(horizontalLL);
 
             LinearLayout.LayoutParams p1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            p1.weight = 0.33f;
+            p1.weight = 0f;
+            p1.leftMargin = 64;
 
             LinearLayout.LayoutParams p2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            p2.weight = 0.33f;
+            p2.weight = 1f;
 
             LinearLayout.LayoutParams p3 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            p3.weight = 0.33f;
+            p3.weight = 0f;
+            p3.rightMargin = 64;
 
             horizontalLL.addView(newDateTextView, p1);
             horizontalLL.addView(newTaskTextView, p2);
