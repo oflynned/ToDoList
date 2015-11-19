@@ -2,21 +2,6 @@
 <items version="2" >
 
     <item
-<<<<<<< HEAD
-        jar="C:\Users\IslaHoe\Documents\GitHub\ToDoList\app\build\intermediates\exploded-aar\com.android.support\design\23.1.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="19026d31f5d3ae868db81319671a642be5fbba08">
-        <dex dex="C:\Users\IslaHoe\Documents\GitHub\ToDoList\app\build\intermediates\pre-dexed\debug\classes-4c42255865b374fc66e2759180f61aba5bf38e5f.jar" />
-    </item>
-    <item
-        jar="C:\Users\IslaHoe\Documents\GitHub\ToDoList\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="3f151e49c316a5ab2c065969a3b3b55ef9b393fc">
-        <dex dex="C:\Users\IslaHoe\Documents\GitHub\ToDoList\app\build\intermediates\pre-dexed\debug\classes-94481140454d498c79c8b72e2c345fd949f97e3b.jar" />
-    </item>
-    <item
         jar="C:\Users\IslaHoe\Documents\GitHub\ToDoList\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
@@ -24,11 +9,18 @@
         <dex dex="C:\Users\IslaHoe\Documents\GitHub\ToDoList\app\build\intermediates\pre-dexed\debug\classes-58f569eb674c4c45ce00d9e46a065b98303b22f6.jar" />
     </item>
     <item
-        jar="C:\Users\IslaHoe\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.0\support-annotations-23.1.0.jar"
+        jar="C:\Users\IslaHoe\Documents\GitHub\ToDoList\app\build\intermediates\exploded-aar\com.android.support\design\23.1.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="92e3fc113ec3ee36b64603a38857b95700025633">
-        <dex dex="C:\Users\IslaHoe\Documents\GitHub\ToDoList\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.0-ec1cd07342c7db85f51c25dcfc4747ea82242f23.jar" />
+        sha1="19026d31f5d3ae868db81319671a642be5fbba08">
+        <dex dex="C:\Users\IslaHoe\Documents\GitHub\ToDoList\app\build\intermediates\pre-dexed\debug\classes-4c42255865b374fc66e2759180f61aba5bf38e5f.jar" />
+    </item>
+    <item
+        jar="C:\Users\IslaHoe\Documents\GitHub\ToDoList\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\libs\internal_impl-23.1.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
+        <dex dex="C:\Users\IslaHoe\Documents\GitHub\ToDoList\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.0-f8f6797977d36b69b9773bf40aa5d4b3251d6aa3.jar" />
     </item>
     <item
         jar="C:\Users\IslaHoe\Documents\GitHub\ToDoList\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\classes.jar"
@@ -38,53 +30,18 @@
         <dex dex="C:\Users\IslaHoe\Documents\GitHub\ToDoList\app\build\intermediates\pre-dexed\debug\classes-86642f5725a4588c4903c85f99f478f77289610a.jar" />
     </item>
     <item
-        jar="C:\Users\IslaHoe\Documents\GitHub\ToDoList\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\libs\internal_impl-23.1.0.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
-        <dex dex="C:\Users\IslaHoe\Documents\GitHub\ToDoList\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.0-f8f6797977d36b69b9773bf40aa5d4b3251d6aa3.jar" />
-=======
-        jar="C:\Users\Diarmuid\Documents\GitHub\ToDoList\ToDoList\app\build\intermediates\exploded-aar\com.android.support\design\23.1.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="19026d31f5d3ae868db81319671a642be5fbba08">
-        <dex dex="C:\Users\Diarmuid\Documents\GitHub\ToDoList\ToDoList\app\build\intermediates\pre-dexed\debug\classes-53575874c8895da31f2d120539377a1ee3f930f1.jar" />
-    </item>
-    <item
-        jar="C:\Users\Diarmuid\Documents\GitHub\ToDoList\ToDoList\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
-        <dex dex="C:\Users\Diarmuid\Documents\GitHub\ToDoList\ToDoList\app\build\intermediates\pre-dexed\debug\classes-349ae199d1849c86c8dbf23b9410037f13a8e514.jar" />
-    </item>
-    <item
-        jar="C:\Users\Diarmuid\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.0\support-annotations-23.1.0.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="92e3fc113ec3ee36b64603a38857b95700025633">
-        <dex dex="C:\Users\Diarmuid\Documents\GitHub\ToDoList\ToDoList\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.0-4e11f0e195b95830385c8f7a2ce3e0f06af6edcc.jar" />
-    </item>
-    <item
-        jar="C:\Users\Diarmuid\Documents\GitHub\ToDoList\ToDoList\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.0\jars\classes.jar"
+        jar="C:\Users\IslaHoe\Documents\GitHub\ToDoList\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="3f151e49c316a5ab2c065969a3b3b55ef9b393fc">
-        <dex dex="C:\Users\Diarmuid\Documents\GitHub\ToDoList\ToDoList\app\build\intermediates\pre-dexed\debug\classes-cc19d970eab1a938d76f183cd1df28ff57d08f5a.jar" />
+        <dex dex="C:\Users\IslaHoe\Documents\GitHub\ToDoList\app\build\intermediates\pre-dexed\debug\classes-94481140454d498c79c8b72e2c345fd949f97e3b.jar" />
     </item>
     <item
-        jar="C:\Users\Diarmuid\Documents\GitHub\ToDoList\ToDoList\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\jars\classes.jar"
+        jar="C:\Users\IslaHoe\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.0\support-annotations-23.1.0.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
-        <dex dex="C:\Users\Diarmuid\Documents\GitHub\ToDoList\ToDoList\app\build\intermediates\pre-dexed\debug\classes-2fa3911004d5fa3ca8327081ceacd71089e79f66.jar" />
-    </item>
-    <item
-        jar="C:\Users\Diarmuid\Documents\GitHub\ToDoList\ToDoList\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\libs\internal_impl-23.1.0.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
-        <dex dex="C:\Users\Diarmuid\Documents\GitHub\ToDoList\ToDoList\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.0-8da71a6cb79cc7950f2852d6388472a37df054a8.jar" />
->>>>>>> refs/remotes/origin/master
+        sha1="92e3fc113ec3ee36b64603a38857b95700025633">
+        <dex dex="C:\Users\IslaHoe\Documents\GitHub\ToDoList\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.0-ec1cd07342c7db85f51c25dcfc4747ea82242f23.jar" />
     </item>
 
 </items>

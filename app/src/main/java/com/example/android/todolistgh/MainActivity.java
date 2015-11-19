@@ -30,38 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
     int count = 0;                                                                          //count tracks the number of CheckBoxes at any given moment in time
     int countCopy = 0;                                                                      //countCopy is never reduced- we need this to ensure that even if CheckBoxes in the middle are deleted, we still reach the latest CheckBox when checking to see which tasks are completed
-<<<<<<< HEAD
-    boolean[] arrayx = new boolean[100];
 
-  
-
-    private String readFromFile(Context context, String fileName) {
-        if (context == null) {
-            return null;
-        }
-
-        String ret = "";
-
-        try {
-            InputStream inputStream = context.openFileInput(fileName);
-
-            if ( inputStream != null ) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-
-                int size = inputStream.available();
-                char[] buffer = new char[size];
-
-                inputStreamReader.read(buffer);
-
-                inputStream.close();
-                ret = new String(buffer);
-            }
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return ret;
-    }                //arrayx stores the existence state of any task (i.e. if the task has been created, set to true...if the task has been completed and cleared, set to false)- NOTE that the max number of tasks created is set to 100
+    boolean[] arrayx = new boolean[100];                                                    //arrayx stores the existence state of any task (i.e. if the task has been created, set to true...if the task has been completed and cleared, set to false)- NOTE that the max number of tasks created is set to 100
 
 
 
@@ -69,11 +39,7 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, Main2Activity.class);
         startActivity(intent);
-
     }
-=======
-    boolean[] arrayx = new boolean[100];                                                    //arrayx stores the existence state of any task (i.e. if the task has been created, set to true...if the task has been completed and cleared, set to false)- NOTE that the max number of tasks created is set to 100
->>>>>>> refs/remotes/origin/master
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
