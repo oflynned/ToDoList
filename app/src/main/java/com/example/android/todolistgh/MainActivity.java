@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     int count = 0;                                                                          //count tracks the number of CheckBoxes at any given moment in time
     int countCopy = 0;                                                                      //countCopy is never reduced- we need this to ensure that even if CheckBoxes in the middle are deleted, we still reach the latest CheckBox when checking to see which tasks are completed
     boolean[] arrayx = new boolean[100];                                                    //arrayx stores the existence state of any task (i.e. if the task has been created, set to true...if the task has been completed and cleared, set to false)- NOTE that the max number of tasks created is set to 100
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,18 +85,16 @@ public class MainActivity extends AppCompatActivity {
             
             TextView newDateTextView = new TextView(this);                                  //create a new TextView which will contain the due date of the new task to be added
             newDateTextView.setText(date);                                                  //set this due date to be the date passed to this function from the parseNewTask function
-            //newDateTextView.setId((1 + count));
             newDateTextView.setGravity(Gravity.CENTER);                                     //set the gravity of this TextView to: "center"
 
             TextView newTaskTextView = new TextView(this);                                  //create a new TextView which will contain the description of the new task to be added
             newTaskTextView.setText(task);                                                  //set this description to be the date passed to this function from the parseNewTask function
             newTaskTextView.setGravity(Gravity.CENTER);                                     //set the gravity of this TextView to: "center"
-            //newTaskTextView.setId((2 + count));
 
             CheckBox newCheckBox = new CheckBox(this);                                      //create a new CheckBox which will contain information on whether or not the task has been completed
             newCheckBox.setGravity(Gravity.CENTER);                                         //set the gravity of this CheckBox to: "center"
-            newCheckBox.setId((3 + count));                                                 //issue this CheckBox a unique id, so that we can later scan all CheckBoxes to detect which ones are checked
-            arrayx[count] = true;                                                           //set the component of arrayx corresponding to this new task to "true", indicating that this task is live and HAS NOT been completed and cleared
+            newCheckBox.setId((3 + countCopy));                                             //issue this CheckBox a unique id, so that we can later scan all CheckBoxes to detect which ones are checked
+            arrayx[countCopy] = true;                                                       //set the component of arrayx corresponding to this new task to "true", indicating that this task is live and HAS NOT been completed and cleared
             /*
             LinearLayout horizontalLL = new LinearLayout(this);
 
@@ -149,13 +147,13 @@ public class MainActivity extends AppCompatActivity {
                         LinearLayout maskLayout = (LinearLayout) mask.getParent();          //find the horizontal linear layout containing the first check box
                         maskLayout.removeAllViews();                                        //remove all the views from the horizontal linear layout containing the 2 TextBoxes and CheckBox for that particular task
                         newTask.removeView(maskLayout);                                     //remove the physical horizontal linear layout from the parent vertical linear layout
-                        //((ViewGroup) maskLayout.getParent()).removeView(maskLayout);
-                        //((ViewManager)maskLayout.getParent()).removeView(maskLayout);
                         arrayx[i] = false;
                         count--;
                     }
-
                 }
+            }
+            if (count == 0) {
+                Toast.makeText(this, "All tasks completed!", Toast.LENGTH_SHORT).show();    //if all tasks have been cleared, notify user that all tasks have been completed
             }
         }
     }
