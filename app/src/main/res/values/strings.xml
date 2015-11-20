@@ -5,10 +5,13 @@
     <string name="newTask">Add new task</string>
     <string name="newDueDate">dd/mm</string>
     <string name="newDescription">description</string>
-    <string name="addNewTask">+</string>
+    <string name="addNewTask">Add</string>
     <string name="dueDate">Date</string>
     <string name="description">Description</string>
     <string name="completedyorn">Completed?</string>
     <string name="clearCompleted">Clear</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="memo">Memo</string>
+    <string name="notes">notes</string>
+    <string name="enterNote">Enter a note</string>
 </resources>
