@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">ListeDeChosesÀFaire</string>
     <string name="action_settings">Paramètres</string>
-    <string name="title">ListeDeChosesÀFaire</string>
-    <string name="newTask">AjouterUneNouvelleTâche</string>
+    <string name="title">Liste De Choses À Faire</string>
+    <string name="newTask">Ajouter Une Nouvelle Tâche</string>
     <string name="newDueDate">jj/mm</string>
     <string name="newDescription">description</string>
     <string name="addNewTask">Ajouter</string>
