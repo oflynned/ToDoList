@@ -87,6 +87,7 @@ public class Main2Activity extends AppCompatActivity {
         return ret;
     }
 
+    /*
     private void sendToEmail(View view) {
 
         EditText memo = (EditText) findViewById(R.id.sendToEmail);
@@ -101,6 +102,6 @@ public class Main2Activity extends AppCompatActivity {
         if (sendEmailSummary.resolveActivity(getPackageManager()) != null) {
                 startActivity(sendEmailSummary);
         }
-    }
+    }*/
 
 }
