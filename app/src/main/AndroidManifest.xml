@@ -27,6 +27,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.todolistgh.MainActivity" />
         </activity>
+        <activity
+            android:name=".EventInfo"
+            android:label="@string/title_activity_event_info"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.todolistgh.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

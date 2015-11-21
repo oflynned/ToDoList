@@ -15,4 +15,5 @@
     <string name="notes">notes</string>
     <string name="enterNote">Enter a note</string>
     <string name="email">Email</string>
+    <string name="title_activity_event_info">EventInfo</string>
 </resources>
