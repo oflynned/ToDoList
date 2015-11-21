@@ -10,7 +10,8 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_main2"
     tools:context="com.example.android.todolistgh.Main2Activity">
-<TextView
+
+    <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="@string/notes"
@@ -26,11 +27,11 @@
         android:layout_height="wrap_content"
         android:hint="@string/enterNote" />
 
-    <!--
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/email"
-        android:onClick="sendToEmail" />-->
+        android:onClick="sendToEmail" />
+
 </LinearLayout>
