@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
     boolean[] arrayx = new boolean[100];                                                    //arrayx stores the existence state of any task (i.e. if the task has been created, set to true...if the task has been completed and cleared, set to false)- NOTE that the max number of tasks created is set to 100
 
-
+    String[] arrayTaskDates = new String[100];
+    String[] arrayTaskDescriptions = new String[100];
+    boolean[] arrayTaskCompleted = new boolean[100];
 
     public void openMemo (View view)
     {
@@ -102,7 +106,11 @@ public class MainActivity extends AppCompatActivity {
 
             count++;                                                                        //increment count by 1
             countCopy++;                                                                    //increment countCopy by 1
-            
+
+            arrayTaskDates[countCopy] = date;
+            arrayTaskDescriptions[countCopy] = task;
+            arrayTaskCompleted[countCopy] = false;
+
             TextView newDateTextView = new TextView(this);                                  //create a new TextView which will contain the due date of the new task to be added
             newDateTextView.setText(date);                                                  //set this due date to be the date passed to this function from the parseNewTask function
             newDateTextView.setGravity(Gravity.CENTER);                                     //set the gravity of this TextView to: "center"
@@ -179,12 +187,107 @@ public class MainActivity extends AppCompatActivity {
                         maskLayout.removeAllViews();                                        //remove all the views from the horizontal linear layout containing the 2 TextBoxes and CheckBox for that particular task
                         newTask.removeView(maskLayout);                                     //remove the physical horizontal linear layout from the parent vertical linear layout
                         arrayx[i] = false;
+                        arrayTaskCompleted[i] = true;
+                        arrayTaskDates[i] = "";
+                        arrayTaskDescriptions[i] = "";
                         count--;
                     }
                 }
             }
             if (count == 0) {
                 Toast.makeText(this, "All tasks completed!", Toast.LENGTH_SHORT).show();    //if all tasks have been cleared, notify user that all tasks have been completed
+            }
+        }
+    }
+
+    //static final String[] STATE_DATE = new String[100];
+    static final String[] STATE_DATE = Collections.nCopies(100, "taskDate").toArray(new String[0]);
+    //static final String STATE_DESCRIPTION = "taskDescription";
+    static final String[] STATE_DESCRIPTION = Collections.nCopies(100, "taskDescription").toArray(new String[0]);
+    //static final String STATE_COMPLETED = "taskCompleted";
+    static final String[] STATE_COMPLETED = Collections.nCopies(100, "taskCompleted").toArray(new String[0]);
+    static final String STATE_COUNTCOPY = "countCopyString";
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+
+        // Save the user's current game state
+        for (int i = 0; i <= 100; i++) {
+
+            savedInstanceState.putStringArray(STATE_DATE[i], arrayTaskDates);
+            savedInstanceState.putStringArray(STATE_DESCRIPTION[i], arrayTaskDescriptions);
+            savedInstanceState.putBooleanArray(STATE_COMPLETED[i], arrayTaskCompleted);
+            savedInstanceState.putInt(STATE_COUNTCOPY, countCopy);
+        }
+
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        // Always call the superclass so it can restore the view hierarchy
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // Restore state members from saved instance
+        for (int i = 0; i <= 100; i++) {
+
+            arrayTaskDates = savedInstanceState.getStringArray(STATE_DATE[i]);
+            arrayTaskDescriptions = savedInstanceState.getStringArray(STATE_DESCRIPTION[i]);
+            arrayTaskCompleted = savedInstanceState.getBooleanArray(STATE_COMPLETED[i]);
+        }
+        countCopy = savedInstanceState.getInt(STATE_COUNTCOPY);
+
+        for (int j = 0; j <= countCopy; j++) {
+
+
+            arrayTaskDates[countCopy] = arrayTaskDates[j];
+            arrayTaskDescriptions[countCopy] = arrayTaskDescriptions[j];
+            arrayTaskCompleted[countCopy] = arrayTaskCompleted[j];
+
+            if (arrayTaskDescriptions[j] != "" && !arrayTaskCompleted[j]) {
+
+                TextView newDateTextView = (TextView) findViewById(100 + j);
+                newDateTextView.setText(arrayTaskDates[j]);
+                TextView newTaskTextView = (TextView) findViewById(200 + j);
+                newTaskTextView.setText(arrayTaskDescriptions[j]);
+
+                /*
+                TextView newDateTextView = new TextView(this);                                  //create a new TextView which will contain the due date of the new task to be added
+                newDateTextView.setText(arrayTaskDates[j]);                                                  //set this due date to be the date passed to this function from the parseNewTask function
+                newDateTextView.setGravity(Gravity.CENTER);                                     //set the gravity of this TextView to: "center"
+                newDateTextView.setId(100 + countCopy);
+
+                TextView newTaskTextView = new TextView(this);                                  //create a new TextView which will contain the description of the new task to be added
+                newTaskTextView.setText(arrayTaskDescriptions[j]);                                                  //set this description to be the date passed to this function from the parseNewTask function
+                newTaskTextView.setGravity(Gravity.CENTER);                                     //set the gravity of this TextView to: "center"
+                newTaskTextView.setId(200 + countCopy);
+
+                CheckBox newCheckBox = new CheckBox(this);                                      //create a new CheckBox which will contain information on whether or not the task has been completed
+                newCheckBox.setGravity(Gravity.CENTER);                                         //set the gravity of this CheckBox to: "center"
+                newCheckBox.setId((300 + countCopy));                                           //issue this CheckBox a unique id, so that we can later scan all CheckBoxes to detect which ones are checked
+                arrayx[countCopy] = true;                                                       //set the component of arrayx corresponding to this new task to "true", indicating that this task is live and HAS NOT been completed and cleared
+
+                LinearLayout newTask = (LinearLayout) findViewById(R.id.verticalLL);            //find the parent vertical linear layout that contains all the tasks created (NOTE: this is the root vertical linear layout)
+                LinearLayout horizontalLL = new LinearLayout(this);                             //create a new horizontal linear layout which will contain the details of the new task to be added (in 3 Views, 2 TextBoxes and 1 CheckBox)
+                horizontalLL.setId(count);
+                horizontalLL.setWeightSum(1f);
+                newTask.addView(horizontalLL);
+
+                LinearLayout.LayoutParams p1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                p1.weight = 0f;
+                p1.leftMargin = 64;
+
+                LinearLayout.LayoutParams p2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                p2.weight = 1f;
+
+                LinearLayout.LayoutParams p3 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                p3.weight = 0f;
+                p3.rightMargin = 64;
+
+                horizontalLL.addView(newDateTextView, p1);
+                horizontalLL.addView(newTaskTextView, p2);
+                horizontalLL.addView(newCheckBox, p3);
+                */
             }
         }
     }
