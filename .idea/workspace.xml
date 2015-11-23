@@ -36,23 +36,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/todolistgh/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6666667">
+              <caret line="189" column="5" selection-start-line="189" selection-start-column="5" selection-end-line="189" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="content_main.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_main.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.75862">
-              <caret line="116" column="21" selection-start-line="116" selection-start-column="21" selection-end-line="116" selection-end-column="21" />
+            <state vertical-scroll-proportion="-68.27586">
+              <caret line="134" column="0" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
               <folding>
-                <element signature="e#327#367#0" expanded="true" />
-                <element signature="e#1078#1092#0" expanded="true" />
-                <element signature="e#1387#1402#0" expanded="true" />
-                <element signature="e#1779#1803#0" expanded="true" />
-                <element signature="e#2080#2097#0" expanded="true" />
-                <element signature="e#2762#2782#0" expanded="true" />
-                <element signature="e#3060#3084#0" expanded="true" />
-                <element signature="e#3182#3202#0" expanded="true" />
-                <element signature="e#3729#3746#0" expanded="true" />
-                <element signature="e#3987#4008#0" expanded="true" />
-                <element signature="e#4249#4272#0" expanded="true" />
+                <element signature="e#2135#2152#0" expanded="true" />
+                <element signature="e#3962#3979#0" expanded="true" />
+                <element signature="e#4270#4291#0" expanded="true" />
+                <element signature="e#4580#4603#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -61,20 +64,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/todolistgh/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6976744">
-              <caret line="120" column="14" selection-start-line="120" selection-start-column="14" selection-end-line="120" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.444445">
+            <state vertical-scroll-proportion="-8.888889">
               <caret line="17" column="63" selection-start-line="17" selection-start-column="63" selection-end-line="17" selection-end-column="63" />
               <folding />
             </state>
@@ -1430,9 +1423,9 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_main2.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/todolistgh/Main2Activity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_event_info.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/content_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/android/todolistgh/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/content_main.xml" />
       </list>
     </option>
   </component>
@@ -1467,7 +1460,10 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1592,9 +1588,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1854,6 +1847,38 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="116" column="21" selection-start-line="116" selection-start-column="21" selection-end-line="116" selection-end-column="21" />
+          <folding>
+            <element signature="e#2135#2152#0" expanded="true" />
+            <element signature="e#3962#3979#0" expanded="true" />
+            <element signature="e#4270#4291#0" expanded="true" />
+            <element signature="e#4580#4603#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/todolistgh/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="120" column="14" selection-start-line="120" selection-start-column="14" selection-end-line="120" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="63" selection-start-line="17" selection-start-column="63" selection-end-line="17" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_main2.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1879,7 +1904,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2005,17 +2029,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="92" column="47" selection-start-line="92" selection-start-column="47" selection-end-line="92" selection-end-column="47" />
           <folding>
-            <element signature="e#327#367#0" expanded="true" />
-            <element signature="e#1078#1092#0" expanded="true" />
-            <element signature="e#1387#1402#0" expanded="true" />
-            <element signature="e#1779#1803#0" expanded="true" />
-            <element signature="e#2080#2097#0" expanded="true" />
-            <element signature="e#2762#2782#0" expanded="true" />
-            <element signature="e#3060#3084#0" expanded="true" />
-            <element signature="e#3182#3202#0" expanded="true" />
-            <element signature="e#3729#3746#0" expanded="true" />
-            <element signature="e#3987#4008#0" expanded="true" />
-            <element signature="e#4249#4272#0" expanded="true" />
+            <element signature="e#2135#2152#0" expanded="true" />
+            <element signature="e#3962#3979#0" expanded="true" />
+            <element signature="e#4270#4291#0" expanded="true" />
+            <element signature="e#4580#4603#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2077,17 +2094,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
           <folding>
-            <element signature="e#327#367#0" expanded="true" />
-            <element signature="e#1078#1092#0" expanded="true" />
-            <element signature="e#1387#1402#0" expanded="true" />
-            <element signature="e#1779#1803#0" expanded="true" />
-            <element signature="e#2080#2097#0" expanded="true" />
-            <element signature="e#2762#2782#0" expanded="true" />
-            <element signature="e#3060#3084#0" expanded="true" />
-            <element signature="e#3182#3202#0" expanded="true" />
-            <element signature="e#3729#3746#0" expanded="true" />
-            <element signature="e#3987#4008#0" expanded="true" />
-            <element signature="e#4249#4272#0" expanded="true" />
+            <element signature="e#2135#2152#0" expanded="true" />
+            <element signature="e#3962#3979#0" expanded="true" />
+            <element signature="e#4270#4291#0" expanded="true" />
+            <element signature="e#4580#4603#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2165,17 +2175,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#327#367#0" expanded="true" />
-            <element signature="e#1078#1092#0" expanded="true" />
-            <element signature="e#1387#1402#0" expanded="true" />
-            <element signature="e#1779#1803#0" expanded="true" />
-            <element signature="e#2080#2097#0" expanded="true" />
-            <element signature="e#2762#2782#0" expanded="true" />
-            <element signature="e#3060#3084#0" expanded="true" />
-            <element signature="e#3182#3202#0" expanded="true" />
-            <element signature="e#3729#3746#0" expanded="true" />
-            <element signature="e#3987#4008#0" expanded="true" />
-            <element signature="e#4249#4272#0" expanded="true" />
+            <element signature="e#2135#2152#0" expanded="true" />
+            <element signature="e#3962#3979#0" expanded="true" />
+            <element signature="e#4270#4291#0" expanded="true" />
+            <element signature="e#4580#4603#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2240,32 +2243,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_main2.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="40" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/todolistgh/Main2Activity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/todolistgh/EventInfo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2282,28 +2263,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.444445">
+        <state vertical-scroll-proportion="-8.888889">
           <caret line="17" column="63" selection-start-line="17" selection-start-column="63" selection-end-line="17" selection-end-column="63" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/todolistgh/Main2Activity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.7777777">
+          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_main2.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41691843">
+          <caret line="26" column="44" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.75862">
-          <caret line="116" column="21" selection-start-line="116" selection-start-column="21" selection-end-line="116" selection-end-column="21" />
+        <state vertical-scroll-proportion="-68.27586">
+          <caret line="134" column="0" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
           <folding>
-            <element signature="e#327#367#0" expanded="true" />
-            <element signature="e#1078#1092#0" expanded="true" />
-            <element signature="e#1387#1402#0" expanded="true" />
-            <element signature="e#1779#1803#0" expanded="true" />
-            <element signature="e#2080#2097#0" expanded="true" />
-            <element signature="e#2762#2782#0" expanded="true" />
-            <element signature="e#3060#3084#0" expanded="true" />
-            <element signature="e#3182#3202#0" expanded="true" />
-            <element signature="e#3729#3746#0" expanded="true" />
-            <element signature="e#3987#4008#0" expanded="true" />
-            <element signature="e#4249#4272#0" expanded="true" />
+            <element signature="e#2135#2152#0" expanded="true" />
+            <element signature="e#3962#3979#0" expanded="true" />
+            <element signature="e#4270#4291#0" expanded="true" />
+            <element signature="e#4580#4603#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2313,8 +2308,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/todolistgh/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6976744">
-          <caret line="120" column="14" selection-start-line="120" selection-start-column="14" selection-end-line="120" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.6666667">
+          <caret line="189" column="5" selection-start-line="189" selection-start-column="5" selection-end-line="189" selection-end-column="5" />
           <folding />
         </state>
       </provider>

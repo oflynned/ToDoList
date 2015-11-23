@@ -106,10 +106,12 @@ public class MainActivity extends AppCompatActivity {
             TextView newDateTextView = new TextView(this);                                  //create a new TextView which will contain the due date of the new task to be added
             newDateTextView.setText(date);                                                  //set this due date to be the date passed to this function from the parseNewTask function
             newDateTextView.setGravity(Gravity.CENTER);                                     //set the gravity of this TextView to: "center"
+            newDateTextView.setId(100 + countCopy);
 
             TextView newTaskTextView = new TextView(this);                                  //create a new TextView which will contain the description of the new task to be added
             newTaskTextView.setText(task);                                                  //set this description to be the date passed to this function from the parseNewTask function
             newTaskTextView.setGravity(Gravity.CENTER);                                     //set the gravity of this TextView to: "center"
+            newTaskTextView.setId(200 + countCopy);
             /*
             newTaskTextView.setClickable(true);
             newTaskTextView.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
             CheckBox newCheckBox = new CheckBox(this);                                      //create a new CheckBox which will contain information on whether or not the task has been completed
             newCheckBox.setGravity(Gravity.CENTER);                                         //set the gravity of this CheckBox to: "center"
-            newCheckBox.setId((3 + countCopy));                                             //issue this CheckBox a unique id, so that we can later scan all CheckBoxes to detect which ones are checked
+            newCheckBox.setId((300 + countCopy));                                           //issue this CheckBox a unique id, so that we can later scan all CheckBoxes to detect which ones are checked
             arrayx[countCopy] = true;                                                       //set the component of arrayx corresponding to this new task to "true", indicating that this task is live and HAS NOT been completed and cleared
             /*
             LinearLayout horizontalLL = new LinearLayout(this);
@@ -170,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 //LinearLayout maskLayout = (LinearLayout) findViewById(count);
                 if (arrayx[i] == true) {                                                    //IF the state of the first task is true (true if the CheckBox for that task still exists i.e. hasn't been completed and removed yet)
-                    CheckBox mask = (CheckBox) findViewById((3 + i));                       //find the first check box
+                    CheckBox mask = (CheckBox) findViewById((300 + i));                     //find the first check box
 
                     if (mask.isChecked()) {                                                 //IF check box is checked...
                         LinearLayout maskLayout = (LinearLayout) mask.getParent();          //find the horizontal linear layout containing the first check box
