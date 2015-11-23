@@ -110,6 +110,15 @@ public class MainActivity extends AppCompatActivity {
             TextView newTaskTextView = new TextView(this);                                  //create a new TextView which will contain the description of the new task to be added
             newTaskTextView.setText(task);                                                  //set this description to be the date passed to this function from the parseNewTask function
             newTaskTextView.setGravity(Gravity.CENTER);                                     //set the gravity of this TextView to: "center"
+            /*
+            newTaskTextView.setClickable(true);
+            newTaskTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // do you work here
+                }
+            });
+            */
 
             CheckBox newCheckBox = new CheckBox(this);                                      //create a new CheckBox which will contain information on whether or not the task has been completed
             newCheckBox.setGravity(Gravity.CENTER);                                         //set the gravity of this CheckBox to: "center"
