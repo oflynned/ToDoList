@@ -32,9 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     int count = 0;                                                                          //count tracks the number of CheckBoxes at any given moment in time
     int countCopy = 0;                                                                      //countCopy is never reduced- we need this to ensure that even if CheckBoxes in the middle are deleted, we still reach the latest CheckBox when checking to see which tasks are completed
-
     boolean[] arrayx = new boolean[100];                                                    //arrayx stores the existence state of any task (i.e. if the task has been created, set to true...if the task has been completed and cleared, set to false)- NOTE that the max number of tasks created is set to 100
-
     String[] arrayTaskDates = new String[100];
     String[] arrayTaskDescriptions = new String[100];
     boolean[] arrayTaskCompleted = new boolean[100];
@@ -84,6 +82,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * function reads the task date and description entered
+     * passes this data to the addNewTask function
+     * @param view "add" Button view
+     */
     public void parseNewTask(View view) {                                                   //gets the due date and description of a new task and stores them as strings
         String date;
         String task;
@@ -97,6 +100,12 @@ public class MainActivity extends AppCompatActivity {
         newTaskDescription.setText("");                                                     //clears the content of the EditText view to ready the field for a new task to be entered
     }
 
+    /**
+     * function reads the task date and description entered
+     * passes this data to the addNewTask function
+     * @param date this holds the due date of the new task being added
+     * @param task this holds the description of the new task being added
+     */
     public void addNewTask(String date, String task) {
 
         if (countCopy == 100) {                                                             //IF the max number of tasks created allowable has been reached (this is defined by the size of arrayx)...
@@ -125,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             newTaskTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // do you work here
+                    // do your work here
                 }
             });
             */
@@ -134,16 +143,7 @@ public class MainActivity extends AppCompatActivity {
             newCheckBox.setGravity(Gravity.CENTER);                                         //set the gravity of this CheckBox to: "center"
             newCheckBox.setId((300 + countCopy));                                           //issue this CheckBox a unique id, so that we can later scan all CheckBoxes to detect which ones are checked
             arrayx[countCopy] = true;                                                       //set the component of arrayx corresponding to this new task to "true", indicating that this task is live and HAS NOT been completed and cleared
-            /*
-            LinearLayout horizontalLL = new LinearLayout(this);
 
-            LinearLayout newTask = (LinearLayout) findViewById(R.id.verticalLL);
-
-            newTask.addView(horizontalLL);
-            horizontalLL.addView(newDateTextView);
-            horizontalLL.addView(newTaskTextView);
-            horizontalLL.addView(newCheckBox);
-            */
             LinearLayout newTask = (LinearLayout) findViewById(R.id.verticalLL);            //find the parent vertical linear layout that contains all the tasks created (NOTE: this is the root vertical linear layout)
             LinearLayout horizontalLL = new LinearLayout(this);                             //create a new horizontal linear layout which will contain the details of the new task to be added (in 3 Views, 2 TextBoxes and 1 CheckBox)
             horizontalLL.setId(count);
@@ -167,6 +167,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * function cycles through all created tasks
+     * searches for all tasks with checked CheckBoxes
+     * removes all views and the linear layout containing details of each completed task
+     * @param view "clear" Button view
+     */
     public void clearCompletedTasks(View view) {
 
 
@@ -179,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 1; i <= countCopy; i++)                                            //this FOR loop cycles through all the horizontal linear layouts containing different tasks and searches for the tasks that are checked "completed"
             {
                 //LinearLayout maskLayout = (LinearLayout) findViewById(count);
-                if (arrayx[i] == true) {                                                    //IF the state of the first task is true (true if the CheckBox for that task still exists i.e. hasn't been completed and removed yet)
+                if (arrayx[i]) {                                                            //IF the state of the first task is true (true if the CheckBox for that task still exists i.e. hasn't been completed and removed yet)
                     CheckBox mask = (CheckBox) findViewById((300 + i));                     //find the first check box
 
                     if (mask.isChecked()) {                                                 //IF check box is checked...
@@ -196,98 +202,6 @@ public class MainActivity extends AppCompatActivity {
             }
             if (count == 0) {
                 Toast.makeText(this, "All tasks completed!", Toast.LENGTH_SHORT).show();    //if all tasks have been cleared, notify user that all tasks have been completed
-            }
-        }
-    }
-
-    //static final String[] STATE_DATE = new String[100];
-    static final String[] STATE_DATE = Collections.nCopies(100, "taskDate").toArray(new String[0]);
-    //static final String STATE_DESCRIPTION = "taskDescription";
-    static final String[] STATE_DESCRIPTION = Collections.nCopies(100, "taskDescription").toArray(new String[0]);
-    //static final String STATE_COMPLETED = "taskCompleted";
-    static final String[] STATE_COMPLETED = Collections.nCopies(100, "taskCompleted").toArray(new String[0]);
-    static final String STATE_COUNTCOPY = "countCopyString";
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-
-        // Save the user's current game state
-        for (int i = 0; i <= 100; i++) {
-
-            savedInstanceState.putStringArray(STATE_DATE[i], arrayTaskDates);
-            savedInstanceState.putStringArray(STATE_DESCRIPTION[i], arrayTaskDescriptions);
-            savedInstanceState.putBooleanArray(STATE_COMPLETED[i], arrayTaskCompleted);
-            savedInstanceState.putInt(STATE_COUNTCOPY, countCopy);
-        }
-
-        // Always call the superclass so it can save the view hierarchy state
-        super.onSaveInstanceState(savedInstanceState);
-    }
-
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        // Always call the superclass so it can restore the view hierarchy
-        super.onRestoreInstanceState(savedInstanceState);
-
-        // Restore state members from saved instance
-        for (int i = 0; i <= 100; i++) {
-
-            arrayTaskDates = savedInstanceState.getStringArray(STATE_DATE[i]);
-            arrayTaskDescriptions = savedInstanceState.getStringArray(STATE_DESCRIPTION[i]);
-            arrayTaskCompleted = savedInstanceState.getBooleanArray(STATE_COMPLETED[i]);
-        }
-        countCopy = savedInstanceState.getInt(STATE_COUNTCOPY);
-
-        for (int j = 0; j <= countCopy; j++) {
-
-
-            arrayTaskDates[countCopy] = arrayTaskDates[j];
-            arrayTaskDescriptions[countCopy] = arrayTaskDescriptions[j];
-            arrayTaskCompleted[countCopy] = arrayTaskCompleted[j];
-
-            if (arrayTaskDescriptions[j] != "" && !arrayTaskCompleted[j]) {
-
-                TextView newDateTextView = (TextView) findViewById(100 + j);
-                newDateTextView.setText(arrayTaskDates[j]);
-                TextView newTaskTextView = (TextView) findViewById(200 + j);
-                newTaskTextView.setText(arrayTaskDescriptions[j]);
-
-                /*
-                TextView newDateTextView = new TextView(this);                                  //create a new TextView which will contain the due date of the new task to be added
-                newDateTextView.setText(arrayTaskDates[j]);                                                  //set this due date to be the date passed to this function from the parseNewTask function
-                newDateTextView.setGravity(Gravity.CENTER);                                     //set the gravity of this TextView to: "center"
-                newDateTextView.setId(100 + countCopy);
-
-                TextView newTaskTextView = new TextView(this);                                  //create a new TextView which will contain the description of the new task to be added
-                newTaskTextView.setText(arrayTaskDescriptions[j]);                                                  //set this description to be the date passed to this function from the parseNewTask function
-                newTaskTextView.setGravity(Gravity.CENTER);                                     //set the gravity of this TextView to: "center"
-                newTaskTextView.setId(200 + countCopy);
-
-                CheckBox newCheckBox = new CheckBox(this);                                      //create a new CheckBox which will contain information on whether or not the task has been completed
-                newCheckBox.setGravity(Gravity.CENTER);                                         //set the gravity of this CheckBox to: "center"
-                newCheckBox.setId((300 + countCopy));                                           //issue this CheckBox a unique id, so that we can later scan all CheckBoxes to detect which ones are checked
-                arrayx[countCopy] = true;                                                       //set the component of arrayx corresponding to this new task to "true", indicating that this task is live and HAS NOT been completed and cleared
-
-                LinearLayout newTask = (LinearLayout) findViewById(R.id.verticalLL);            //find the parent vertical linear layout that contains all the tasks created (NOTE: this is the root vertical linear layout)
-                LinearLayout horizontalLL = new LinearLayout(this);                             //create a new horizontal linear layout which will contain the details of the new task to be added (in 3 Views, 2 TextBoxes and 1 CheckBox)
-                horizontalLL.setId(count);
-                horizontalLL.setWeightSum(1f);
-                newTask.addView(horizontalLL);
-
-                LinearLayout.LayoutParams p1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                p1.weight = 0f;
-                p1.leftMargin = 64;
-
-                LinearLayout.LayoutParams p2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                p2.weight = 1f;
-
-                LinearLayout.LayoutParams p3 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                p3.weight = 0f;
-                p3.rightMargin = 64;
-
-                horizontalLL.addView(newDateTextView, p1);
-                horizontalLL.addView(newTaskTextView, p2);
-                horizontalLL.addView(newCheckBox, p3);
-                */
             }
         }
     }
