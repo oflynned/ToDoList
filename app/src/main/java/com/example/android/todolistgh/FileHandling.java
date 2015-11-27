@@ -42,7 +42,6 @@ public class FileHandling {
         }
     }
 
-
     private String readFromFile() {
 
         String ret = "";

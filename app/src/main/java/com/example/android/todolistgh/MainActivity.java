@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         newTaskDescription.setText("");                                                     //clears the content of the EditText view to ready the field for a new task to be entered
     }
 
+
     public void addNewTask(String date, String task) {
 
         if (countCopy == 100) {                                                             //IF the max number of tasks created allowable has been reached (this is defined by the size of arrayx)...
