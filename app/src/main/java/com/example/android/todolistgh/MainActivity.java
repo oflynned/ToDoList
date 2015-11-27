@@ -1,43 +1,28 @@
 package com.example.android.todolistgh;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-
 public class MainActivity extends AppCompatActivity {
 
-    int count = 0;                                                                          //count tracks the number of CheckBoxes at any given moment in time
-    int countCopy = 0;                                                                      //countCopy is never reduced- we need this to ensure that even if CheckBoxes in the middle are deleted, we still reach the latest CheckBox when checking to see which tasks are completed
+    int count = 0;
+    int countCopy = 0;
+    boolean[] arrayx = new boolean[100];
 
-    boolean[] arrayx = new boolean[100];                                                    //arrayx stores the existence state of any task (i.e. if the task has been created, set to true...if the task has been completed and cleared, set to false)- NOTE that the max number of tasks created is set to 100
-
-
-
-    public void openMemo (View view)
+    public void openMemo ()
     {
-        Intent intent = new Intent(this, Main2Activity.class);
+        Intent intent = new Intent(this, SyncActivity.class);
         startActivity(intent);
     }
 
@@ -47,15 +32,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     @Override
@@ -160,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 1; i <= countCopy; i++)                                            //this FOR loop cycles through all the horizontal linear layouts containing different tasks and searches for the tasks that are checked "completed"
             {
                 //LinearLayout maskLayout = (LinearLayout) findViewById(count);
-                if (arrayx[i] == true) {                                                    //IF the state of the first task is true (true if the CheckBox for that task still exists i.e. hasn't been completed and removed yet)
+                if (arrayx[i]) {                                                    //IF the state of the first task is true (true if the CheckBox for that task still exists i.e. hasn't been completed and removed yet)
                     CheckBox mask = (CheckBox) findViewById((3 + i));                       //find the first check box
 
                     if (mask.isChecked()) {                                                 //IF check box is checked...
