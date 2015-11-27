@@ -11,7 +11,6 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    Context context;
     public static final int DATABASE_VERSION = 1;
 
     //queries
@@ -23,8 +22,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     Database.TasksTable.TASK + " TEXT," +
                     Database.TasksTable.TIME_ADDED + " INTEGER," +
                     Database.TasksTable.DUE_DATE + " INTEGER," +
-                    Database.TasksTable.COMPLETED + " BOOLEAN," +
-                    Database.TasksTable.LOCATION + " TEXT);";
+                    Database.TasksTable.COMPLETED + " BOOLEAN);";
+
     public String DELETE_TABLE_QUERY =
             "DROP TABLE IF EXISTS " + Database.TasksTable.TABLE_NAME + ";";
 
@@ -66,10 +65,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param time_added time in millis of task added
      * @param due_date time in millis of task due date
      * @param completed has the task been completed?
-     * @param location GPS coords of where task is due
      */
-    public void insertTask(int id, String category, String task, long time_added,
-                           long due_date, boolean completed, String location){
+    public void insertTask(int id, String category, String task,
+                           long time_added, long due_date, boolean completed){
         SQLiteDatabase writeDb = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Database.TasksTable.ID, id);
@@ -78,7 +76,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(Database.TasksTable.TIME_ADDED, time_added);
         contentValues.put(Database.TasksTable.DUE_DATE, due_date);
         contentValues.put(Database.TasksTable.COMPLETED, completed);
-        contentValues.put(Database.TasksTable.LOCATION, location);
         writeDb.insert(Database.TasksTable.TABLE_NAME, null, contentValues);
     }
 
@@ -98,20 +95,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         writeDb.close();
     }
 
+    /**
+     * obliterates the entire table by remove all records from rows
+     */
+    public void removeAllTasks(){
+        SQLiteDatabase writeDb = this.getWritableDatabase();
+
+        //query to remove row with given id
+        String removeAll =
+                "DELETE FROM " + Database.TasksTable.TABLE_NAME + ";";
+
+        writeDb.execSQL(removeAll);
+        writeDb.close();
+    }
+
+    /**
+     * Takes the id passed and modifies the columns for that row
+     * @param id row id
+     * @param category amended category
+     * @param task amended task
+     * @param time_added amended time
+     * @param due_date amended date due
+     * @param completed amended completion
+     */
     public void editTask(int id, String category, String task, long time_added,
-                         long due_date, boolean completed, String location){
+                         long due_date, boolean completed){
         SQLiteDatabase writeDb = this.getWritableDatabase();
         SQLiteDatabase readDb = this.getReadableDatabase();
 
-        Cursor cursor = readDb.rawQuery(SELECT_ALL_QUERY, null);
-        cursor.moveToFirst();
-        int rowNum = cursor.getCount();
-        int colNum = cursor.getColumnCount();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Database.TasksTable.CATEGORY, category);
+        contentValues.put(Database.TasksTable.TASK, task);
+        contentValues.put(Database.TasksTable.TIME_ADDED, time_added);
+        contentValues.put(Database.TasksTable.DUE_DATE, due_date);
+        contentValues.put(Database.TasksTable.COMPLETED, completed);
 
-        String editRow =
-                "UPDATE " + Database.TasksTable.TABLE_NAME +
-                        " SET " +
-                        ";";
+        String[] whereArgs = {String.valueOf(id)};
+        writeDb.update(Database.TasksTable.TABLE_NAME, contentValues,
+                Database.TasksTable.ID + "=" + "?", whereArgs);
+        writeDb.close();
+        readDb.close();
     }
 
     /**
@@ -119,9 +142,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param tableName the table to be printed out in monitor
      */
     public void printTableContents(String tableName){
-        String query = "SELECT * FROM (" + tableName + ")";
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        Cursor cursor = sqLiteDatabase.rawQuery(SELECT_ALL_QUERY, null);
         cursor.moveToFirst();
 
         int rowNum = cursor.getCount();
@@ -134,7 +156,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             for(int c = 0; c < colNum; c++){
                 System.out.println(c + ". " + cursor.getString(c) + "; ");
             }
-            System.out.println("\n");
+            System.out.println("\n------------");
             cursor.moveToNext();
         }
         cursor.close();

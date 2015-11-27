@@ -14,7 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
+
+    DatabaseHelper databaseHelper;
 
     int count = 0;
     int countCopy = 0;

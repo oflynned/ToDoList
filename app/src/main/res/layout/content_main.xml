@@ -30,7 +30,6 @@
             <Button
                 android:text="@string/memo"
                 android:id="@+id/clickbutton"
-                android:onClick="openMemo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#FF9800" />

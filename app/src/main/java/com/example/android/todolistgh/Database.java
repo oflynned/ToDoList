@@ -30,8 +30,6 @@ public class Database {
         public static final String DUE_DATE = "due_date";
         //has the task been completed? boolean
         public static final String COMPLETED = "completed";
-        //GPS coords stored - string
-        public static final String LOCATION = "location";
     }
 
 }
