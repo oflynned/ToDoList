@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper databaseHelper;
 
-    Button addButton, memoButton;
+    Button addButton, memoButton, clearButton;
     TableLayout tableLayout;
     ArrayList<CheckBox> checkBoxes;
 
@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         addButton = (Button) findViewById(R.id.addButton);
         memoButton = (Button) findViewById(R.id.memoButton);
+        clearButton = (Button) findViewById(R.id.clearCompletedTasks);
         tableLayout = (TableLayout) findViewById(R.id.list_table);
         checkBoxes = new ArrayList<>();
 
@@ -65,14 +66,31 @@ public class MainActivity extends AppCompatActivity {
                 addTaskDialog.setAddDialogListener(new AddTaskDialog.setAddTaskListener() {
                     @Override
                     public void onDoneClick(DialogFragment dialogFragment) {
-                        databaseHelper.insertTask(addTaskDialog.getCategory(),
-                                addTaskDialog.getDescription(),
-                                addTaskDialog.getDate(),
-                                false);
-                        databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
-                        tableLayout.invalidate();
-                        populateTable();
-                        Toast.makeText(MainActivity.this, "Task Added Successfully!", Toast.LENGTH_SHORT).show();
+                        if(addTaskDialog.getDate().equals("")){
+                            Toast.makeText(MainActivity.this, "Please add a date!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        if(addTaskDialog.getCategory().equals("")){
+                            Toast.makeText(MainActivity.this, "Please add a category!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        if(addTaskDialog.getDescription().equals("")){
+                            Toast.makeText(MainActivity.this, "Please add a description!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        if(!addTaskDialog.getDate().equals("")
+                                && !addTaskDialog.getCategory().equals("")
+                                && addTaskDialog.getDescription().equals("")){
+                            databaseHelper.insertTask(addTaskDialog.getCategory(),
+                                    addTaskDialog.getDescription(),
+                                    addTaskDialog.getDate(),
+                                    false);
+                            databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
+                            tableLayout.invalidate();
+                            populateTable();
+                            Toast.makeText(MainActivity.this, "Task Added Successfully!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
             }
@@ -82,6 +100,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getBaseContext(), SyncActivity.class));
+            }
+        });
+
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                databaseHelper.removeAllTasks();
+                tableLayout.invalidate();
+                populateTable();
             }
         });
     }
