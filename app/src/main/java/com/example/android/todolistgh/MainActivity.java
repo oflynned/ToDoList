@@ -1,13 +1,17 @@
 package com.example.android.todolistgh;
 
+import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.internal.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -84,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                             databaseHelper.insertTask(addTaskDialog.getCategory(),
                                     addTaskDialog.getDescription(),
                                     addTaskDialog.getDate(),
+                                    addTaskDialog.getRawDate(),
                                     false);
                             databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
                             tableLayout.invalidate();
@@ -152,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
         cursor.moveToFirst();
 
         for (int i = 0; i < numRows; i++) {
-            TableRow tableRow = new TableRow(this);
+            final TableRow tableRow = new TableRow(this);
             TableRow.LayoutParams tableRowParams =
                     new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                             ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -185,6 +190,68 @@ public class MainActivity extends AppCompatActivity {
                 categoryField.setTextColor(Color.WHITE);
                 descField.setTextColor(Color.WHITE);
             }
+
+            final int row = cursor.getInt(0);
+            tableRow.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(
+                            new ContextThemeWrapper(MainActivity.this, R.style.LongClickDialog));
+                    builder.setMessage("Would you like to alter your to-do list?")
+                            .setPositiveButton("Remove", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    databaseHelper.removeTask(row);
+                                    tableLayout.invalidate();
+                                    databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
+                                    populateTable();
+                                }
+                            })
+                            .setNegativeButton("Modify", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    final AddTaskDialog addTaskDialog = new AddTaskDialog();
+                                    addTaskDialog.show(MainActivity.this.getFragmentManager(), "setAddDialogListener");
+                                    addTaskDialog.setAddDialogListener(new AddTaskDialog.setAddTaskListener() {
+                                        @Override
+                                        public void onDoneClick(DialogFragment dialogFragment) {
+                                            if (addTaskDialog.getDate().equals("")) {
+                                                Toast.makeText(MainActivity.this, "Please add a date!",
+                                                        Toast.LENGTH_SHORT).show();
+                                            }
+                                            if (addTaskDialog.getCategory().equals("")) {
+                                                Toast.makeText(MainActivity.this, "Please add a category!",
+                                                        Toast.LENGTH_SHORT).show();
+                                            }
+                                            if (addTaskDialog.getDescription().equals("")) {
+                                                Toast.makeText(MainActivity.this, "Please add a description!",
+                                                        Toast.LENGTH_SHORT).show();
+                                            }
+                                            if (!addTaskDialog.getDate().equals("")
+                                                    && !addTaskDialog.getCategory().equals("")
+                                                    && !addTaskDialog.getDescription().equals("")) {
+                                                databaseHelper.editTask(
+                                                        row,
+                                                        addTaskDialog.getCategory(),
+                                                        addTaskDialog.getDescription(),
+                                                        addTaskDialog.getDate(),
+                                                        addTaskDialog.getRawDate(),
+                                                        false);
+                                                databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
+                                                tableLayout.invalidate();
+                                                populateTable();
+                                                Toast.makeText(MainActivity.this, "Task modified successfully!",
+                                                        Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                    builder.create().show();
+                    Toast.makeText(MainActivity.this, "id: " + row, Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            });
 
             //add views
             tableRow.addView(dateField);

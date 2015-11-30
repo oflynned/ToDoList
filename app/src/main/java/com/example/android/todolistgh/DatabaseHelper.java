@@ -21,7 +21,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     Database.TasksTable.CATEGORY + " TEXT," +
                     Database.TasksTable.TASK + " TEXT," +
                     Database.TasksTable.TIME_ADDED + " INTEGER," +
-                    Database.TasksTable.DUE_DATE + " INTEGER," +
+                    Database.TasksTable.DUE_DATE + " TEXT," +
+                    Database.TasksTable.RAW_DUE_DATE + " TEXT," +
                     Database.TasksTable.COMPLETED + " BOOLEAN);";
 
     public static final String DELETE_TABLE_QUERY =
@@ -29,6 +30,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String SELECT_ALL_QUERY =
             "SELECT * FROM " + Database.TasksTable.TABLE_NAME + ";";
+
+    public static final String SELECT_BY_DATE_DESCENDING =
+            "";
+
+    public static final String SELECT_BY_DATE_ASCENDING =
+            "";
 
     public DatabaseHelper(Context context) {
         super(context, Database.DATABASE_NAME, null, DATABASE_VERSION);
@@ -63,9 +70,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param category category or subject name
      * @param task task to be done by user
      * @param due_date time in millis of task due date
+     * @param raw_due_date the time in yyyyMMdd format to be compared for ordering by date
      * @param completed has the task been completed?
      */
-    public void insertTask(String category, String task, String due_date, boolean completed){
+    public void insertTask(String category, String task, String due_date,
+                           String raw_due_date, boolean completed){
         SQLiteDatabase writeDb = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -74,6 +83,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(Database.TasksTable.TASK, task);
         contentValues.put(Database.TasksTable.TIME_ADDED, time);
         contentValues.put(Database.TasksTable.DUE_DATE, due_date);
+        contentValues.put(Database.TasksTable.RAW_DUE_DATE, raw_due_date);
         contentValues.put(Database.TasksTable.COMPLETED, completed);
         writeDb.insert(Database.TasksTable.TABLE_NAME, null, contentValues);
     }
@@ -113,20 +123,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param id row id
      * @param category amended category
      * @param task amended task
-     * @param time_added amended time
      * @param due_date amended date due
+     * @param raw_due_date amended raw due date for comparison of records wrt time
      * @param completed amended completion
      */
-    public void editTask(int id, String category, String task, long time_added,
-                         long due_date, boolean completed){
+    public void editTask(int id, String category, String task, String due_date,
+                         String raw_due_date, boolean completed){
         SQLiteDatabase writeDb = this.getWritableDatabase();
         SQLiteDatabase readDb = this.getReadableDatabase();
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(Database.TasksTable.CATEGORY, category);
         contentValues.put(Database.TasksTable.TASK, task);
-        contentValues.put(Database.TasksTable.TIME_ADDED, time_added);
         contentValues.put(Database.TasksTable.DUE_DATE, due_date);
+        contentValues.put(Database.TasksTable.RAW_DUE_DATE, raw_due_date);
         contentValues.put(Database.TasksTable.COMPLETED, completed);
 
         String[] whereArgs = {String.valueOf(id)};

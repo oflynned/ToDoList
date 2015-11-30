@@ -22,6 +22,7 @@ import java.util.Calendar;
  */
 public class AddTaskDialog extends DialogFragment {
 
+    private String date, rawDate;
     private EditText dateField, descriptionField, categoryField;
     private setAddTaskListener addDialogListener = null;
 
@@ -66,7 +67,7 @@ public class AddTaskDialog extends DialogFragment {
         dateParams.setMarginStart(10);
         dateParams.setMarginEnd(10);
         dateField.setSingleLine();
-        dateField.setHint("dd/mm/yyyy");
+        dateField.setHint("Date");
         dateField.setLayoutParams(dateParams);
         dateField.setId(View.generateViewId());
 
@@ -78,7 +79,8 @@ public class AddTaskDialog extends DialogFragment {
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 calendar.set(Calendar.MONTH, monthOfYear);
                 calendar.set(Calendar.YEAR, year);
-                updateLabel(calendar);
+                setDate(calendar);
+                setRawDate(calendar);
             }
         };
 
@@ -128,13 +130,20 @@ public class AddTaskDialog extends DialogFragment {
         return builder.create();
     }
 
-    public String getDate(){return dateField.getText().toString();}
+    public String getDate(){return date;}
     public String getDescription(){return descriptionField.getText().toString();}
     public String getCategory(){return categoryField.getText().toString();}
+    public String getRawDate(){return rawDate;}
 
-    private void updateLabel(Calendar calender){
+    private void setDate(Calendar calender){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         dateField.setText(simpleDateFormat.format(calender.getTime()));
+        this.date = dateField.getText().toString();
+    }
+
+    private void setRawDate(Calendar calender){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        this.rawDate = simpleDateFormat.format(calender.getTime());
     }
 
 }
