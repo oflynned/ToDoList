@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         if(!addTaskDialog.getDate().equals("")
                                 && !addTaskDialog.getCategory().equals("")
-                                && addTaskDialog.getDescription().equals("")){
+                                && !addTaskDialog.getDescription().equals("")){
                             databaseHelper.insertTask(addTaskDialog.getCategory(),
                                     addTaskDialog.getDescription(),
                                     addTaskDialog.getDate(),
