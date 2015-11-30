@@ -55,25 +55,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // want to port the table over and not obliterate it
         // but for now this is okay
         db.execSQL(DELETE_TABLE_QUERY);
+        onCreate(db);
     }
 
     /**
      * Inserts a new row into the table with respect to row
-     * @param id row id
      * @param category category or subject name
      * @param task task to be done by user
-     * @param time_added time in millis of task added
      * @param due_date time in millis of task due date
      * @param completed has the task been completed?
      */
-    public void insertTask(int id, String category, String task,
-                           long time_added, long due_date, boolean completed){
+    public void insertTask(String category, String task, String due_date, boolean completed){
         SQLiteDatabase writeDb = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(Database.TasksTable.ID, id);
+
+        Long time = System.currentTimeMillis();
         contentValues.put(Database.TasksTable.CATEGORY, category);
         contentValues.put(Database.TasksTable.TASK, task);
-        contentValues.put(Database.TasksTable.TIME_ADDED, time_added);
+        contentValues.put(Database.TasksTable.TIME_ADDED, time);
         contentValues.put(Database.TasksTable.DUE_DATE, due_date);
         contentValues.put(Database.TasksTable.COMPLETED, completed);
         writeDb.insert(Database.TasksTable.TABLE_NAME, null, contentValues);
@@ -89,7 +88,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //query to remove row with given id
         String removeRow =
                 "DELETE FROM " + Database.TasksTable.TABLE_NAME +
-                " WHERE " + Database.TasksTable.ID + "=" + id + ";";
+                        " WHERE " + Database.TasksTable.ID + "=" + id + ";";
 
         writeDb.execSQL(removeRow);
         writeDb.close();
