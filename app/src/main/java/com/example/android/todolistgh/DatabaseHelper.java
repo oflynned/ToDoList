@@ -146,6 +146,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         readDb.close();
     }
 
+    /**
+     * Notifies the row's col of modifying checked state for state and view invalidation
+     * @param id the id of the chosen row
+     * @param completed boolean value for tracking checked
+     */
     public void editChecked(int id, boolean completed){
         SQLiteDatabase writeDb = this.getWritableDatabase();
         SQLiteDatabase readDb = this.getReadableDatabase();

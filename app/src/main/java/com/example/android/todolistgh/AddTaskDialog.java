@@ -35,6 +35,12 @@ public class AddTaskDialog extends DialogFragment {
         this.addDialogListener = addDialogListener;
     }
 
+    /**
+     * onCreateDialog is a generic builder for generating a dialog
+     * per row id given, such that tasks can be added to the db
+     * @param savedInstanceState the parsed data for the given context
+     * @return the appropriate dialog
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -135,12 +141,20 @@ public class AddTaskDialog extends DialogFragment {
     public String getCategory(){return categoryField.getText().toString();}
     public String getRawDate(){return rawDate;}
 
+    /**
+     * Takes the chosen time and renders it in the given format for the user to see
+     * @param calender the appropriate chosen time for the task
+     */
     private void setDate(Calendar calender){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         dateField.setText(simpleDateFormat.format(calender.getTime()));
         this.date = dateField.getText().toString();
     }
 
+    /**
+     * Takes the chosen time for rendering in a hidden field in the db for sorting later
+     * @param calender the appropriate chosen time for the task
+     */
     private void setRawDate(Calendar calender){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         this.rawDate = simpleDateFormat.format(calender.getTime());

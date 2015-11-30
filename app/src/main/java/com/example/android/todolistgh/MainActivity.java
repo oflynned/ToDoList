@@ -1,6 +1,5 @@
 package com.example.android.todolistgh;
 
-import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
