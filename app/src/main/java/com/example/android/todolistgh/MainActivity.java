@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Please enter a due date", Toast.LENGTH_SHORT).show();
             check = false;
         }
-        if (date.charAt(2) != '/') {
+        if (!date.isEmpty() && date.charAt(2) != '/') {
             Toast.makeText(this, "Incorrect date format", Toast.LENGTH_SHORT).show();
             check = false;
         }
