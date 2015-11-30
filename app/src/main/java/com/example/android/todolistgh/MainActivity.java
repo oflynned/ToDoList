@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     Button addButton, memoButton, clearButton;
     TableLayout tableLayout;
     ArrayList<CheckBox> checkBoxes;
+    CheckBox totalCheckBox;
 
     int count = 0;
     int countCopy = 0;
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         memoButton = (Button) findViewById(R.id.memoButton);
         clearButton = (Button) findViewById(R.id.clearCompletedTasks);
         tableLayout = (TableLayout) findViewById(R.id.list_table);
+        totalCheckBox = (CheckBox) findViewById(R.id.select_all);
         checkBoxes = new ArrayList<>();
 
         databaseHelper = new DatabaseHelper(this);
@@ -145,13 +149,12 @@ public class MainActivity extends AppCompatActivity {
      */
     public void populateTable() {
         SQLiteDatabase readDb = databaseHelper.getReadableDatabase();
-        checkBoxes.clear();
 
         int currNumRows = tableLayout.getChildCount();
         if (currNumRows > 1)
             tableLayout.removeViewsInLayout(1, currNumRows - 1);
 
-        Cursor cursor = readDb.rawQuery(DatabaseHelper.SELECT_ALL_QUERY, null);
+        final Cursor cursor = readDb.rawQuery(DatabaseHelper.SELECT_ALL_QUERY, null);
         int numRows = cursor.getCount();
         System.out.println("Row count " + numRows);
         cursor.moveToFirst();
@@ -164,22 +167,20 @@ public class MainActivity extends AppCompatActivity {
             tableRow.setLayoutParams(tableRowParams);
 
             //assign row via ID instantiation
-            CheckBox checkBox = new CheckBox(this);
-            checkBox.setId(cursor.getInt(5));
-            checkBoxes.add(checkBox);
+            final int row = cursor.getInt(0);
 
             //name
-            TextView dateField = new TextView(this);
+            final TextView dateField = new TextView(this);
             dateField.setText(cursor.getString(4));
             dateField.setGravity(Gravity.CENTER);
 
             //name
-            TextView categoryField = new TextView(this);
+            final TextView categoryField = new TextView(this);
             categoryField.setText(cursor.getString(1));
             categoryField.setGravity(Gravity.CENTER);
 
             //max
-            TextView descField = new TextView(this);
+            final TextView descField = new TextView(this);
             descField.setText(cursor.getString(2));
             descField.setGravity(Gravity.CENTER);
 
@@ -191,7 +192,28 @@ public class MainActivity extends AppCompatActivity {
                 descField.setTextColor(Color.WHITE);
             }
 
-            final int row = cursor.getInt(0);
+            final CheckBox checkBox = new CheckBox(this);
+            checkBox.setId(cursor.getInt(0));
+            checkBoxes.add(checkBox);
+            if(cursor.getInt(6) == 1){
+                checkBox.setChecked(true);
+                strikeThrough(dateField, categoryField, descField, true);
+                tableLayout.invalidate();
+            } else {
+                checkBox.setChecked(false);
+                strikeThrough(dateField, categoryField, descField, false);
+                tableLayout.invalidate();
+            }
+
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    databaseHelper.editChecked(row, isChecked);
+                    strikeThrough(dateField, categoryField, descField, isChecked);
+                    databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
+                }
+            });
+
             tableRow.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -203,8 +225,8 @@ public class MainActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     databaseHelper.removeTask(row);
                                     tableLayout.invalidate();
-                                    databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
                                     populateTable();
+                                    databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
                                 }
                             })
                             .setNegativeButton("Modify", new DialogInterface.OnClickListener() {
@@ -236,7 +258,7 @@ public class MainActivity extends AppCompatActivity {
                                                         addTaskDialog.getDescription(),
                                                         addTaskDialog.getDate(),
                                                         addTaskDialog.getRawDate(),
-                                                        false);
+                                                        checkBox.isChecked());
                                                 databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
                                                 tableLayout.invalidate();
                                                 populateTable();
@@ -266,6 +288,19 @@ public class MainActivity extends AppCompatActivity {
 
         readDb.close();
         cursor.close();
+    }
+
+    public void strikeThrough(TextView dateField, TextView categoryField,
+                              TextView descField, boolean completed){
+        if(completed) {
+            dateField.setPaintFlags(dateField.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            categoryField.setPaintFlags(dateField.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            descField.setPaintFlags(dateField.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        } else {
+            dateField.setPaintFlags(dateField.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
+            categoryField.setPaintFlags(dateField.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
+            descField.setPaintFlags(dateField.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
+        }
     }
 
     /**

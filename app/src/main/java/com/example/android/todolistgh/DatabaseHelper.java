@@ -146,6 +146,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         readDb.close();
     }
 
+    public void editChecked(int id, boolean completed){
+        SQLiteDatabase writeDb = this.getWritableDatabase();
+        SQLiteDatabase readDb = this.getReadableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Database.TasksTable.COMPLETED, completed);
+
+        String[] whereArgs = {String.valueOf(id)};
+        writeDb.update(Database.TasksTable.TABLE_NAME, contentValues,
+                Database.TasksTable.ID + "=" + "?", whereArgs);
+        writeDb.close();
+        readDb.close();
+    }
+
     /**
      * Prints out the current values stored within the table in Sys
      * @param tableName the table to be printed out in monitor
