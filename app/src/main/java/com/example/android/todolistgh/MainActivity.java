@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * function reads the task date and description entered
      * passes this data to the addNewTask function
+     *
      * @param view "add" Button view
      */
     public void parseNewTask(View view) {                                                   //gets the due date and description of a new task and stores them as strings
@@ -73,9 +74,36 @@ public class MainActivity extends AppCompatActivity {
         EditText newTaskDescription = (EditText) findViewById(R.id.newDescription);         //find the EditText view in which the user has entered a description for the new task
         date = newTaskDate.getText().toString();                                            //convert the contents of the EditText view into "string" format
         task = newTaskDescription.getText().toString();                                     //convert the contents of the EditText view into "string" format
-        addNewTask(date, task);                                                             //sends the strings containing the due date and task description to the addNewTask method + calls this method
-        newTaskDate.setText("");                                                            //clears the content of the EditText view to ready the field for a new task to be entered
-        newTaskDescription.setText("");                                                     //clears the content of the EditText view to ready the field for a new task to be entered
+        if(validateNewTask(date, task)) {
+            addNewTask(date, task);                                                         //sends the strings containing the due date and task description to the addNewTask method + calls this method
+            newTaskDate.setText("");                                                        //clears the content of the EditText view to ready the field for a new task to be entered
+            newTaskDescription.setText("");                                                 //clears the content of the EditText view to ready the field for a new task to be entered
+        }
+    }
+
+    /**
+     * function checks that the date is valid
+     * function checks that the description has some content
+     *
+     * @param date this holds the due date of the new task being added
+     * @param task this holds the description of the new task being added
+     * @return valid or not valid
+     */
+    public Boolean validateNewTask(String date, String task) {
+        Boolean check = true;
+        if (date.isEmpty()) {
+            Toast.makeText(this, "Please enter a due date", Toast.LENGTH_SHORT).show();
+            check = false;
+        }
+        if (!date.isEmpty() && date.charAt(2) != '/') {
+            Toast.makeText(this, "Incorrect date format", Toast.LENGTH_SHORT).show();
+            check = false;
+        }
+        if (task.isEmpty()) {
+            Toast.makeText(this, "Please enter a task description", Toast.LENGTH_SHORT).show();
+            check = false;
+        }
+        return check;
     }
 
     /**
