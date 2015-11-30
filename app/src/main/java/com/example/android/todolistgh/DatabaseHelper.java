@@ -14,7 +14,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
 
     //queries
-    public String CREATE_TABLE_QUERY =
+    public static final String CREATE_TABLE_QUERY =
             "CREATE TABLE " +
                     Database.TasksTable.TABLE_NAME + "(" +
                     Database.TasksTable.ID + " INTEGER PRIMARY KEY," +
@@ -24,10 +24,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     Database.TasksTable.DUE_DATE + " INTEGER," +
                     Database.TasksTable.COMPLETED + " BOOLEAN);";
 
-    public String DELETE_TABLE_QUERY =
+    public static final String DELETE_TABLE_QUERY =
             "DROP TABLE IF EXISTS " + Database.TasksTable.TABLE_NAME + ";";
 
-    public String SELECT_ALL_QUERY =
+    public static final String SELECT_ALL_QUERY =
             "SELECT * FROM " + Database.TasksTable.TABLE_NAME + ";";
 
     public DatabaseHelper(Context context) {

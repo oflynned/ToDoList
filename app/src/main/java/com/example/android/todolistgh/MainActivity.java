@@ -2,24 +2,35 @@ package com.example.android.todolistgh;
 
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper databaseHelper;
 
     Button addButton, memoButton;
+    TableLayout tableLayout;
+    ArrayList<CheckBox> checkBoxes;
 
     int count = 0;
     int countCopy = 0;
@@ -38,8 +49,13 @@ public class MainActivity extends AppCompatActivity {
 
         addButton = (Button) findViewById(R.id.addButton);
         memoButton = (Button) findViewById(R.id.memoButton);
+        tableLayout = (TableLayout) findViewById(R.id.list_table);
+        checkBoxes = new ArrayList<>();
 
         databaseHelper = new DatabaseHelper(this);
+
+        populateTable();
+        databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
                                 addTaskDialog.getDate(),
                                 false);
                         databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
+                        tableLayout.invalidate();
+                        populateTable();
                         Toast.makeText(MainActivity.this, "Task Added Successfully!", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -88,6 +106,72 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * populates the database rows and columns into a programmatically added layout
+     */
+    public void populateTable() {
+        SQLiteDatabase readDb = databaseHelper.getReadableDatabase();
+        checkBoxes.clear();
+
+        int currNumRows = tableLayout.getChildCount();
+        if (currNumRows > 1)
+            tableLayout.removeViewsInLayout(1, currNumRows - 1);
+
+        Cursor cursor = readDb.rawQuery(DatabaseHelper.SELECT_ALL_QUERY, null);
+        int numRows = cursor.getCount();
+        System.out.println("Row count " + numRows);
+        cursor.moveToFirst();
+
+        for (int i = 0; i < numRows; i++) {
+            TableRow tableRow = new TableRow(this);
+            TableRow.LayoutParams tableRowParams =
+                    new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT);
+            tableRow.setLayoutParams(tableRowParams);
+
+            //assign row via ID instantiation
+            CheckBox checkBox = new CheckBox(this);
+            checkBox.setId(cursor.getInt(5));
+            checkBoxes.add(checkBox);
+
+            //name
+            TextView dateField = new TextView(this);
+            dateField.setText(cursor.getString(4));
+            dateField.setGravity(Gravity.CENTER);
+
+            //name
+            TextView categoryField = new TextView(this);
+            categoryField.setText(cursor.getString(1));
+            categoryField.setGravity(Gravity.CENTER);
+
+            //max
+            TextView descField = new TextView(this);
+            descField.setText(cursor.getString(2));
+            descField.setGravity(Gravity.CENTER);
+
+            if (i % 2 == 0) {
+                tableRow.setBackgroundColor(ContextCompat
+                        .getColor(getBaseContext(), R.color.colorPrimary));
+                dateField.setTextColor(Color.WHITE);
+                categoryField.setTextColor(Color.WHITE);
+                descField.setTextColor(Color.WHITE);
+            }
+
+            //add views
+            tableRow.addView(dateField);
+            tableRow.addView(categoryField);
+            tableRow.addView(descField);
+            tableRow.addView(checkBox);
+
+            tableLayout.addView(tableRow);
+
+            cursor.moveToNext();
+        }
+
+        readDb.close();
+        cursor.close();
     }
 
     /**
