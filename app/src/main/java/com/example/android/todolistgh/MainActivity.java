@@ -1,24 +1,25 @@
 package com.example.android.todolistgh;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Random;
-
 public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper databaseHelper;
+
+    Button addButton, memoButton;
 
     int count = 0;
     int countCopy = 0;
@@ -34,8 +35,37 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+        addButton = (Button) findViewById(R.id.addButton);
+        memoButton = (Button) findViewById(R.id.memoButton);
+
+        databaseHelper = new DatabaseHelper(this);
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AddTaskDialog addTaskDialog = new AddTaskDialog();
+                addTaskDialog.show(MainActivity.this.getFragmentManager(), "setAddDialogListener");
+                addTaskDialog.setAddDialogListener(new AddTaskDialog.setAddTaskListener() {
+                    @Override
+                    public void onDoneClick(DialogFragment dialogFragment) {
+                        databaseHelper.insertTask(addTaskDialog.getCategory(),
+                                addTaskDialog.getDescription(),
+                                addTaskDialog.getDate(),
+                                false);
+                        databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
+                        Toast.makeText(MainActivity.this, "Task Added Successfully!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+        memoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getBaseContext(), SyncActivity.class));
+            }
+        });
     }
 
     @Override
