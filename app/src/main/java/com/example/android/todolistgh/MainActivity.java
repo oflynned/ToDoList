@@ -95,11 +95,12 @@ public class MainActivity extends AppCompatActivity {
         EditText newTaskDescription = (EditText) findViewById(R.id.newDescription);         //find the EditText view in which the user has entered a description for the new task
         date = newTaskDate.getText().toString();                                            //convert the contents of the EditText view into "string" format
         task = newTaskDescription.getText().toString();                                     //convert the contents of the EditText view into "string" format
-        validateNewTask(date, task);
-        addNewTask(date, task);                                                             //sends the strings containing the due date and task description to the addNewTask method + calls this method
-        newTaskDate.setText("");                                                            //clears the content of the EditText view to ready the field for a new task to be entered
-        newTaskDescription.setText("");                                                     //clears the content of the EditText view to ready the field for a new task to be entered
-    }
+        if(validateNewTask(date, task)) {
+            addNewTask(date, task);                                                         //sends the strings containing the due date and task description to the addNewTask method + calls this method
+            newTaskDate.setText("");                                                        //clears the content of the EditText view to ready the field for a new task to be entered
+            newTaskDescription.setText("");                                                 //clears the content of the EditText view to ready the field for a new task to be entered
+        }
+      }
 
     /**
      * function checks that the date is valid
