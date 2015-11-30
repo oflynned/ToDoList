@@ -60,6 +60,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * function reads the task date and description entered
+     * passes this data to the addNewTask function
+     * @param view "add" Button view
+     */
     public void parseNewTask(View view) {                                                   //gets the due date and description of a new task and stores them as strings
         String date;
         String task;
@@ -73,7 +78,12 @@ public class MainActivity extends AppCompatActivity {
         newTaskDescription.setText("");                                                     //clears the content of the EditText view to ready the field for a new task to be entered
     }
 
-
+    /**
+     * function reads the task date and description entered
+     * passes this data to the addNewTask function
+     * @param date this holds the due date of the new task being added
+     * @param task this holds the description of the new task being added
+     */
     public void addNewTask(String date, String task) {
 
         if (countCopy == 100) {                                                             //IF the max number of tasks created allowable has been reached (this is defined by the size of arrayx)...
@@ -91,6 +101,15 @@ public class MainActivity extends AppCompatActivity {
             TextView newTaskTextView = new TextView(this);                                  //create a new TextView which will contain the description of the new task to be added
             newTaskTextView.setText(task);                                                  //set this description to be the date passed to this function from the parseNewTask function
             newTaskTextView.setGravity(Gravity.CENTER);                                     //set the gravity of this TextView to: "center"
+            /*
+            newTaskTextView.setClickable(true);
+            newTaskTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // do your work here
+                }
+            });
+            */
 
             CheckBox newCheckBox = new CheckBox(this);                                      //create a new CheckBox which will contain information on whether or not the task has been completed
             newCheckBox.setGravity(Gravity.CENTER);                                         //set the gravity of this CheckBox to: "center"
@@ -129,6 +148,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * function cycles through all created tasks
+     * searches for all tasks with checked CheckBoxes
+     * removes all views and the linear layout containing details of each completed task
+     * @param view "clear" Button view
+     */
     public void clearCompletedTasks(View view) {
 
 
