@@ -33,6 +33,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     boolean dateOrdered;
+    String data;
 
     DatabaseHelper databaseHelper;
 
@@ -41,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
     TableLayout tableLayout;
     ArrayList<CheckBox> checkBoxes;
     CheckBox totalCheckBox;
-
     TextView orderByDate;
 
     int count = 0;
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                     setDateOrdered(false);
                     tableLayout.invalidate();
                     populateTable(DatabaseHelper.SELECT_BY_DATE_DESCENDING);
-                    Toast.makeText(getBaseContext(),"Ordered by descending date", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Ordered by descending date", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
     public void populateTable(String query) {
         SQLiteDatabase readDb = databaseHelper.getReadableDatabase();
 
-        int currNumRows = tableLayout.getChildCount();
+        final int currNumRows = tableLayout.getChildCount();
         if (currNumRows > 1)
             tableLayout.removeViewsInLayout(1, currNumRows - 1);
 
@@ -233,21 +233,21 @@ public class MainActivity extends AppCompatActivity {
             tableRow.setLayoutParams(tableRowParams);
 
             //assign row via ID instantiation
-            final int row = cursor.getInt(0);
+            final int row = cursor.getInt(DatabaseHelper.COL_ID);
 
-            //name
+            //date
             final TextView dateField = new TextView(this);
-            dateField.setText(cursor.getString(4));
+            dateField.setText(cursor.getString(DatabaseHelper.COL_DUE_DATE));
             dateField.setGravity(Gravity.CENTER);
 
-            //name
+            //category
             final TextView categoryField = new TextView(this);
-            categoryField.setText(cursor.getString(1));
+            categoryField.setText(cursor.getString(DatabaseHelper.COL_CATEGORY));
             categoryField.setGravity(Gravity.CENTER);
 
-            //max
+            //description
             final TextView descField = new TextView(this);
-            descField.setText(cursor.getString(2));
+            descField.setText(cursor.getString(DatabaseHelper.COL_DESCRIPTION));
             descField.setGravity(Gravity.CENTER);
 
             if (i % 2 == 0) {
@@ -298,32 +298,44 @@ public class MainActivity extends AppCompatActivity {
                             .setNegativeButton("Modify", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    final AddTaskDialog addTaskDialog = new AddTaskDialog();
-                                    addTaskDialog.show(MainActivity.this.getFragmentManager(), "setAddDialogListener");
-                                    addTaskDialog.setAddDialogListener(new AddTaskDialog.setAddTaskListener() {
+                                    final EditTaskDialog editTaskDialog = new EditTaskDialog();
+
+                                    setData(row, DatabaseHelper.COL_DUE_DATE);
+                                    editTaskDialog.setDate(getData());
+
+                                    setData(row, DatabaseHelper.COL_CATEGORY);
+                                    editTaskDialog.setCategory(getData());
+
+                                    setData(row, DatabaseHelper.COL_DESCRIPTION);
+                                    editTaskDialog.setDescription(getData());
+
+                                    editTaskDialog.show(MainActivity.this.getFragmentManager(), "setEditDialogListener");
+                                    editTaskDialog.setEditDialogListener(new EditTaskDialog.setEditTaskListener() {
                                         @Override
                                         public void onDoneClick(DialogFragment dialogFragment) {
-                                            if (addTaskDialog.getDate().equals("")) {
+
+                                            if (editTaskDialog.getDate().equals("")) {
                                                 Toast.makeText(MainActivity.this, "Please add a date!",
                                                         Toast.LENGTH_SHORT).show();
                                             }
-                                            if (addTaskDialog.getCategory().equals("")) {
+                                            if (editTaskDialog.getCategory().equals("")) {
                                                 Toast.makeText(MainActivity.this, "Please add a category!",
                                                         Toast.LENGTH_SHORT).show();
                                             }
-                                            if (addTaskDialog.getDescription().equals("")) {
+                                            if (editTaskDialog.getDescription().equals("")) {
                                                 Toast.makeText(MainActivity.this, "Please add a description!",
                                                         Toast.LENGTH_SHORT).show();
                                             }
-                                            if (!addTaskDialog.getDate().equals("")
-                                                    && !addTaskDialog.getCategory().equals("")
-                                                    && !addTaskDialog.getDescription().equals("")) {
+                                            if (!editTaskDialog.getDate().equals("")
+                                                    && !editTaskDialog.getCategory().equals("")
+                                                    && !editTaskDialog.getDescription().equals("")) {
+
                                                 databaseHelper.editTask(
                                                         row,
-                                                        addTaskDialog.getCategory(),
-                                                        addTaskDialog.getDescription(),
-                                                        addTaskDialog.getDate(),
-                                                        addTaskDialog.getRawDate(),
+                                                        editTaskDialog.getCategory(),
+                                                        editTaskDialog.getDescription(),
+                                                        editTaskDialog.getDate(),
+                                                        editTaskDialog.getRawDate(),
                                                         checkBox.isChecked());
                                                 databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
                                                 tableLayout.invalidate();
@@ -352,6 +364,17 @@ public class MainActivity extends AppCompatActivity {
             cursor.moveToNext();
         }
 
+        readDb.close();
+        cursor.close();
+    }
+
+    public String getData(){return data;}
+    public void setData(int row, int col){
+        SQLiteDatabase readDb = databaseHelper.getReadableDatabase();
+        Cursor cursor = readDb.rawQuery(DatabaseHelper.SELECT_ALL_QUERY, null);
+        cursor.moveToFirst();
+        cursor.move(row - 1);
+        this.data = cursor.getString(col);
         readDb.close();
         cursor.close();
     }

@@ -13,6 +13,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final int DATABASE_VERSION = 1;
 
+    //fields
+    public static final int COL_ID = 0;
+    public static final int COL_CATEGORY = 1;
+    public static final int COL_DESCRIPTION = 2;
+    public static final int COL_TIME_ADDED = 3;
+    public static final int COL_DUE_DATE = 4;
+    public static final int COL_RAW_DATE = 5;
+    public static final int COL_COMPLETED = 6;
+
+    String[] values = new String[3];
+
     //queries
     public static final String CREATE_TABLE_QUERY =
             "CREATE TABLE " +
@@ -90,6 +101,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         writeDb.insert(Database.TasksTable.TABLE_NAME, null, contentValues);
     }
 
+    public void readTask(int id){
+        SQLiteDatabase readDb = this.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        String[] whereArgs = {String.valueOf(id)};
+        readDb.update(Database.TasksTable.TABLE_NAME, contentValues,
+                Database.TasksTable.ID + "=" + "?", whereArgs);
+
+        values[0] = (String) contentValues.get(Database.TasksTable.CATEGORY);
+        values[1] = (String) contentValues.get(Database.TasksTable.TASK);
+        values[2] = (String) contentValues.get(Database.TasksTable.DUE_DATE);
+
+        readDb.close();
+    }
+
+    public String getValues(int value){return values[value];}
+
     /**
      * Remove rows from the task table given the id which should be searchable and unique
      * @param id the index id of the row
@@ -132,7 +160,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void editTask(int id, String category, String task, String due_date,
                          String raw_due_date, boolean completed){
         SQLiteDatabase writeDb = this.getWritableDatabase();
-        SQLiteDatabase readDb = this.getReadableDatabase();
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(Database.TasksTable.CATEGORY, category);
@@ -145,7 +172,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         writeDb.update(Database.TasksTable.TABLE_NAME, contentValues,
                 Database.TasksTable.ID + "=" + "?", whereArgs);
         writeDb.close();
-        readDb.close();
     }
 
     /**

@@ -5,6 +5,8 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.Gravity;
@@ -20,22 +22,22 @@ import java.util.Calendar;
 /**
  * Created by ed on 30/11/15.
  */
-public class AddTaskDialog extends DialogFragment {
+public class EditTaskDialog extends DialogFragment {
 
     private String dialogTitle;
     boolean modified;
 
-    private String date, rawDate;
+    private String date, rawDate, category, description;
     private EditText dateField, descriptionField, categoryField;
-    private setAddTaskListener addDialogListener = null;
+    private setEditTaskListener editDialogListener = null;
 
     //listener that the corresponding button implements
-    public interface setAddTaskListener{
+    public interface setEditTaskListener{
         void onDoneClick(DialogFragment dialogFragment);
     }
 
-    public void setAddDialogListener(setAddTaskListener addDialogListener){
-        this.addDialogListener = addDialogListener;
+    public void setEditDialogListener(setEditTaskListener editDialogListener){
+        this.editDialogListener = editDialogListener;
     }
 
     /**
@@ -47,11 +49,11 @@ public class AddTaskDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Add a task")
+        builder.setTitle("Edit a task")
                 .setPositiveButton("Done", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        if (addDialogListener != null) {
-                            addDialogListener.onDoneClick(AddTaskDialog.this);
+                        if (editDialogListener != null) {
+                            editDialogListener.onDoneClick(EditTaskDialog.this);
                         }
                     }
                 })
@@ -130,6 +132,10 @@ public class AddTaskDialog extends DialogFragment {
         descriptionField.setLayoutParams(descriptionParams);
         descriptionField.setId(View.generateViewId());
 
+        dateField.setText(getDate());
+        categoryField.setText(getCategory());
+        descriptionField.setText(getDescription());
+
         propertiesEntry.addView(dateField);
         propertiesEntry.addView(categoryField);
         propertiesEntry.addView(descriptionField);
@@ -140,9 +146,17 @@ public class AddTaskDialog extends DialogFragment {
     }
 
     public String getDate(){return date;}
-    public String getDescription(){return descriptionField.getText().toString();}
-    public String getCategory(){return categoryField.getText().toString();}
+    public String getDescription(){return description;}
+    public String getCategory(){return category;}
     public String getRawDate(){return rawDate;}
+
+    public String getDateField(){return dateField.getText().toString();}
+    public String getCategoryField(){return categoryField.getText().toString();}
+    public String getDescriptionField(){return descriptionField.getText().toString();}
+
+    public void setDate(String date){this.date = date;}
+    public void setDescription(String description){this.description = description;}
+    public void setCategory(String category){this.category = category;}
 
     /**
      * Takes the chosen time and renders it in the given format for the user to see
