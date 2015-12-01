@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    boolean dateOrdered;
+    boolean dateOrdered, categoryOrdered, descriptionOrdered;
     String data;
 
     DatabaseHelper databaseHelper;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     TableLayout tableLayout;
     ArrayList<CheckBox> checkBoxes;
     CheckBox totalCheckBox;
-    TextView orderByDate;
+    TextView orderByDate, orderByCategory, orderByDescription;
 
     int count = 0;
     int countCopy = 0;
@@ -65,8 +65,12 @@ public class MainActivity extends AppCompatActivity {
         clearButton = (Button) findViewById(R.id.clearCompletedTasks);
         tableLayout = (TableLayout) findViewById(R.id.list_table);
         totalCheckBox = (CheckBox) findViewById(R.id.select_all);
-        orderByDate = (TextView) findViewById(R.id.dateTitle);
+
         checkBoxes = new ArrayList<>();
+
+        orderByDate = (TextView) findViewById(R.id.dateTitle);
+        orderByCategory = (TextView) findViewById(R.id.categoryTitle);
+        orderByDescription = (TextView) findViewById(R.id.descriptionTitle);
 
         databaseHelper = new DatabaseHelper(this);
 
@@ -76,16 +80,56 @@ public class MainActivity extends AppCompatActivity {
         orderByDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isDateOrdered()){
+                if (!isDateOrdered()) {
                     setDateOrdered(true);
                     tableLayout.invalidate();
                     populateTable(DatabaseHelper.SELECT_BY_DATE_ASCENDING);
-                    Toast.makeText(getBaseContext(), "Ordered by ascending date", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Ordered by ascending date",
+                            Toast.LENGTH_SHORT).show();
                 } else {
                     setDateOrdered(false);
                     tableLayout.invalidate();
                     populateTable(DatabaseHelper.SELECT_BY_DATE_DESCENDING);
-                    Toast.makeText(getBaseContext(), "Ordered by descending date", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Ordered by descending date",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        orderByCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isCategoryOrdered()){
+                    setCategoryOrdered(true);
+                    tableLayout.invalidate();
+                    populateTable(DatabaseHelper.SELECT_BY_CATEGORY_ASCENDING);
+                    Toast.makeText(getBaseContext(), "Ordered by ascending category alphabetically",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    setCategoryOrdered(false);
+                    tableLayout.invalidate();
+                    populateTable(DatabaseHelper.SELECT_BY_CATEGORY_DESCENDING);
+                    Toast.makeText(getBaseContext(), "Ordered by descending category alphabetically",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        orderByDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isDescriptionOrdered()){
+                    setDescriptionOrdered(true);
+                    tableLayout.invalidate();
+                    populateTable(DatabaseHelper.SELECT_BY_DESCRIPTION_ASCENDING);
+                    Toast.makeText(getBaseContext(), "Ordered by ascending description alphabetically",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    setDescriptionOrdered(false);
+                    tableLayout.invalidate();
+                    populateTable(DatabaseHelper.SELECT_BY_DESCRIPTION_DESCENDING);
+                    Toast.makeText(getBaseContext(), "Ordered by descending description alphabetically",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -209,6 +253,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void setDateOrdered(boolean dateOrdered){this.dateOrdered=dateOrdered;}
     public boolean isDateOrdered(){return dateOrdered;}
+    public void setCategoryOrdered(boolean categoryOrdered){this.categoryOrdered=categoryOrdered;}
+    public boolean isCategoryOrdered(){return categoryOrdered;}
+    public void setDescriptionOrdered(boolean descriptionOrdered){this.descriptionOrdered=descriptionOrdered;}
+    public boolean isDescriptionOrdered(){return descriptionOrdered;}
 
     /**
      * populates the database rows and columns into a programmatically added layout

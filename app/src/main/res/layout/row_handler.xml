@@ -29,6 +29,7 @@
                     android:background="@drawable/table_cell"
                     android:gravity="center"/>
                 <TextView
+                    android:id="@+id/descriptionTitle"
                     android:text="Description"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"

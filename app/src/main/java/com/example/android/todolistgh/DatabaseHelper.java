@@ -22,8 +22,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final int COL_RAW_DATE = 5;
     public static final int COL_COMPLETED = 6;
 
-    String[] values = new String[3];
-
     //queries
     public static final String CREATE_TABLE_QUERY =
             "CREATE TABLE " +
@@ -49,6 +47,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String SELECT_BY_DATE_ASCENDING =
             "SELECT * FROM " + Database.TasksTable.TABLE_NAME +
                     " ORDER BY DATE(" + Database.TasksTable.RAW_DUE_DATE + ") ASC;";
+
+    public static final String SELECT_BY_CATEGORY_DESCENDING =
+            "SELECT * FROM " + Database.TasksTable.TABLE_NAME +
+                    " ORDER BY " + Database.TasksTable.CATEGORY + " DESC;";
+
+    public static final String SELECT_BY_CATEGORY_ASCENDING =
+            "SELECT * FROM " + Database.TasksTable.TABLE_NAME +
+                    " ORDER BY " + Database.TasksTable.CATEGORY + " ASC;";
+
+    public static final String SELECT_BY_DESCRIPTION_DESCENDING =
+            "SELECT * FROM " + Database.TasksTable.TABLE_NAME +
+                    " ORDER BY " + Database.TasksTable.TASK + " DESC;";
+
+    public static final String SELECT_BY_DESCRIPTION_ASCENDING =
+            "SELECT * FROM " + Database.TasksTable.TABLE_NAME +
+                    " ORDER BY " + Database.TasksTable.TASK + " ASC;";
 
     public DatabaseHelper(Context context) {
         super(context, Database.DATABASE_NAME, null, DATABASE_VERSION);
