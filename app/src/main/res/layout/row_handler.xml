@@ -15,12 +15,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
+                    android:id="@+id/dateTitle"
                     android:text="Date"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:background="@drawable/table_cell"
                     android:gravity="center"/>
                 <TextView
+                    android:id="@+id/categoryTitle"
                     android:text="Category"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"

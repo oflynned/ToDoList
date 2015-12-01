@@ -32,6 +32,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    boolean dateOrdered;
+
     DatabaseHelper databaseHelper;
 
     Button addButton, memoButton, clearButton;
@@ -39,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     TableLayout tableLayout;
     ArrayList<CheckBox> checkBoxes;
     CheckBox totalCheckBox;
+
+    TextView orderByDate;
 
     int count = 0;
     int countCopy = 0;
@@ -61,12 +65,30 @@ public class MainActivity extends AppCompatActivity {
         clearButton = (Button) findViewById(R.id.clearCompletedTasks);
         tableLayout = (TableLayout) findViewById(R.id.list_table);
         totalCheckBox = (CheckBox) findViewById(R.id.select_all);
+        orderByDate = (TextView) findViewById(R.id.dateTitle);
         checkBoxes = new ArrayList<>();
 
         databaseHelper = new DatabaseHelper(this);
 
-        populateTable();
+        populateTable(DatabaseHelper.SELECT_ALL_QUERY);
         databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
+
+        orderByDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isDateOrdered()){
+                    setDateOrdered(true);
+                    tableLayout.invalidate();
+                    populateTable(DatabaseHelper.SELECT_BY_DATE_ASCENDING);
+                    Toast.makeText(getBaseContext(), "Ordered by ascending date", Toast.LENGTH_SHORT).show();
+                } else {
+                    setDateOrdered(false);
+                    tableLayout.invalidate();
+                    populateTable(DatabaseHelper.SELECT_BY_DATE_DESCENDING);
+                    Toast.makeText(getBaseContext(),"Ordered by descending date", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                                     false);
                             databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
                             tableLayout.invalidate();
-                            populateTable();
+                            populateTable(DatabaseHelper.SELECT_ALL_QUERY);
                             Toast.makeText(MainActivity.this, "Task Added Successfully!",
                                     Toast.LENGTH_SHORT).show();
                         }
@@ -137,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
                                     false);
                             databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
                             tableLayout.invalidate();
-                            populateTable();
+                            populateTable(DatabaseHelper.SELECT_ALL_QUERY);
                             Toast.makeText(MainActivity.this, "Task Added Successfully!",
                                     Toast.LENGTH_SHORT).show();
                         }
@@ -158,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 databaseHelper.removeAllTasks();
                 tableLayout.invalidate();
-                populateTable();
+                populateTable(DatabaseHelper.SELECT_ALL_QUERY);
             }
         });
     }
@@ -185,17 +207,20 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void setDateOrdered(boolean dateOrdered){this.dateOrdered=dateOrdered;}
+    public boolean isDateOrdered(){return dateOrdered;}
+
     /**
      * populates the database rows and columns into a programmatically added layout
      */
-    public void populateTable() {
+    public void populateTable(String query) {
         SQLiteDatabase readDb = databaseHelper.getReadableDatabase();
 
         int currNumRows = tableLayout.getChildCount();
         if (currNumRows > 1)
             tableLayout.removeViewsInLayout(1, currNumRows - 1);
 
-        final Cursor cursor = readDb.rawQuery(DatabaseHelper.SELECT_ALL_QUERY, null);
+        final Cursor cursor = readDb.rawQuery(query, null);
         int numRows = cursor.getCount();
         System.out.println("Row count " + numRows);
         cursor.moveToFirst();
@@ -266,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     databaseHelper.removeTask(row);
                                     tableLayout.invalidate();
-                                    populateTable();
+                                    populateTable(DatabaseHelper.SELECT_ALL_QUERY);
                                     databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
                                 }
                             })
@@ -302,7 +327,7 @@ public class MainActivity extends AppCompatActivity {
                                                         checkBox.isChecked());
                                                 databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
                                                 tableLayout.invalidate();
-                                                populateTable();
+                                                populateTable(DatabaseHelper.SELECT_ALL_QUERY);
                                                 Toast.makeText(MainActivity.this, "Task modified successfully!",
                                                         Toast.LENGTH_SHORT).show();
                                             }

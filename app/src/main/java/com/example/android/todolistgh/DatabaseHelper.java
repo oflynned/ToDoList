@@ -32,10 +32,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "SELECT * FROM " + Database.TasksTable.TABLE_NAME + ";";
 
     public static final String SELECT_BY_DATE_DESCENDING =
-            "";
+            "SELECT * FROM " + Database.TasksTable.TABLE_NAME +
+                    " ORDER BY DATE(" + Database.TasksTable.RAW_DUE_DATE + ") DESC;";
 
     public static final String SELECT_BY_DATE_ASCENDING =
-            "";
+            "SELECT * FROM " + Database.TasksTable.TABLE_NAME +
+                    " ORDER BY DATE(" + Database.TasksTable.RAW_DUE_DATE + ") ASC;";
 
     public DatabaseHelper(Context context) {
         super(context, Database.DATABASE_NAME, null, DATABASE_VERSION);
