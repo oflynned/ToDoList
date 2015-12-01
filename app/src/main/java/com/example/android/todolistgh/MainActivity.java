@@ -368,7 +368,21 @@ public class MainActivity extends AppCompatActivity {
         cursor.close();
     }
 
+    /**
+     * given the data set in the row/col mix, the value is given in string format
+     * @return the value for the field as a string
+     */
     public String getData(){return data;}
+
+    /**
+     * retrieves the appropriate data for the edit record dialog box
+     * in order to populate the given fields with the appropriate values
+     * as a generic function
+     * @param row the given row to be accessed with respect to ID
+     *            which is always the row number + 1
+     * @param col the given column to be accessed where the column
+     *            corresponds to the queries in the database helper class
+     */
     public void setData(int row, int col){
         SQLiteDatabase readDb = databaseHelper.getReadableDatabase();
         Cursor cursor = readDb.rawQuery(DatabaseHelper.SELECT_ALL_QUERY, null);
@@ -379,6 +393,13 @@ public class MainActivity extends AppCompatActivity {
         cursor.close();
     }
 
+    /**
+     * strikes through the appropriate field by adding or removing bitwise operator flags
+     * @param dateField the date field in the given row to be struck through or unstruck
+     * @param categoryField the category field in the given row to be struck/unstruck
+     * @param descField the desc field in the given row to be struck/unstruck
+     * @param completed toggles whether or not the row is to be struck through or not
+     */
     public void strikeThrough(TextView dateField, TextView categoryField,
                               TextView descField, boolean completed){
         if(completed) {
