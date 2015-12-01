@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseHelper databaseHelper;
 
     Button addButton, memoButton, clearButton;
-    //FloatingActionButton floatingMenu;
+    FloatingActionButton floatingMenu;
     TableLayout tableLayout;
     ArrayList<CheckBox> checkBoxes;
     CheckBox totalCheckBox;
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         addButton = (Button) findViewById(R.id.addButton);
-        //floatingMenu = (FloatingActionButton) findViewById(R.id.floatingMenu);
+        floatingMenu = (FloatingActionButton) findViewById(R.id.floatingMenu);
         memoButton = (Button) findViewById(R.id.memoButton);
         clearButton = (Button) findViewById(R.id.clearCompletedTasks);
         tableLayout = (TableLayout) findViewById(R.id.list_table);
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
-        /*
+
         floatingMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
-        */
+
         memoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

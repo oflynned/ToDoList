@@ -33,16 +33,20 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/todolistgh/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.226257">
-              <caret line="58" column="9" selection-start-line="58" selection-start-column="9" selection-end-line="58" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.2932961">
+              <caret line="58" column="8" selection-start-line="58" selection-start-column="8" selection-end-line="58" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#6812#7009#0" expanded="true" />
-                <element signature="e#7008#7009#0" expanded="true" />
-                <element signature="e#7052#7292#0" expanded="true" />
-                <element signature="e#7291#7292#0" expanded="true" />
-                <element signature="e#11437#11957#0" expanded="true" />
-                <element signature="e#11956#11957#0" expanded="true" />
+                <element signature="e#4560#6746#0" expanded="true" />
+                <element signature="e#4877#6720#0" expanded="true" />
+                <element signature="e#6719#6720#0" expanded="true" />
+                <element signature="e#6745#6746#0" expanded="true" />
+                <element signature="e#6788#6985#0" expanded="true" />
+                <element signature="e#6984#6985#0" expanded="true" />
+                <element signature="e#7028#7268#0" expanded="true" />
+                <element signature="e#7267#7268#0" expanded="true" />
+                <element signature="e#11413#11933#0" expanded="true" />
+                <element signature="e#11932#11933#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2155,16 +2159,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/todolistgh/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.226257">
-          <caret line="58" column="9" selection-start-line="58" selection-start-column="9" selection-end-line="58" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.2932961">
+          <caret line="58" column="8" selection-start-line="58" selection-start-column="8" selection-end-line="58" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#6812#7009#0" expanded="true" />
-            <element signature="e#7008#7009#0" expanded="true" />
-            <element signature="e#7052#7292#0" expanded="true" />
-            <element signature="e#7291#7292#0" expanded="true" />
-            <element signature="e#11437#11957#0" expanded="true" />
-            <element signature="e#11956#11957#0" expanded="true" />
+            <element signature="e#4560#6746#0" expanded="true" />
+            <element signature="e#4877#6720#0" expanded="true" />
+            <element signature="e#6719#6720#0" expanded="true" />
+            <element signature="e#6745#6746#0" expanded="true" />
+            <element signature="e#6788#6985#0" expanded="true" />
+            <element signature="e#6984#6985#0" expanded="true" />
+            <element signature="e#7028#7268#0" expanded="true" />
+            <element signature="e#7267#7268#0" expanded="true" />
+            <element signature="e#11413#11933#0" expanded="true" />
+            <element signature="e#11932#11933#0" expanded="true" />
           </folding>
         </state>
       </provider>
