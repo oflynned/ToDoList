@@ -157,6 +157,7 @@ public class EditTaskDialog extends DialogFragment {
     public void setDate(String date){this.date = date;}
     public void setDescription(String description){this.description = description;}
     public void setCategory(String category){this.category = category;}
+    public void setRawDate(String rawDate){this.rawDate = rawDate;}
 
     /**
      * Takes the chosen time and renders it in the given format for the user to see

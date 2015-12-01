@@ -309,6 +309,9 @@ public class MainActivity extends AppCompatActivity {
                                     setData(row, DatabaseHelper.COL_DESCRIPTION);
                                     editTaskDialog.setDescription(getData());
 
+                                    setData(row, DatabaseHelper.COL_RAW_DATE);
+                                    editTaskDialog.setRawDate(getData());
+
                                     editTaskDialog.show(MainActivity.this.getFragmentManager(), "setEditDialogListener");
                                     editTaskDialog.setEditDialogListener(new EditTaskDialog.setEditTaskListener() {
                                         @Override
@@ -332,9 +335,9 @@ public class MainActivity extends AppCompatActivity {
 
                                                 databaseHelper.editTask(
                                                         row,
-                                                        editTaskDialog.getCategory(),
-                                                        editTaskDialog.getDescription(),
-                                                        editTaskDialog.getDate(),
+                                                        editTaskDialog.getCategoryField(),
+                                                        editTaskDialog.getDescriptionField(),
+                                                        editTaskDialog.getDateField(),
                                                         editTaskDialog.getRawDate(),
                                                         checkBox.isChecked());
                                                 databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
