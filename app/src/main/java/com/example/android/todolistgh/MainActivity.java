@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseHelper databaseHelper;
 
     Button addButton, memoButton, clearButton;
+    //FloatingActionButton floatingMenu;
     TableLayout tableLayout;
     ArrayList<CheckBox> checkBoxes;
     CheckBox totalCheckBox;
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         addButton = (Button) findViewById(R.id.addButton);
+        //floatingMenu = (FloatingActionButton) findViewById(R.id.floatingMenu);
         memoButton = (Button) findViewById(R.id.memoButton);
         clearButton = (Button) findViewById(R.id.clearCompletedTasks);
         tableLayout = (TableLayout) findViewById(R.id.list_table);
@@ -73,21 +76,21 @@ public class MainActivity extends AppCompatActivity {
                 addTaskDialog.setAddDialogListener(new AddTaskDialog.setAddTaskListener() {
                     @Override
                     public void onDoneClick(DialogFragment dialogFragment) {
-                        if(addTaskDialog.getDate().equals("")){
+                        if (addTaskDialog.getDate().equals("")) {
                             Toast.makeText(MainActivity.this, "Please add a date!",
                                     Toast.LENGTH_SHORT).show();
                         }
-                        if(addTaskDialog.getCategory().equals("")){
+                        if (addTaskDialog.getCategory().equals("")) {
                             Toast.makeText(MainActivity.this, "Please add a category!",
                                     Toast.LENGTH_SHORT).show();
                         }
-                        if(addTaskDialog.getDescription().equals("")){
+                        if (addTaskDialog.getDescription().equals("")) {
                             Toast.makeText(MainActivity.this, "Please add a description!",
                                     Toast.LENGTH_SHORT).show();
                         }
-                        if(!addTaskDialog.getDate().equals("")
+                        if (!addTaskDialog.getDate().equals("")
                                 && !addTaskDialog.getCategory().equals("")
-                                && !addTaskDialog.getDescription().equals("")){
+                                && !addTaskDialog.getDescription().equals("")) {
                             databaseHelper.insertTask(addTaskDialog.getCategory(),
                                     addTaskDialog.getDescription(),
                                     addTaskDialog.getDate(),
@@ -103,7 +106,46 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
-
+        /*
+        floatingMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AddTaskDialog addTaskDialog = new AddTaskDialog();
+                addTaskDialog.show(MainActivity.this.getFragmentManager(), "setAddDialogListener");
+                addTaskDialog.setAddDialogListener(new AddTaskDialog.setAddTaskListener() {
+                    @Override
+                    public void onDoneClick(DialogFragment dialogFragment) {
+                        if (addTaskDialog.getDate().equals("")) {
+                            Toast.makeText(MainActivity.this, "Please add a date!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        if (addTaskDialog.getCategory().equals("")) {
+                            Toast.makeText(MainActivity.this, "Please add a category!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        if (addTaskDialog.getDescription().equals("")) {
+                            Toast.makeText(MainActivity.this, "Please add a description!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        if (!addTaskDialog.getDate().equals("")
+                                && !addTaskDialog.getCategory().equals("")
+                                && !addTaskDialog.getDescription().equals("")) {
+                            databaseHelper.insertTask(addTaskDialog.getCategory(),
+                                    addTaskDialog.getDescription(),
+                                    addTaskDialog.getDate(),
+                                    addTaskDialog.getRawDate(),
+                                    false);
+                            databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
+                            tableLayout.invalidate();
+                            populateTable();
+                            Toast.makeText(MainActivity.this, "Task Added Successfully!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+        */
         memoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
