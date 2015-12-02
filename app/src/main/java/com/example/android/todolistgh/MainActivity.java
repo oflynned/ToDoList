@@ -38,9 +38,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseHelper databaseHelper;
 
     Button addButton, memoButton, clearButton;
-    FloatingActionButton floatingMenu;
-    FloatingActionButton floatingOption1;
-    FloatingActionButton floatingOption2;
+    FloatingActionButton floatingMenu, floatingOption1, floatingOption2;
     TableLayout tableLayout;
     ArrayList<CheckBox> checkBoxes;
     CheckBox totalCheckBox;
@@ -63,8 +61,13 @@ public class MainActivity extends AppCompatActivity {
 
         addButton = (Button) findViewById(R.id.addButton);
         floatingMenu = (FloatingActionButton) findViewById(R.id.floatingMenu);
+        floatingMenu.setClickable(true);
         floatingOption1 = (FloatingActionButton) findViewById(R.id.floatingOption1);
+        floatingOption1.setVisibility(View.INVISIBLE);
+        floatingOption1.setClickable(false);
         floatingOption2 = (FloatingActionButton) findViewById(R.id.floatingOption2);
+        floatingOption2.setVisibility(View.INVISIBLE);
+        floatingOption2.setClickable(false);
         memoButton = (Button) findViewById(R.id.memoButton);
         clearButton = (Button) findViewById(R.id.clearCompletedTasks);
         tableLayout = (TableLayout) findViewById(R.id.list_table);
@@ -178,6 +181,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
         floatingMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                floatingOption1.setVisibility(View.VISIBLE);
+                floatingOption1.setClickable(true);
+                floatingOption2.setVisibility(View.VISIBLE);
+                floatingOption2.setClickable(true);
+            }
+        });
+
+        floatingOption1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final AddTaskDialog addTaskDialog = new AddTaskDialog();
