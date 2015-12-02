@@ -140,6 +140,7 @@ public class AddTaskDialog extends DialogFragment {
     }
 
     public String getDate(){return date;}
+    public String getDateField(){return dateField.getText().toString();}
     public String getDescription(){return descriptionField.getText().toString();}
     public String getCategory(){return categoryField.getText().toString();}
     public String getRawDate(){return rawDate;}

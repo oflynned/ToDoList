@@ -242,21 +242,21 @@ public class MainActivity extends AppCompatActivity {
                 addTaskDialog.setAddDialogListener(new AddTaskDialog.setAddTaskListener() {
                     @Override
                     public void onDoneClick(DialogFragment dialogFragment) {
-                        if (addTaskDialog.getDate().isEmpty()) {
+                        if (addTaskDialog.getDateField().matches("")) {
                             Toast.makeText(MainActivity.this, "Please add a date!",
                                     Toast.LENGTH_SHORT).show();
                         }
-                        if (addTaskDialog.getCategory().isEmpty()) {
+                        if (addTaskDialog.getCategory().matches("")) {
                             Toast.makeText(MainActivity.this, "Please add a category!",
                                     Toast.LENGTH_SHORT).show();
                         }
-                        if (addTaskDialog.getDescription().isEmpty()) {
+                        if (addTaskDialog.getDescription().matches("")) {
                             Toast.makeText(MainActivity.this, "Please add a description!",
                                     Toast.LENGTH_SHORT).show();
                         }
-                        if (!addTaskDialog.getDate().equals("")
-                                && !addTaskDialog.getCategory().equals("")
-                                && !addTaskDialog.getDescription().equals("")) {
+                        if (!addTaskDialog.getDateField().matches("")
+                                && !addTaskDialog.getCategory().matches("")
+                                && !addTaskDialog.getDescription().matches("")) {
                             databaseHelper.insertTask(addTaskDialog.getCategory(),
                                     addTaskDialog.getDescription(),
                                     addTaskDialog.getDate(),
@@ -476,21 +476,21 @@ public class MainActivity extends AppCompatActivity {
                                         @Override
                                         public void onDoneClick(DialogFragment dialogFragment) {
 
-                                            if (editTaskDialog.getDate().equals("")) {
+                                            if (editTaskDialog.getDateField().matches("")) {
                                                 Toast.makeText(MainActivity.this, "Please add a date!",
                                                         Toast.LENGTH_SHORT).show();
                                             }
-                                            if (editTaskDialog.getCategory().equals("")) {
+                                            if (editTaskDialog.getCategory().matches("")) {
                                                 Toast.makeText(MainActivity.this, "Please add a category!",
                                                         Toast.LENGTH_SHORT).show();
                                             }
-                                            if (editTaskDialog.getDescription().equals("")) {
+                                            if (editTaskDialog.getDescription().matches("")) {
                                                 Toast.makeText(MainActivity.this, "Please add a description!",
                                                         Toast.LENGTH_SHORT).show();
                                             }
-                                            if (!editTaskDialog.getDate().equals("")
-                                                    && !editTaskDialog.getCategory().equals("")
-                                                    && !editTaskDialog.getDescription().equals("")) {
+                                            if (!editTaskDialog.getDateField().matches("")
+                                                    && !editTaskDialog.getCategory().matches("")
+                                                    && !editTaskDialog.getDescription().matches("")) {
 
                                                 databaseHelper.editTask(
                                                         row,
