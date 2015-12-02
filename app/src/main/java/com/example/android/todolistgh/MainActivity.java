@@ -21,18 +21,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity {
 
-    boolean dateOrdered, categoryOrdered, descriptionOrdered;
+    boolean dateOrdered, categoryOrdered, descriptionOrdered, allChecked;
     String data;
 
     DatabaseHelper databaseHelper;
@@ -83,6 +82,35 @@ public class MainActivity extends AppCompatActivity {
 
         populateTable(DatabaseHelper.SELECT_ALL_QUERY);
         databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
+
+        totalCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SQLiteDatabase readDb = databaseHelper.getReadableDatabase();
+                Cursor cursor = readDb.rawQuery(DatabaseHelper.SELECT_ALL_QUERY, null);
+                cursor.moveToFirst();
+                int rows = cursor.getCount();
+
+                if (isChecked) {
+                    setAllChecked(true);
+                    for(int i=0; i < rows; i++){
+                        databaseHelper.editChecked(cursor.getInt(0), true);
+                        cursor.moveToNext();
+                    }
+                } else {
+                    setAllChecked(false);
+                    for(int i=0; i < rows; i++){
+                        databaseHelper.editChecked(cursor.getInt(0), false);
+                        cursor.moveToNext();
+                    }
+                }
+                tableLayout.invalidate();
+                populateTable(DatabaseHelper.SELECT_ALL_QUERY);
+                readDb.close();
+                cursor.close();
+            }
+        });
+
 
         orderByDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -274,7 +302,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean isCategoryOrdered(){return categoryOrdered;}
     public void setDescriptionOrdered(boolean descriptionOrdered){this.descriptionOrdered=descriptionOrdered;}
     public boolean isDescriptionOrdered(){return descriptionOrdered;}
-
+    public void setAllChecked(boolean allChecked){this.allChecked=allChecked;}
+    public boolean isAllChecked(){return allChecked;}
     /**
      * populates the database rows and columns into a programmatically added layout
      */
