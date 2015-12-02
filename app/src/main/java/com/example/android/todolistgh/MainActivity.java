@@ -95,13 +95,13 @@ public class MainActivity extends AppCompatActivity {
 
                 if (isChecked) {
                     setAllChecked(true);
-                    for(int i=0; i < rows; i++){
+                    for (int i = 0; i < rows; i++) {
                         databaseHelper.editChecked(cursor.getInt(0), true);
                         cursor.moveToNext();
                     }
                 } else {
                     setAllChecked(false);
-                    for(int i=0; i < rows; i++){
+                    for (int i = 0; i < rows; i++) {
                         databaseHelper.editChecked(cursor.getInt(0), false);
                         cursor.moveToNext();
                     }
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         orderByCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isCategoryOrdered()){
+                if (!isCategoryOrdered()) {
                     editor.putInt(getResources().getString(R.string.pref_key_ordering), 3);
                     editor.apply();
                     setCategoryOrdered(true);
@@ -235,6 +235,22 @@ public class MainActivity extends AppCompatActivity {
                 databaseHelper.removeAllTasks();
                 tableLayout.invalidate();
                 populateTable(DatabaseHelper.SELECT_ALL_QUERY);
+            }
+        });
+
+        final com.getbase.floatingactionbutton.FloatingActionButton actionA = (com.getbase.floatingactionbutton.FloatingActionButton) findViewById(R.id.action_a);
+        actionA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                actionA.setTitle("Action A clicked");
+            }
+        });
+
+        final com.getbase.floatingactionbutton.FloatingActionButton actionB = (com.getbase.floatingactionbutton.FloatingActionButton) findViewById(R.id.action_b);
+        actionB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                actionB.setTitle("Action B clicked");
             }
         });
     }
