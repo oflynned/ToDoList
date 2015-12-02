@@ -11,12 +11,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a5c296e-60f5-40cf-867e-e437c9fe91ae" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ToDoListRepo.iml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/todolistgh/AddTaskDialog.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/todolistgh/AddTaskDialog.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/todolistgh/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/todolistgh/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -42,8 +40,8 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/todolistgh/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.556701">
-              <caret line="256" column="57" selection-start-line="256" selection-start-column="57" selection-end-line="256" selection-end-column="57" />
+            <state vertical-scroll-proportion="2.0762463">
+              <caret line="118" column="79" selection-start-line="118" selection-start-column="79" selection-end-line="118" selection-end-column="79" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2169#2221#0" expanded="true" />
@@ -56,6 +54,16 @@
                 <element signature="e#10038#11928#0" expanded="true" />
                 <element signature="e#11927#11928#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EditTaskDialog.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/todolistgh/EditTaskDialog.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="159" column="66" selection-start-line="159" selection-start-column="66" selection-end-line="159" selection-end-column="66" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1725,7 +1733,7 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
     <property name="recentsLimit" value="5" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="emulator-5554" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="CB5A20BZ0W" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Nexus_5_API_23" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
@@ -1915,7 +1923,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32668567" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32668567" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328585" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29154795" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2195,13 +2203,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/todolistgh/EditTaskDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="159" column="66" selection-start-line="159" selection-start-column="66" selection-end-line="159" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/table_cell.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2251,10 +2252,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/todolistgh/EditTaskDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="159" column="66" selection-start-line="159" selection-start-column="66" selection-end-line="159" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/todolistgh/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.556701">
-          <caret line="256" column="57" selection-start-line="256" selection-start-column="57" selection-end-line="256" selection-end-column="57" />
+        <state vertical-scroll-proportion="2.0762463">
+          <caret line="118" column="79" selection-start-line="118" selection-start-column="79" selection-end-line="118" selection-end-column="79" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2169#2221#0" expanded="true" />

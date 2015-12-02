@@ -92,49 +92,7 @@ public class MainActivity extends AppCompatActivity {
         populateTable(DatabaseHelper.SELECT_ALL_QUERY);
         databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
 
-        switch (ordering){
-            //date descending
-            case 0:
-                tableLayout.invalidate();
-                populateTable(DatabaseHelper.SELECT_BY_DATE_DESCENDING);
-                break;
-            //date ascending
-            case 1:
-                tableLayout.invalidate();
-                populateTable(DatabaseHelper.SELECT_BY_DATE_ASCENDING);
-                break;
-            //category descending
-            case 2:
-                tableLayout.invalidate();
-                populateTable(DatabaseHelper.SELECT_BY_CATEGORY_DESCENDING);
-                break;
-            //category ascending
-            case 3:
-                tableLayout.invalidate();
-                populateTable(DatabaseHelper.SELECT_BY_CATEGORY_ASCENDING);
-                break;
-            //description descending
-            case 4:
-                tableLayout.invalidate();
-                populateTable(DatabaseHelper.SELECT_BY_DESCRIPTION_DESCENDING);
-                break;
-            //description ascending
-            case 5:
-                tableLayout.invalidate();
-                populateTable(DatabaseHelper.SELECT_BY_DESCRIPTION_ASCENDING);
-                break;
-            //priority descending
-            case 6:
-                break;
-            //priority ascending
-            case 7:
-                break;
-            //by id ascending default
-            default:
-                tableLayout.invalidate();
-                populateTable(DatabaseHelper.SELECT_ALL_QUERY);
-                break;
-        }
+        orderTable();
 
         totalCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -158,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 tableLayout.invalidate();
-                populateTable(DatabaseHelper.SELECT_ALL_QUERY);
+                orderTable();
                 readDb.close();
                 cursor.close();
             }
@@ -369,6 +327,54 @@ public class MainActivity extends AppCompatActivity {
     public boolean isDescriptionOrdered(){return descriptionOrdered;}
     public void setAllChecked(boolean allChecked){this.allChecked=allChecked;}
     public boolean isAllChecked(){return allChecked;}
+
+    public void orderTable(){
+        this.ordering = sharedPreferences.getInt(getResources().getString(R.string.pref_key_ordering), 8);
+        switch (ordering){
+            //date descending
+            case 0:
+                tableLayout.invalidate();
+                populateTable(DatabaseHelper.SELECT_BY_DATE_DESCENDING);
+                break;
+            //date ascending
+            case 1:
+                tableLayout.invalidate();
+                populateTable(DatabaseHelper.SELECT_BY_DATE_ASCENDING);
+                break;
+            //category descending
+            case 2:
+                tableLayout.invalidate();
+                populateTable(DatabaseHelper.SELECT_BY_CATEGORY_DESCENDING);
+                break;
+            //category ascending
+            case 3:
+                tableLayout.invalidate();
+                populateTable(DatabaseHelper.SELECT_BY_CATEGORY_ASCENDING);
+                break;
+            //description descending
+            case 4:
+                tableLayout.invalidate();
+                populateTable(DatabaseHelper.SELECT_BY_DESCRIPTION_DESCENDING);
+                break;
+            //description ascending
+            case 5:
+                tableLayout.invalidate();
+                populateTable(DatabaseHelper.SELECT_BY_DESCRIPTION_ASCENDING);
+                break;
+            //priority descending
+            case 6:
+                break;
+            //priority ascending
+            case 7:
+                break;
+            //by id ascending default
+            default:
+                tableLayout.invalidate();
+                populateTable(DatabaseHelper.SELECT_ALL_QUERY);
+                break;
+        }
+    }
+
     /**
      * populates the database rows and columns into a programmatically added layout
      */
