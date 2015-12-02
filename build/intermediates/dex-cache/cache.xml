@@ -2,11 +2,11 @@
 <items version="2" >
 
     <item
-        jar="/home/ed/Projects/University/ToDoList/app/build/intermediates/exploded-aar/com.getbase/floatingactionbutton/1.10.1/jars/classes.jar"
+        jar="/Users/sidgupta/AndroidStudioProjects/GitHub/ToDoListRepo/app/build/intermediates/exploded-aar/com.getbase/floatingactionbutton/1.10.1/jars/classes.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="f40cf334cdc8b098b74312e21c7741c6eefbeb0e">
-        <dex dex="/home/ed/Projects/University/ToDoList/app/build/intermediates/pre-dexed/debug/classes-0413fdcfc44e32ca6a167d7aeb16bdb6230d81d2.jar" />
+        <dex dex="/Users/sidgupta/AndroidStudioProjects/GitHub/ToDoListRepo/app/build/intermediates/pre-dexed/debug/classes-a4790cf1c46b61d69d95e9b8cc1ebc3b2f66c058.jar" />
     </item>
 
 </items>

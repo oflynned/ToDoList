@@ -23,8 +23,6 @@ public class SyncActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
         memo = (EditText) findViewById(R.id.sendToEmail);
-        newTaskDate = (EditText) findViewById(R.id.newDate);
-        newTaskDescription = (EditText) findViewById(R.id.newDescription);
         sendEmail = (Button) findViewById(R.id.send_email);
         sendEmailText = (EditText) findViewById(R.id.sendEmailText);
 

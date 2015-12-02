@@ -54,13 +54,6 @@
 
         </LinearLayout>
 
-        <TextView
-            android:text="@string/newTask"
-            android:textSize="16dp"
-            android:layout_marginLeft="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -69,31 +62,17 @@
             android:layout_marginRight="8dp"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/newDate"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:hint="@string/newDueDate"
-                android:inputType="date"
-                android:layout_weight="1.1" />
-
-            <EditText
-                android:id="@+id/newDescription"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:hint="@string/newDescription"
-                android:layout_weight="2.9" />
-
             <Button
                 android:id="@+id/addButton"
                 android:text="@string/addNewTask"
-                android:layout_width="49dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.60"
+                android:layout_weight="1"
                 android:background="@color/colorAccent"
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
+
         <include layout="@layout/row_handler"
             android:id="@+id/table_layout" />
 
