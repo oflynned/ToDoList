@@ -32,7 +32,8 @@
                 android:id="@+id/memoButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#FF9800" />
+                android:background="@color/colorAccent"
+                android:textColor="@android:color/white"/>
 
             <TextView
                 android:text="@string/title"
@@ -48,7 +49,8 @@
                 android:text="@string/clearCompleted"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#FF9800" />
+                android:background="@color/colorAccent"
+                android:textColor="@android:color/white"/>
 
         </LinearLayout>
 
@@ -88,7 +90,8 @@
                 android:layout_width="49dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.60"
-                android:background="#FF9800" />
+                android:background="@color/colorAccent"
+                android:textColor="@android:color/white"/>
 
         </LinearLayout>
         <include layout="@layout/row_handler"

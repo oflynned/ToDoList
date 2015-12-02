@@ -146,15 +146,15 @@ public class MainActivity extends AppCompatActivity {
                 addTaskDialog.setAddDialogListener(new AddTaskDialog.setAddTaskListener() {
                     @Override
                     public void onDoneClick(DialogFragment dialogFragment) {
-                        if (addTaskDialog.getDate().equals("")) {
+                        if (addTaskDialog.getDate().isEmpty()) {
                             Toast.makeText(MainActivity.this, "Please add a date!",
                                     Toast.LENGTH_SHORT).show();
                         }
-                        if (addTaskDialog.getCategory().equals("")) {
+                        if (addTaskDialog.getCategory().isEmpty()) {
                             Toast.makeText(MainActivity.this, "Please add a category!",
                                     Toast.LENGTH_SHORT).show();
                         }
-                        if (addTaskDialog.getDescription().equals("")) {
+                        if (addTaskDialog.getDescription().isEmpty()) {
                             Toast.makeText(MainActivity.this, "Please add a description!",
                                     Toast.LENGTH_SHORT).show();
                         }
