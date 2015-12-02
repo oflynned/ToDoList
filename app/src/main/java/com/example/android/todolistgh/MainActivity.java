@@ -3,11 +3,13 @@ package com.example.android.todolistgh;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -27,11 +29,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity {
 
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
     boolean dateOrdered, categoryOrdered, descriptionOrdered, allChecked;
+    int ordering;
     String data;
 
     DatabaseHelper databaseHelper;
@@ -58,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = sharedPreferences.edit();
+        ordering = sharedPreferences.getInt(getResources().getString(R.string.pref_key_ordering), 8);
+
         addButton = (Button) findViewById(R.id.addButton);
         floatingMenu = (FloatingActionButton) findViewById(R.id.floatingMenu);
         floatingMenu.setClickable(true);
@@ -82,6 +91,50 @@ public class MainActivity extends AppCompatActivity {
 
         populateTable(DatabaseHelper.SELECT_ALL_QUERY);
         databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
+
+        switch (ordering){
+            //date descending
+            case 0:
+                tableLayout.invalidate();
+                populateTable(DatabaseHelper.SELECT_BY_DATE_DESCENDING);
+                break;
+            //date ascending
+            case 1:
+                tableLayout.invalidate();
+                populateTable(DatabaseHelper.SELECT_BY_DATE_ASCENDING);
+                break;
+            //category descending
+            case 2:
+                tableLayout.invalidate();
+                populateTable(DatabaseHelper.SELECT_BY_CATEGORY_DESCENDING);
+                break;
+            //category ascending
+            case 3:
+                tableLayout.invalidate();
+                populateTable(DatabaseHelper.SELECT_BY_CATEGORY_ASCENDING);
+                break;
+            //description descending
+            case 4:
+                tableLayout.invalidate();
+                populateTable(DatabaseHelper.SELECT_BY_DESCRIPTION_DESCENDING);
+                break;
+            //description ascending
+            case 5:
+                tableLayout.invalidate();
+                populateTable(DatabaseHelper.SELECT_BY_DESCRIPTION_ASCENDING);
+                break;
+            //priority descending
+            case 6:
+                break;
+            //priority ascending
+            case 7:
+                break;
+            //by id ascending default
+            default:
+                tableLayout.invalidate();
+                populateTable(DatabaseHelper.SELECT_ALL_QUERY);
+                break;
+        }
 
         totalCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -116,12 +169,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!isDateOrdered()) {
+                    editor.putInt(getResources().getString(R.string.pref_key_ordering), 1);
+                    editor.apply();
                     setDateOrdered(true);
                     tableLayout.invalidate();
                     populateTable(DatabaseHelper.SELECT_BY_DATE_ASCENDING);
                     Toast.makeText(getBaseContext(), "Ordered by ascending date",
                             Toast.LENGTH_SHORT).show();
                 } else {
+                    editor.putInt(getResources().getString(R.string.pref_key_ordering), 0);
+                    editor.apply();
                     setDateOrdered(false);
                     tableLayout.invalidate();
                     populateTable(DatabaseHelper.SELECT_BY_DATE_DESCENDING);
@@ -135,12 +192,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!isCategoryOrdered()){
+                    editor.putInt(getResources().getString(R.string.pref_key_ordering), 3);
+                    editor.apply();
                     setCategoryOrdered(true);
                     tableLayout.invalidate();
                     populateTable(DatabaseHelper.SELECT_BY_CATEGORY_ASCENDING);
                     Toast.makeText(getBaseContext(), "Ordered by ascending category alphabetically",
                             Toast.LENGTH_SHORT).show();
                 } else {
+                    editor.putInt(getResources().getString(R.string.pref_key_ordering), 2);
+                    editor.apply();
                     setCategoryOrdered(false);
                     tableLayout.invalidate();
                     populateTable(DatabaseHelper.SELECT_BY_CATEGORY_DESCENDING);
@@ -154,12 +215,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!isDescriptionOrdered()){
+                    editor.putInt(getResources().getString(R.string.pref_key_ordering), 5);
+                    editor.apply();
                     setDescriptionOrdered(true);
                     tableLayout.invalidate();
                     populateTable(DatabaseHelper.SELECT_BY_DESCRIPTION_ASCENDING);
                     Toast.makeText(getBaseContext(), "Ordered by ascending description alphabetically",
                             Toast.LENGTH_SHORT).show();
                 } else {
+                    editor.putInt(getResources().getString(R.string.pref_key_ordering), 4);
+                    editor.apply();
                     setDescriptionOrdered(false);
                     tableLayout.invalidate();
                     populateTable(DatabaseHelper.SELECT_BY_DESCRIPTION_DESCENDING);

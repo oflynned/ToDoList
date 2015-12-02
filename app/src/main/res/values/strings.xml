@@ -15,4 +15,7 @@
     <string name="notes">notes</string>
     <string name="enterNote">Enter a note</string>
     <string name="email">Email</string>
+
+    <!-- preference keys -->
+    <string name="pref_key_ordering">pref_key_ordering</string>
 </resources>

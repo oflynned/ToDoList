@@ -113,6 +113,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(Database.TasksTable.RAW_DUE_DATE, raw_due_date);
         contentValues.put(Database.TasksTable.COMPLETED, completed);
         writeDb.insert(Database.TasksTable.TABLE_NAME, null, contentValues);
+        writeDb.close();
     }
 
     /**
@@ -213,5 +214,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.moveToNext();
         }
         cursor.close();
+        sqLiteDatabase.close();
     }
 }
