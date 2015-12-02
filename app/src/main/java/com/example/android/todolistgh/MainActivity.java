@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
     Button addButton, memoButton, clearButton;
     FloatingActionButton floatingMenu;
+    FloatingActionButton floatingOption1;
+    FloatingActionButton floatingOption2;
     TableLayout tableLayout;
     ArrayList<CheckBox> checkBoxes;
     CheckBox totalCheckBox;
@@ -61,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
         addButton = (Button) findViewById(R.id.addButton);
         floatingMenu = (FloatingActionButton) findViewById(R.id.floatingMenu);
+        floatingOption1 = (FloatingActionButton) findViewById(R.id.floatingOption1);
+        floatingOption2 = (FloatingActionButton) findViewById(R.id.floatingOption2);
         memoButton = (Button) findViewById(R.id.memoButton);
         clearButton = (Button) findViewById(R.id.clearCompletedTasks);
         tableLayout = (TableLayout) findViewById(R.id.list_table);
