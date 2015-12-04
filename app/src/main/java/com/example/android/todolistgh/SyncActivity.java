@@ -8,8 +8,6 @@ import android.widget.EditText;
 
 public class SyncActivity extends AppCompatActivity {
 
-    //instantiate class objects with activity contexts
-    FileHandling fileHandling = new FileHandling(this);
     Connectivity connectivity = new Connectivity(this);
 
     EditText memo, newTaskDate, newTaskDescription, sendEmailText;
