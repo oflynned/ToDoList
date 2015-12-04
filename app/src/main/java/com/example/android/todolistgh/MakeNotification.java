@@ -21,8 +21,10 @@ public class MakeNotification {
     /**
      * Creates the notification which directs you to
      * Main Activity when clicked
+     * @param description The description of the task
+     *                    due
      */
-    public void createNotification () {
+    public void createNotification (String description) {
         int mId = 1;
         Intent resultIntent = new Intent(context, MainActivity.class);
 
@@ -35,9 +37,9 @@ public class MakeNotification {
         );
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.mipmap.ic_launcher_new)
                 .setContentTitle("To Do List")
-                .setContentText("Something is due");
+                .setContentText("To do tomorrow: " + description);
 
 
         mBuilder.setContentIntent(resultPendingIntent);
