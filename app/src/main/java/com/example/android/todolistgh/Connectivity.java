@@ -19,7 +19,6 @@ public class Connectivity {
         Intent sendEmailSummary = new Intent(Intent.ACTION_SENDTO);
 
         sendEmailSummary.setData(Uri.parse("mailto:")); // only email apps should handle this
-        sendEmailSummary.putExtra(Intent.EXTRA_EMAIL, new String[] { "example@gmail.com" });
         sendEmailSummary.putExtra(Intent.EXTRA_SUBJECT, ("MEMO- To-Do List App"));
         sendEmailSummary.putExtra(Intent.EXTRA_TEXT, memo);
         if (sendEmailSummary.resolveActivity(context.getPackageManager()) != null) {
