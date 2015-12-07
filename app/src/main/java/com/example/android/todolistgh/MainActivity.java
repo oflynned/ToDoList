@@ -41,11 +41,11 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper databaseHelper;
 
-    Button addButton, memoButton, clearButton;
+    Button addButton, memoButton;
     TableLayout tableLayout;
     ArrayList<CheckBox> checkBoxes;
     CheckBox totalCheckBox;
-    TextView orderByDate, orderByCategory, orderByDescription;
+    TextView orderByDate, orderByCategory, orderByDescription, clearButton;
 
     int count = 0;
     int countCopy = 0;
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         addButton = (Button) findViewById(R.id.addButton);
         memoButton = (Button) findViewById(R.id.memoButton);
-        clearButton = (Button) findViewById(R.id.clearCompletedTasks);
+        clearButton = (TextView) findViewById(R.id.clearAllTasks);
         tableLayout = (TableLayout) findViewById(R.id.list_table);
         totalCheckBox = (CheckBox) findViewById(R.id.select_all);
 

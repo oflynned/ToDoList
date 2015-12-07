@@ -9,7 +9,7 @@
     <string name="dueDate">Date</string>
     <string name="description">Description</string>
     <string name="completedyorn">Completed?</string>
-    <string name="clearCompleted">Clear</string>
+    <string name="clearAll">Clear All</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="memo">Memo</string>
     <string name="notes">notes</string>
