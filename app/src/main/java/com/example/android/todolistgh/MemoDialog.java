@@ -1,7 +1,6 @@
 package com.example.android.todolistgh;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
@@ -10,12 +9,9 @@ import android.text.InputType;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 /**
  * Created by sidgupta on 09/12/2015.
@@ -26,7 +22,9 @@ public class MemoDialog extends DialogFragment{
     boolean modified;
 
     private EditText memoField;
+    private Button emailButton;
     private setMemoListener memoDialogListener = null;
+    private Connectivity connectivity;
 
     //listener that the corresponding button implements
     public interface setMemoListener{
@@ -58,7 +56,14 @@ public class MemoDialog extends DialogFragment{
                     public void onClick(DialogInterface dialog, int id) {
 
                     }
+                })
+                .setNeutralButton("Email", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        connectivity.sendToEmail(memoField.getText().toString());
+                    }
                 });
+
+        connectivity = new Connectivity(this.getActivity());
 
         RelativeLayout propertiesEntry = new RelativeLayout(this.getActivity());
         propertiesEntry.setGravity(Gravity.CENTER);
@@ -87,6 +92,4 @@ public class MemoDialog extends DialogFragment{
     }
 
     public String getMemo(){return memoField.getText().toString();}
-
-
 }
