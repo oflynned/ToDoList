@@ -49,16 +49,6 @@ public class MainActivity extends AppCompatActivity {
     com.getbase.floatingactionbutton.FloatingActionButton actionAdd;
     com.getbase.floatingactionbutton.FloatingActionButton actionMemo;
 
-    int count = 0;
-    int countCopy = 0;
-    boolean[] arrayx = new boolean[100];
-
-    public void openMemo ()
-    {
-        Intent intent = new Intent(this, SyncActivity.class);
-        startActivity(intent);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -593,31 +583,4 @@ public class MainActivity extends AppCompatActivity {
             descField.setPaintFlags(dateField.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
         }
     }
-
-    /**
-     * function checks that the date is valid
-     * function checks that the description has some content
-     *
-     * @param date this holds the due date of the new task being added
-     * @param task this holds the description of the new task being added
-     * @return valid or not valid
-     */
-    /*
-    public Boolean validateNewTask(String date, String task) {
-        Boolean check = true;
-        if (date.isEmpty()) {
-            Toast.makeText(this, "Please enter a due date", Toast.LENGTH_SHORT).show();
-            check = false;
-        }
-        if (!date.isEmpty() && date.charAt(2) != '/') {
-            Toast.makeText(this, "Incorrect date format", Toast.LENGTH_SHORT).show();
-            check = false;
-        }
-        if (task.isEmpty()) {
-            Toast.makeText(this, "Please enter a task description", Toast.LENGTH_SHORT).show();
-            check = false;
-        }
-        return check;
-    }
-    */
 }
