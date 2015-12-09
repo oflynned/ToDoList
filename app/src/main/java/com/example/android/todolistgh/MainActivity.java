@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<CheckBox> checkBoxes;
     CheckBox totalCheckBox;
     TextView orderByDate, orderByCategory, orderByDescription, clearButton;
+    com.getbase.floatingactionbutton.FloatingActionButton actionAdd;
+    com.getbase.floatingactionbutton.FloatingActionButton actionMemo;
 
     int count = 0;
     int countCopy = 0;
@@ -71,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
         clearButton = (TextView) findViewById(R.id.clearAllTasks);
         tableLayout = (TableLayout) findViewById(R.id.list_table);
         totalCheckBox = (CheckBox) findViewById(R.id.select_all);
+        actionAdd = (com.getbase.floatingactionbutton.FloatingActionButton) findViewById(R.id.action_a);
+        actionMemo = (com.getbase.floatingactionbutton.FloatingActionButton) findViewById(R.id.action_b);
+
 
         checkBoxes = new ArrayList<>();
 
@@ -191,31 +196,37 @@ public class MainActivity extends AppCompatActivity {
                 addTaskDialog.setAddDialogListener(new AddTaskDialog.setAddTaskListener() {
                     @Override
                     public void onDoneClick(DialogFragment dialogFragment) {
-                        if (addTaskDialog.getDateField().matches("")) {
-                            Toast.makeText(MainActivity.this, "Please add a date!",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        if (addTaskDialog.getCategory().matches("")) {
-                            Toast.makeText(MainActivity.this, "Please add a category!",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        if (addTaskDialog.getDescription().matches("")) {
-                            Toast.makeText(MainActivity.this, "Please add a description!",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        if (!addTaskDialog.getDateField().matches("")
-                                && !addTaskDialog.getCategory().matches("")
-                                && !addTaskDialog.getDescription().matches("")) {
-                            databaseHelper.insertTask(addTaskDialog.getCategory(),
-                                    addTaskDialog.getDescription(),
-                                    addTaskDialog.getDate(),
-                                    addTaskDialog.getRawDate(),
-                                    false);
-                            databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
-                            tableLayout.invalidate();
-                            populateTable(DatabaseHelper.SELECT_ALL_QUERY);
-                            Toast.makeText(MainActivity.this, "Task Added Successfully!",
-                                    Toast.LENGTH_SHORT).show();
+                        if (addTaskDialog.getDateField().matches("") &&
+                                addTaskDialog.getCategory().matches("") &&
+                                addTaskDialog.getDescription().matches("")) {
+                            Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (addTaskDialog.getDateField().matches("")) {
+                                Toast.makeText(MainActivity.this, "Please add a date",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                            if (addTaskDialog.getCategory().matches("")) {
+                                Toast.makeText(MainActivity.this, "Please add a category",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                            if (addTaskDialog.getDescription().matches("")) {
+                                Toast.makeText(MainActivity.this, "Please add a description",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                            if (!addTaskDialog.getDateField().matches("")
+                                    && !addTaskDialog.getCategory().matches("")
+                                    && !addTaskDialog.getDescription().matches("")) {
+                                databaseHelper.insertTask(addTaskDialog.getCategory(),
+                                        addTaskDialog.getDescription(),
+                                        addTaskDialog.getDate(),
+                                        addTaskDialog.getRawDate(),
+                                        false);
+                                databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
+                                tableLayout.invalidate();
+                                populateTable(DatabaseHelper.SELECT_ALL_QUERY);
+                                Toast.makeText(MainActivity.this, "Task Added Successfully!",
+                                        Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
                 });
@@ -238,8 +249,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final com.getbase.floatingactionbutton.FloatingActionButton actionA = (com.getbase.floatingactionbutton.FloatingActionButton) findViewById(R.id.action_a);
-        actionA.setOnClickListener(new View.OnClickListener() {
+        actionAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final AddTaskDialog addTaskDialog = new AddTaskDialog();
@@ -247,31 +257,37 @@ public class MainActivity extends AppCompatActivity {
                 addTaskDialog.setAddDialogListener(new AddTaskDialog.setAddTaskListener() {
                     @Override
                     public void onDoneClick(DialogFragment dialogFragment) {
-                        if (addTaskDialog.getDateField().matches("")) {
-                            Toast.makeText(MainActivity.this, "Please add a date!",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        if (addTaskDialog.getCategory().matches("")) {
-                            Toast.makeText(MainActivity.this, "Please add a category!",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        if (addTaskDialog.getDescription().matches("")) {
-                            Toast.makeText(MainActivity.this, "Please add a description!",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        if (!addTaskDialog.getDateField().matches("")
-                                && !addTaskDialog.getCategory().matches("")
-                                && !addTaskDialog.getDescription().matches("")) {
-                            databaseHelper.insertTask(addTaskDialog.getCategory(),
-                                    addTaskDialog.getDescription(),
-                                    addTaskDialog.getDate(),
-                                    addTaskDialog.getRawDate(),
-                                    false);
-                            databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
-                            tableLayout.invalidate();
-                            populateTable(DatabaseHelper.SELECT_ALL_QUERY);
-                            Toast.makeText(MainActivity.this, "Task Added Successfully!",
-                                    Toast.LENGTH_SHORT).show();
+                        if(addTaskDialog.getDateField().matches("") &&
+                                addTaskDialog.getCategory().matches("") &&
+                                addTaskDialog.getDescription().matches("")){
+                            Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (addTaskDialog.getDateField().matches("")) {
+                                Toast.makeText(MainActivity.this, "Please add a date",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                            if (addTaskDialog.getCategory().matches("")) {
+                                Toast.makeText(MainActivity.this, "Please add a category",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                            if (addTaskDialog.getDescription().matches("")) {
+                                Toast.makeText(MainActivity.this, "Please add a description",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                            if (!addTaskDialog.getDateField().matches("")
+                                    && !addTaskDialog.getCategory().matches("")
+                                    && !addTaskDialog.getDescription().matches("")) {
+                                databaseHelper.insertTask(addTaskDialog.getCategory(),
+                                        addTaskDialog.getDescription(),
+                                        addTaskDialog.getDate(),
+                                        addTaskDialog.getRawDate(),
+                                        false);
+                                databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
+                                tableLayout.invalidate();
+                                populateTable(DatabaseHelper.SELECT_ALL_QUERY);
+                                Toast.makeText(MainActivity.this, "Task Added Successfully!",
+                                        Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
                 });
@@ -279,57 +295,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final com.getbase.floatingactionbutton.FloatingActionButton actionB = (com.getbase.floatingactionbutton.FloatingActionButton) findViewById(R.id.action_b);
-        actionB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final AddTaskDialog addTaskDialog = new AddTaskDialog();
-                addTaskDialog.show(MainActivity.this.getFragmentManager(), "setAddDialogListener");
-                addTaskDialog.setAddDialogListener(new AddTaskDialog.setAddTaskListener() {
-                    @Override
-                    public void onDoneClick(DialogFragment dialogFragment) {
-                        if (addTaskDialog.getDateField().matches("")) {
-                            Toast.makeText(MainActivity.this, "Please add a date!",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        if (addTaskDialog.getCategory().matches("")) {
-                            Toast.makeText(MainActivity.this, "Please add a category!",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        if (addTaskDialog.getDescription().matches("")) {
-                            Toast.makeText(MainActivity.this, "Please add a description!",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        if (!addTaskDialog.getDateField().matches("")
-                                && !addTaskDialog.getCategory().matches("")
-                                && !addTaskDialog.getDescription().matches("")) {
-                            databaseHelper.insertTask(addTaskDialog.getCategory(),
-                                    addTaskDialog.getDescription(),
-                                    addTaskDialog.getDate(),
-                                    addTaskDialog.getRawDate(),
-                                    false);
-                            databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
-                            tableLayout.invalidate();
-                            populateTable(DatabaseHelper.SELECT_ALL_QUERY);
-                            Toast.makeText(MainActivity.this, "Task Added Successfully!",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
-        });
-
-        final com.getbase.floatingactionbutton.FloatingActionButton actionc = (com.getbase.floatingactionbutton.FloatingActionButton) findViewById(R.id.action_b);
-        actionB.setOnClickListener(new View.OnClickListener() {
+        actionMemo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getBaseContext(), SyncActivity.class));
-
             }
         });
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
