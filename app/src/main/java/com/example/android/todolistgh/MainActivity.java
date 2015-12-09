@@ -1,5 +1,6 @@
 package com.example.android.todolistgh;
 
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -247,9 +248,9 @@ public class MainActivity extends AppCompatActivity {
                 addTaskDialog.setAddDialogListener(new AddTaskDialog.setAddTaskListener() {
                     @Override
                     public void onDoneClick(DialogFragment dialogFragment) {
-                        if(addTaskDialog.getDateField().matches("") &&
+                        if (addTaskDialog.getDateField().matches("") &&
                                 addTaskDialog.getCategory().matches("") &&
-                                addTaskDialog.getDescription().matches("")){
+                                addTaskDialog.getDescription().matches("")) {
                             Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
                         } else {
                             if (addTaskDialog.getDateField().matches("")) {
@@ -287,8 +288,20 @@ public class MainActivity extends AppCompatActivity {
 
         actionMemo.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), SyncActivity.class));
+            public void onClick(View v) {
+                final MemoDialog memoDialog = new MemoDialog();
+                memoDialog.show(MainActivity.this.getFragmentManager(), "setMemoDialogListener");
+                memoDialog.setAddDialogListener(new MemoDialog.setMemoListener() {
+                    @Override
+                    public void onDoneClick(DialogFragment dialogFragment) {
+
+                        if (memoDialog.getMemo().matches("")) {
+                            Toast.makeText(MainActivity.this, "Please add a category",
+                                        Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
             }
         });
     }
