@@ -44,7 +44,7 @@ public class MemoDialog extends DialogFragment{
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Add a Memo")
+        builder.setTitle("Add a Note")
                 .setPositiveButton("Done", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         if (memoDialogListener != null) {
@@ -80,7 +80,7 @@ public class MemoDialog extends DialogFragment{
         categoryParams.setMarginEnd(10);
         memoField.setSingleLine();
         memoField.setInputType(InputType.TYPE_CLASS_TEXT);
-        memoField.setHint("Memo");
+        memoField.setHint("Enter note");
         memoField.setLayoutParams(categoryParams);
         memoField.setId(View.generateViewId());
 
