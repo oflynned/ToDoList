@@ -463,6 +463,7 @@ public class MainActivity extends AppCompatActivity {
                                     databaseHelper.removeTask(row);
                                     tableLayout.invalidate();
                                     populateTable(DatabaseHelper.SELECT_ALL_QUERY);
+                                    orderTable();
                                     databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
                                 }
                             })
@@ -488,41 +489,47 @@ public class MainActivity extends AppCompatActivity {
                                         @Override
                                         public void onDoneClick(DialogFragment dialogFragment) {
 
-                                            if (editTaskDialog.getDateField().matches("")) {
-                                                Toast.makeText(MainActivity.this, "Please add a date!",
+                                            if (editTaskDialog.getDateField().matches("") &&
+                                                    editTaskDialog.getDescription().matches("") &&
+                                                    editTaskDialog.getCategory().matches("")) {
+                                                Toast.makeText(MainActivity.this, "Please complete all fields",
                                                         Toast.LENGTH_SHORT).show();
-                                            }
-                                            if (editTaskDialog.getCategory().matches("")) {
-                                                Toast.makeText(MainActivity.this, "Please add a category!",
-                                                        Toast.LENGTH_SHORT).show();
-                                            }
-                                            if (editTaskDialog.getDescription().matches("")) {
-                                                Toast.makeText(MainActivity.this, "Please add a description!",
-                                                        Toast.LENGTH_SHORT).show();
-                                            }
-                                            if (!editTaskDialog.getDateField().matches("")
-                                                    && !editTaskDialog.getCategory().matches("")
-                                                    && !editTaskDialog.getDescription().matches("")) {
+                                            } else {
+                                                if (editTaskDialog.getDateField().matches("")) {
+                                                    Toast.makeText(MainActivity.this, "Please add a date",
+                                                            Toast.LENGTH_SHORT).show();
+                                                }
+                                                if (editTaskDialog.getCategory().matches("")) {
+                                                    Toast.makeText(MainActivity.this, "Please add a category",
+                                                            Toast.LENGTH_SHORT).show();
+                                                }
+                                                if (editTaskDialog.getDescription().matches("")) {
+                                                    Toast.makeText(MainActivity.this, "Please add a description",
+                                                            Toast.LENGTH_SHORT).show();
+                                                }
+                                                if (!editTaskDialog.getDateField().matches("")
+                                                        && !editTaskDialog.getCategory().matches("")
+                                                        && !editTaskDialog.getDescription().matches("")) {
 
-                                                databaseHelper.editTask(
-                                                        row,
-                                                        editTaskDialog.getCategoryField(),
-                                                        editTaskDialog.getDescriptionField(),
-                                                        editTaskDialog.getDateField(),
-                                                        editTaskDialog.getRawDate(),
-                                                        checkBox.isChecked());
-                                                databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
-                                                tableLayout.invalidate();
-                                                populateTable(DatabaseHelper.SELECT_ALL_QUERY);
-                                                Toast.makeText(MainActivity.this, "Task modified successfully!",
-                                                        Toast.LENGTH_SHORT).show();
+                                                    databaseHelper.editTask(
+                                                            row,
+                                                            editTaskDialog.getCategoryField(),
+                                                            editTaskDialog.getDescriptionField(),
+                                                            editTaskDialog.getDateField(),
+                                                            editTaskDialog.getRawDate(),
+                                                            checkBox.isChecked());
+                                                    databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
+                                                    tableLayout.invalidate();
+                                                    populateTable(DatabaseHelper.SELECT_ALL_QUERY);
+                                                    Toast.makeText(MainActivity.this, "Task modified successfully!",
+                                                            Toast.LENGTH_SHORT).show();
+                                                }
                                             }
                                         }
                                     });
                                 }
                             });
                     builder.create().show();
-                    Toast.makeText(MainActivity.this, "id: " + row, Toast.LENGTH_SHORT).show();
                     return true;
                 }
             });
