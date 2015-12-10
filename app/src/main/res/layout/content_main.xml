@@ -37,12 +37,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:background="@color/colorAccent"
+            android:background="@color/background"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
             android:text="@string/clearAll"
             android:textAlignment="center"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/colorAccent" />
 
 
         <include
