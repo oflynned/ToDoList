@@ -22,58 +22,32 @@
             android:orientation="vertical" >
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp">
-
-                <Button
-                    android:text="@string/memo"
-                    android:id="@+id/memoButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorAccent"
-                    android:textColor="@android:color/white"/>
-
                 <TextView
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
                     android:text="@string/title"
                     android:textSize="24sp"
                     android:textColor="@color/colorAccent"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     android:layout_weight="1" />
 
                 <TextView
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:textAlignment="center"
                     android:id="@+id/clearAllTasks"
                     android:text="@string/clearAll"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/addButton"
-                    android:text="@string/addNewTask"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:background="@color/colorAccent"
                     android:textColor="@android:color/white" />
 
-            </LinearLayout>
 
             <include layout="@layout/row_handler"
                 android:id="@+id/table_layout" />
