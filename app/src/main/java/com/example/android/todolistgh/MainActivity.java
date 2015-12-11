@@ -2,7 +2,6 @@ package com.example.android.todolistgh;
 
 import android.app.DialogFragment;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
