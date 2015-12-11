@@ -10,8 +10,12 @@ import android.text.InputType;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
 import java.text.SimpleDateFormat;
@@ -26,6 +30,7 @@ public class AddTaskDialog extends DialogFragment {
     boolean modified;
 
     private String date, rawDate;
+    private Boolean priorityBool = false;
     private EditText dateField, descriptionField, categoryField;
     private setAddTaskListener addDialogListener = null;
 
@@ -130,9 +135,63 @@ public class AddTaskDialog extends DialogFragment {
         descriptionField.setLayoutParams(descriptionParams);
         descriptionField.setId(View.generateViewId());
 
+        /*
+        final RadioButton[] priority = new RadioButton[1];
+        priorityGroup = new RadioGroup (this.getActivity());
+        priorityGroup.setOrientation(RadioGroup.HORIZONTAL);
+        priority[0] = new RadioButton(this.getActivity());
+        priorityGroup.addView(priority[0]);
+        priority[0].setText("Important");
+        RelativeLayout.LayoutParams priorityParams =
+                new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+        priorityParams.addRule(RelativeLayout.BELOW, descriptionField.getId());
+        priorityParams.setMarginStart(10);
+        priorityParams.setMarginEnd(10);
+        priorityGroup.setLayoutParams(priorityParams);
+        priorityGroup.setId(View.generateViewId());
+
+        priorityGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(priority[0].isChecked()){
+                    setPriority(true);
+                } else {
+                    setPriority(false);
+                }
+            }
+        });
+        */
+
+        //priorityField = new View(this.getActivity());
+        final CheckBox priorityBox = new CheckBox(this.getActivity());
+        priorityBox.setText("Important");
+        RelativeLayout.LayoutParams priorityParams =
+                new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+        priorityParams.addRule(RelativeLayout.BELOW, descriptionField.getId());
+        priorityParams.setMarginStart(10);
+        priorityParams.setMarginEnd(10);
+        //priorityField.addView(priorityBox);
+        priorityBox.setLayoutParams(priorityParams);
+        priorityBox.setId(View.generateViewId());
+
+        priorityBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(priorityBox.isChecked()){
+                    setPriority(true);
+                } else {
+                    setPriority(false);
+                }
+            }
+
+        });
+
         propertiesEntry.addView(dateField);
         propertiesEntry.addView(categoryField);
         propertiesEntry.addView(descriptionField);
+        propertiesEntry.addView(priorityBox);
 
         builder.setView(propertiesEntry);
 
@@ -144,6 +203,9 @@ public class AddTaskDialog extends DialogFragment {
     public String getDescription(){return descriptionField.getText().toString();}
     public String getCategory(){return categoryField.getText().toString();}
     public String getRawDate(){return rawDate;}
+
+    public void setPriority(boolean priority){this.priorityBool=priority;}
+    public Boolean getPriority() {return priorityBool;}
 
     /**
      * Takes the chosen time and renders it in the given format for the user to see
@@ -165,3 +227,4 @@ public class AddTaskDialog extends DialogFragment {
     }
 
 }
+

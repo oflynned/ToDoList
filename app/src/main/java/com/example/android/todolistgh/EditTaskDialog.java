@@ -12,8 +12,12 @@ import android.text.InputType;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
 import java.text.SimpleDateFormat;
@@ -28,6 +32,7 @@ public class EditTaskDialog extends DialogFragment {
     boolean modified;
 
     private String date, rawDate, category, description;
+    private Boolean priorityBool = false;
     private EditText dateField, descriptionField, categoryField;
     private setEditTaskListener editDialogListener = null;
 
@@ -132,13 +137,43 @@ public class EditTaskDialog extends DialogFragment {
         descriptionField.setLayoutParams(descriptionParams);
         descriptionField.setId(View.generateViewId());
 
+
+        final CheckBox priorityBox = new CheckBox(this.getActivity());
+        priorityBox.setText("Important");
+        RelativeLayout.LayoutParams priorityParams =
+                new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+        priorityParams.addRule(RelativeLayout.BELOW, descriptionField.getId());
+        priorityParams.setMarginStart(10);
+        priorityParams.setMarginEnd(10);
+        priorityBox.setLayoutParams(priorityParams);
+        priorityBox.setId(View.generateViewId());
+
+        if(getPriority()){
+            priorityBox.setChecked(true);
+        } else {priorityBox.setChecked(false);}
+
+        priorityBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(priorityBox.isChecked()){
+                    setPriority("1");
+                } else {
+                    setPriority("0");
+                }
+            }
+
+        });
+
         dateField.setText(getDate());
         categoryField.setText(getCategory());
         descriptionField.setText(getDescription());
 
+
         propertiesEntry.addView(dateField);
         propertiesEntry.addView(categoryField);
         propertiesEntry.addView(descriptionField);
+        propertiesEntry.addView(priorityBox);
 
         builder.setView(propertiesEntry);
 
@@ -153,6 +188,14 @@ public class EditTaskDialog extends DialogFragment {
     public String getDateField(){return dateField.getText().toString();}
     public String getCategoryField(){return categoryField.getText().toString();}
     public String getDescriptionField(){return descriptionField.getText().toString();}
+
+    public void setPriority(String priority){
+        if(priority.equals("1")){
+            priorityBool = true;
+        }
+        else priorityBool = false;
+    }
+    public Boolean getPriority() {return priorityBool;}
 
     public void setDate(String date){this.date = date;}
     public void setDescription(String description){this.description = description;}

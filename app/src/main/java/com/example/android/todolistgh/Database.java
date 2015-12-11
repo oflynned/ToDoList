@@ -32,6 +32,9 @@ public class Database {
         public static final String RAW_DUE_DATE = "raw_due_date"; //col 5
         //has the task been completed? boolean
         public static final String COMPLETED = "completed"; //col 6
+
+        public static final String PRIORITY = "priority";//col 7
+        //priority level of the task
     }
 
 }

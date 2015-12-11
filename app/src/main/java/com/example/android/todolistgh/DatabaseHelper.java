@@ -20,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final int COL_TIME_ADDED = 3;
     public static final int COL_DUE_DATE = 4;
     public static final int COL_RAW_DATE = 5;
-    public static final int COL_COMPLETED = 6;
+    public static final int COL_PRIORITY = 7;
 
     //queries
     public static final String CREATE_TABLE_QUERY =
@@ -32,7 +32,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     Database.TasksTable.TIME_ADDED + " INTEGER," +
                     Database.TasksTable.DUE_DATE + " TEXT," +
                     Database.TasksTable.RAW_DUE_DATE + " TEXT," +
-                    Database.TasksTable.COMPLETED + " BOOLEAN);";
+                    Database.TasksTable.COMPLETED + " BOOLEAN," +
+                    Database.TasksTable.PRIORITY + " BOOLEAN);";
 
     public static final String DELETE_TABLE_QUERY =
             "DROP TABLE IF EXISTS " + Database.TasksTable.TABLE_NAME + ";";
@@ -101,7 +102,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param completed has the task been completed?
      */
     public void insertTask(String category, String task, String due_date,
-                           String raw_due_date, boolean completed){
+                           String raw_due_date, boolean completed, boolean priority){
         SQLiteDatabase writeDb = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -112,6 +113,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(Database.TasksTable.DUE_DATE, due_date);
         contentValues.put(Database.TasksTable.RAW_DUE_DATE, raw_due_date);
         contentValues.put(Database.TasksTable.COMPLETED, completed);
+        contentValues.put(Database.TasksTable.PRIORITY, priority);
         writeDb.insert(Database.TasksTable.TABLE_NAME, null, contentValues);
         writeDb.close();
     }
@@ -156,7 +158,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param completed amended completion
      */
     public void editTask(int id, String category, String task, String due_date,
-                         String raw_due_date, boolean completed){
+                         String raw_due_date, boolean completed, boolean priority){
         SQLiteDatabase writeDb = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -165,6 +167,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(Database.TasksTable.DUE_DATE, due_date);
         contentValues.put(Database.TasksTable.RAW_DUE_DATE, raw_due_date);
         contentValues.put(Database.TasksTable.COMPLETED, completed);
+        contentValues.put(Database.TasksTable.PRIORITY, priority);
 
         String[] whereArgs = {String.valueOf(id)};
         writeDb.update(Database.TasksTable.TABLE_NAME, contentValues,

@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
@@ -57,11 +58,6 @@ public class MainActivity extends AppCompatActivity {
         editor = sharedPreferences.edit();
         ordering = sharedPreferences.getInt(getResources().getString(R.string.pref_key_ordering), 8);
 
-<<<<<<< HEAD
-=======
-        //addButton = (Button) findViewById(R.id.addButton);
-        //memoButton = (Button) findViewById(R.id.memoButton);
->>>>>>> origin/master
         clearButton = (TextView) findViewById(R.id.clearAllTasks);
         tableLayout = (TableLayout) findViewById(R.id.list_table);
         totalCheckBox = (CheckBox) findViewById(R.id.select_all);
@@ -69,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         actionMemo = (com.getbase.floatingactionbutton.FloatingActionButton) findViewById(R.id.action_b);
 
 
+        checkBoxes = new ArrayList<>();
         checkBoxes = new ArrayList<>();
 
         orderByDate = (TextView) findViewById(R.id.dateTitle);
@@ -221,7 +218,8 @@ public class MainActivity extends AppCompatActivity {
                                         addTaskDialog.getDescription(),
                                         addTaskDialog.getDate(),
                                         addTaskDialog.getRawDate(),
-                                        false);
+                                        false,
+                                        addTaskDialog.getPriority());
                                 databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
                                 tableLayout.invalidate();
                                 populateTable(DatabaseHelper.SELECT_ALL_QUERY);
@@ -373,12 +371,25 @@ public class MainActivity extends AppCompatActivity {
             descField.setText(cursor.getString(DatabaseHelper.COL_DESCRIPTION));
             descField.setGravity(Gravity.CENTER);
 
+            //priority
+            final TextView priField = new TextView(this);
+            if(cursor.getInt(DatabaseHelper.COL_PRIORITY) == 1){
+                priField.setText("!");
+                //priField.setTextColor(getResources().getColor(R.color.red));
+                priField.setTypeface(null, Typeface.BOLD);
+
+            } else {
+                priField.setText("");
+            }
+            priField.setGravity(Gravity.CENTER);
+
             if (i % 2 == 0) {
                 tableRow.setBackgroundColor(ContextCompat
                         .getColor(getBaseContext(), R.color.colorPrimary));
                 dateField.setTextColor(Color.WHITE);
                 categoryField.setTextColor(Color.WHITE);
                 descField.setTextColor(Color.WHITE);
+                priField.setTextColor(Color.WHITE);
             }
 
             final CheckBox checkBox = new CheckBox(this);
@@ -386,11 +397,13 @@ public class MainActivity extends AppCompatActivity {
             checkBoxes.add(checkBox);
             if(cursor.getInt(6) == 1){
                 checkBox.setChecked(true);
-                strikeThrough(dateField, categoryField, descField, true);
+                strikeThrough(dateField, categoryField, descField, priField, true);
+                //priField.setTextColor(getResources().getColor(R.color.red));
+
                 tableLayout.invalidate();
             } else {
                 checkBox.setChecked(false);
-                strikeThrough(dateField, categoryField, descField, false);
+                strikeThrough(dateField, categoryField, descField, priField, false);
                 tableLayout.invalidate();
             }
 
@@ -398,7 +411,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     databaseHelper.editChecked(row, isChecked);
-                    strikeThrough(dateField, categoryField, descField, isChecked);
+                    strikeThrough(dateField, categoryField, descField, priField, isChecked);
                     databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
                 }
             });
@@ -436,6 +449,9 @@ public class MainActivity extends AppCompatActivity {
                                     setData(row, DatabaseHelper.COL_RAW_DATE);
                                     editTaskDialog.setRawDate(getData());
 
+                                    setData(row, DatabaseHelper.COL_PRIORITY);
+                                    editTaskDialog.setPriority(getData());
+
                                     editTaskDialog.show(MainActivity.this.getFragmentManager(), "setEditDialogListener");
                                     editTaskDialog.setEditDialogListener(new EditTaskDialog.setEditTaskListener() {
                                         @Override
@@ -469,7 +485,8 @@ public class MainActivity extends AppCompatActivity {
                                                             editTaskDialog.getDescriptionField(),
                                                             editTaskDialog.getDateField(),
                                                             editTaskDialog.getRawDate(),
-                                                            checkBox.isChecked());
+                                                            checkBox.isChecked(),
+                                                            editTaskDialog.getPriority());
                                                     databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
                                                     tableLayout.invalidate();
                                                     populateTable(DatabaseHelper.SELECT_ALL_QUERY);
@@ -490,6 +507,7 @@ public class MainActivity extends AppCompatActivity {
             tableRow.addView(dateField);
             tableRow.addView(categoryField);
             tableRow.addView(descField);
+            tableRow.addView(priField);
             tableRow.addView(checkBox);
 
             tableLayout.addView(tableRow);
@@ -534,11 +552,13 @@ public class MainActivity extends AppCompatActivity {
      * @param completed toggles whether or not the row is to be struck through or not
      */
     public void strikeThrough(TextView dateField, TextView categoryField,
-                              TextView descField, boolean completed){
+                              TextView descField, TextView priField, boolean completed){
         if(completed) {
             dateField.setPaintFlags(dateField.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             categoryField.setPaintFlags(dateField.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             descField.setPaintFlags(dateField.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            //priField.setTextColor(getResources().getColor(R.color.red));
+
         } else {
             dateField.setPaintFlags(dateField.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
             categoryField.setPaintFlags(dateField.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
