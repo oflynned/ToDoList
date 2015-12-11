@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
         editor = sharedPreferences.edit();
         ordering = sharedPreferences.getInt(getResources().getString(R.string.pref_key_ordering), 8);
 
-        addButton = (Button) findViewById(R.id.addButton);
-        memoButton = (Button) findViewById(R.id.memoButton);
+        //addButton = (Button) findViewById(R.id.addButton);
+        //memoButton = (Button) findViewById(R.id.memoButton);
         clearButton = (TextView) findViewById(R.id.clearAllTasks);
         tableLayout = (TableLayout) findViewById(R.id.list_table);
         totalCheckBox = (CheckBox) findViewById(R.id.select_all);
@@ -176,58 +176,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "Ordered by descending description alphabetically",
                             Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final AddTaskDialog addTaskDialog = new AddTaskDialog();
-                addTaskDialog.show(MainActivity.this.getFragmentManager(), "setAddDialogListener");
-                addTaskDialog.setAddDialogListener(new AddTaskDialog.setAddTaskListener() {
-                    @Override
-                    public void onDoneClick(DialogFragment dialogFragment) {
-                        if (addTaskDialog.getDateField().matches("") &&
-                                addTaskDialog.getCategory().matches("") &&
-                                addTaskDialog.getDescription().matches("")) {
-                            Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
-                        } else {
-                            if (addTaskDialog.getDateField().matches("")) {
-                                Toast.makeText(MainActivity.this, "Please add a date",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                            if (addTaskDialog.getCategory().matches("")) {
-                                Toast.makeText(MainActivity.this, "Please add a category",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                            if (addTaskDialog.getDescription().matches("")) {
-                                Toast.makeText(MainActivity.this, "Please add a description",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                            if (!addTaskDialog.getDateField().matches("")
-                                    && !addTaskDialog.getCategory().matches("")
-                                    && !addTaskDialog.getDescription().matches("")) {
-                                databaseHelper.insertTask(addTaskDialog.getCategory(),
-                                        addTaskDialog.getDescription(),
-                                        addTaskDialog.getDate(),
-                                        addTaskDialog.getRawDate(),
-                                        false);
-                                databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
-                                tableLayout.invalidate();
-                                populateTable(DatabaseHelper.SELECT_ALL_QUERY);
-                                Toast.makeText(MainActivity.this, "Task Added Successfully!",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
-                });
-            }
-        });
-
-        memoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getBaseContext(), SyncActivity.class));
             }
         });
 
