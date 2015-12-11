@@ -2,7 +2,6 @@ package com.example.android.todolistgh;
 
 import android.app.DialogFragment;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -56,12 +55,7 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = sharedPreferences.edit();
         ordering = sharedPreferences.getInt(getResources().getString(R.string.pref_key_ordering), 8);
-
-<<<<<<< HEAD
-=======
-        //addButton = (Button) findViewById(R.id.addButton);
-        //memoButton = (Button) findViewById(R.id.memoButton);
->>>>>>> origin/master
+        
         clearButton = (TextView) findViewById(R.id.clearAllTasks);
         tableLayout = (TableLayout) findViewById(R.id.list_table);
         totalCheckBox = (CheckBox) findViewById(R.id.select_all);
