@@ -1,6 +1,5 @@
 package com.example.android.todolistgh;
 
-import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,7 +10,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -59,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
         editor = sharedPreferences.edit();
         ordering = sharedPreferences.getInt(getResources().getString(R.string.pref_key_ordering), 8);
 
-        addButton = (Button) findViewById(R.id.addButton);
-        memoButton = (Button) findViewById(R.id.memoButton);
         clearButton = (TextView) findViewById(R.id.clearAllTasks);
         tableLayout = (TableLayout) findViewById(R.id.list_table);
         totalCheckBox = (CheckBox) findViewById(R.id.select_all);
