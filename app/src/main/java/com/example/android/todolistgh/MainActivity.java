@@ -226,6 +226,17 @@ public class MainActivity extends AppCompatActivity {
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
+                        /*NotificationHandler notification = new NotificationHandler(MainActivity.this);
+                        SQLiteDatabase readDb = databaseHelper.getReadableDatabase();
+                        Cursor cursor = readDb.rawQuery(DatabaseHelper.SELECT_ALL_QUERY, null);
+                        for(int i = 1; i <= cursor.getCount(); i++)
+                        {
+                            setData(i, DatabaseHelper.COL_DUE_DATE);
+                            String date = getData();
+                            setData(i, DatabaseHelper.COL_DESCRIPTION);
+                            String description = getData();
+                            notification.showNotification(date, description);
+                        }*/
                     }
                 });
 

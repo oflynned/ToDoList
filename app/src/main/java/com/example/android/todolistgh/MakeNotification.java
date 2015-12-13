@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -23,27 +24,22 @@ public class MakeNotification {
     /**
      * Creates the notification which directs you to Main Activity when clicked.
      * Notification is called only if a task is due the next day
-     * @param pi the intent that will call the notification
+     * @param pi the pending intent that will call the notification
      * @param date the date of the task being investigated
      * @param description The description of the task to be called in the notification
+     * @param calendar the calander set to the time the function will be called at.
+     *                 This will be compared to the date by changing it to a string in yyyyMMdd
      */
-    public void createNotification (PendingIntent pi, int date, String description) {
+    public void createNotification (PendingIntent pi, String date, String description, Calendar calendar) {
         int mId = 1;
         Intent resultIntent = new Intent(context, MainActivity.class);
-        Calendar calender = Calendar.getInstance();
-        Calendar currentTime = Calendar.getInstance();
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");
+        String date1 = format1.format(calendar);
 
-        currentTime.getTime();
-        calender.set(Calendar.DATE, date);
-
-        if(calender == currentTime) {
+        if(date == date1) {
             TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
             stackBuilder.addParentStack(MainActivity.class);
             stackBuilder.addNextIntent(resultIntent);
-            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(
-                    0,
-                    PendingIntent.FLAG_UPDATE_CURRENT
-            );
 
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
                     .setSmallIcon(R.mipmap.ic_launcher_new)
@@ -51,7 +47,7 @@ public class MakeNotification {
                     .setContentText("To do tomorrow: " + description);
 
 
-            mBuilder.setContentIntent(resultPendingIntent);
+            mBuilder.setContentIntent(pi);
             NotificationManager mNotificationManager =
                     (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
