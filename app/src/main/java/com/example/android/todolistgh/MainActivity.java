@@ -2,6 +2,7 @@ package com.example.android.todolistgh;
 
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -246,19 +247,7 @@ public class MainActivity extends AppCompatActivity {
         actionMemo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final MemoDialog memoDialog = new MemoDialog();
-                memoDialog.show(MainActivity.this.getFragmentManager(), "setMemoDialogListener");
-                memoDialog.setAddDialogListener(new MemoDialog.setMemoListener() {
-                    @Override
-                    public void onDoneClick(DialogFragment dialogFragment) {
-
-                        if (memoDialog.getMemo().matches("")) {
-                            Toast.makeText(MainActivity.this, "Please add a category",
-                                        Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-                });
+                    startActivity(new Intent(getBaseContext(), SyncActivity.class));
             }
         });
     }
@@ -340,7 +329,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-
+    
     /**
      * populates the database rows and columns into a programmatically added layout
      */
