@@ -329,7 +329,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-    
+
     /**
      * populates the database rows and columns into a programmatically added layout
      */
