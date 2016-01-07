@@ -1,5 +1,6 @@
 package com.example.android.todolistgh;
 
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
 
     boolean dateOrdered, categoryOrdered, descriptionOrdered, allChecked;
+    boolean priorityQuery;
     int ordering;
     String data;
 
@@ -180,9 +182,47 @@ public class MainActivity extends AppCompatActivity {
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseHelper.removeAllTasks();
-                tableLayout.invalidate();
-                populateTable(DatabaseHelper.SELECT_ALL_QUERY);
+                priorityQuery = false;
+                SQLiteDatabase readDb = databaseHelper.getReadableDatabase();
+
+                final Cursor cursor = readDb.rawQuery(DatabaseHelper.SELECT_ALL_QUERY, null);
+                int numRows = cursor.getCount();
+                System.out.println("Row count " + numRows);
+                cursor.moveToFirst();
+
+                for(int i = 0; i <numRows; i++){
+                    if(cursor.getInt(7) == 1){
+                        priorityQuery = true;
+                    }
+                   cursor.moveToNext();
+                }
+
+                readDb.close();
+                cursor.close();
+
+                 if(priorityQuery) {
+                     final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                     builder.setTitle("Are you sure you want to delete important tasks?")
+                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                 public void onClick(DialogInterface dialog, int id) {
+                                     databaseHelper.removeAllTasks();
+                                     tableLayout.invalidate();
+                                     populateTable(DatabaseHelper.SELECT_ALL_QUERY);
+                                 }
+                             })
+                             .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                 public void onClick(DialogInterface dialog, int id) {
+
+                                 }
+                             });
+                     builder.create().show();
+                 }
+
+                else {
+                     databaseHelper.removeAllTasks();
+                     tableLayout.invalidate();
+                     populateTable(DatabaseHelper.SELECT_ALL_QUERY);
+                 }
             }
         });
 
