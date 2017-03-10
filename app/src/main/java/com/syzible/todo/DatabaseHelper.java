@@ -9,21 +9,20 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * Created by ed on 27/11/15.
  */
-public class DatabaseHelper extends SQLiteOpenHelper {
+class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 1;
 
     //fields
-    public static final int COL_ID = 0;
-    public static final int COL_CATEGORY = 1;
-    public static final int COL_DESCRIPTION = 2;
-    public static final int COL_TIME_ADDED = 3;
-    public static final int COL_DUE_DATE = 4;
-    public static final int COL_RAW_DATE = 5;
-    public static final int COL_PRIORITY = 7;
+    static final int COL_ID = 0;
+    static final int COL_CATEGORY = 1;
+    static final int COL_DESCRIPTION = 2;
+    static final int COL_DUE_DATE = 4;
+    static final int COL_RAW_DATE = 5;
+    static final int COL_PRIORITY = 7;
 
     //queries
-    public static final String CREATE_TABLE_QUERY =
+    private static final String CREATE_TABLE_QUERY =
             "CREATE TABLE " +
                     Database.TasksTable.TABLE_NAME + "(" +
                     Database.TasksTable.ID + " INTEGER PRIMARY KEY," +
@@ -35,37 +34,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     Database.TasksTable.COMPLETED + " BOOLEAN," +
                     Database.TasksTable.PRIORITY + " BOOLEAN);";
 
-    public static final String DELETE_TABLE_QUERY =
+    private static final String DELETE_TABLE_QUERY =
             "DROP TABLE IF EXISTS " + Database.TasksTable.TABLE_NAME + ";";
 
-    public static final String SELECT_ALL_QUERY =
+    static final String SELECT_ALL_QUERY =
             "SELECT * FROM " + Database.TasksTable.TABLE_NAME + ";";
 
-    public static final String SELECT_BY_DATE_DESCENDING =
+    static final String SELECT_BY_DATE_DESCENDING =
             "SELECT * FROM " + Database.TasksTable.TABLE_NAME +
                     " ORDER BY DATE(" + Database.TasksTable.RAW_DUE_DATE + ") DESC;";
 
-    public static final String SELECT_BY_DATE_ASCENDING =
+    static final String SELECT_BY_DATE_ASCENDING =
             "SELECT * FROM " + Database.TasksTable.TABLE_NAME +
                     " ORDER BY DATE(" + Database.TasksTable.RAW_DUE_DATE + ") ASC;";
 
-    public static final String SELECT_BY_CATEGORY_DESCENDING =
+    static final String SELECT_BY_CATEGORY_DESCENDING =
             "SELECT * FROM " + Database.TasksTable.TABLE_NAME +
                     " ORDER BY " + Database.TasksTable.CATEGORY + " DESC;";
 
-    public static final String SELECT_BY_CATEGORY_ASCENDING =
+    static final String SELECT_BY_CATEGORY_ASCENDING =
             "SELECT * FROM " + Database.TasksTable.TABLE_NAME +
                     " ORDER BY " + Database.TasksTable.CATEGORY + " ASC;";
 
-    public static final String SELECT_BY_DESCRIPTION_DESCENDING =
+    static final String SELECT_BY_DESCRIPTION_DESCENDING =
             "SELECT * FROM " + Database.TasksTable.TABLE_NAME +
                     " ORDER BY " + Database.TasksTable.TASK + " DESC;";
 
-    public static final String SELECT_BY_DESCRIPTION_ASCENDING =
+    static final String SELECT_BY_DESCRIPTION_ASCENDING =
             "SELECT * FROM " + Database.TasksTable.TABLE_NAME +
                     " ORDER BY " + Database.TasksTable.TASK + " ASC;";
 
-    public DatabaseHelper(Context context) {
+    DatabaseHelper(Context context) {
         super(context, Database.DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -101,8 +100,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param raw_due_date the time in yyyyMMdd format to be compared for ordering by date
      * @param completed has the task been completed?
      */
-    public void insertTask(String category, String task, String due_date,
-                           String raw_due_date, boolean completed, boolean priority){
+    void insertTask(String category, String task, String due_date,
+                    String raw_due_date, boolean completed, boolean priority){
         SQLiteDatabase writeDb = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -122,7 +121,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * Remove rows from the task table given the id which should be searchable and unique
      * @param id the index id of the row
      */
-    public void removeTask(int id){
+    void removeTask(int id){
         SQLiteDatabase writeDb = this.getWritableDatabase();
 
         //query to remove row with given id
@@ -137,7 +136,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * obliterates the entire table by remove all records from rows
      */
-    public void removeAllTasks(){
+    void removeAllTasks(){
         SQLiteDatabase writeDb = this.getWritableDatabase();
 
         //query to remove row with given id
@@ -157,8 +156,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param raw_due_date amended raw due date for comparison of records wrt time
      * @param completed amended completion
      */
-    public void editTask(int id, String category, String task, String due_date,
-                         String raw_due_date, boolean completed, boolean priority){
+    void editTask(int id, String category, String task, String due_date,
+                  String raw_due_date, boolean completed, boolean priority){
         SQLiteDatabase writeDb = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -180,7 +179,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param id the id of the chosen row
      * @param completed boolean value for tracking checked
      */
-    public void editChecked(int id, boolean completed){
+    void editChecked(int id, boolean completed){
         SQLiteDatabase writeDb = this.getWritableDatabase();
         SQLiteDatabase readDb = this.getReadableDatabase();
 
@@ -198,7 +197,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * Prints out the current values stored within the table in Sys
      * @param tableName the table to be printed out in monitor
      */
-    public void printTableContents(String tableName){
+    void printTableContents(String tableName){
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery(SELECT_ALL_QUERY, null);
         cursor.moveToFirst();

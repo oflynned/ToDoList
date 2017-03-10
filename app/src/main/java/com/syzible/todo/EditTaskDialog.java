@@ -24,31 +24,29 @@ import java.util.Calendar;
  */
 public class EditTaskDialog extends DialogFragment {
 
-    private String dialogTitle;
-    boolean modified;
-
     private String date, rawDate, category, description;
     private Boolean priorityBool = false;
     private EditText dateField, descriptionField, categoryField;
     private setEditTaskListener editDialogListener = null;
 
     //listener that the corresponding button implements
-    public interface setEditTaskListener{
+    interface setEditTaskListener {
         void onDoneClick(DialogFragment dialogFragment);
     }
 
-    public void setEditDialogListener(setEditTaskListener editDialogListener){
+    public void setEditDialogListener(setEditTaskListener editDialogListener) {
         this.editDialogListener = editDialogListener;
     }
 
     /**
      * onCreateDialog is a generic builder for generating a dialog
      * per row id given, such that tasks can be added to the db
+     *
      * @param savedInstanceState the parsed data for the given context
      * @return the appropriate dialog
      */
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState){
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Edit a task")
                 .setPositiveButton("Done", new DialogInterface.OnClickListener() {
@@ -145,14 +143,16 @@ public class EditTaskDialog extends DialogFragment {
         priorityBox.setLayoutParams(priorityParams);
         priorityBox.setId(View.generateViewId());
 
-        if(getPriority()){
+        if (getPriority()) {
             priorityBox.setChecked(true);
-        } else {priorityBox.setChecked(false);}
+        } else {
+            priorityBox.setChecked(false);
+        }
 
         priorityBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(priorityBox.isChecked()){
+                if (priorityBox.isChecked()) {
                     setPriority("1");
                 } else {
                     setPriority("0");
@@ -176,33 +176,64 @@ public class EditTaskDialog extends DialogFragment {
         return builder.create();
     }
 
-    public String getDate(){return date;}
-    public String getDescription(){return description;}
-    public String getCategory(){return category;}
-    public String getRawDate(){return rawDate;}
-
-    public String getDateField(){return dateField.getText().toString();}
-    public String getCategoryField(){return categoryField.getText().toString();}
-    public String getDescriptionField(){return descriptionField.getText().toString();}
-
-    public void setPriority(String priority){
-        if(priority.equals("1")){
-            priorityBool = true;
-        }
-        else priorityBool = false;
+    public String getDate() {
+        return date;
     }
-    public Boolean getPriority() {return priorityBool;}
 
-    public void setDate(String date){this.date = date;}
-    public void setDescription(String description){this.description = description;}
-    public void setCategory(String category){this.category = category;}
-    public void setRawDate(String rawDate){this.rawDate = rawDate;}
+    public String getDescription() {
+        return description;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getRawDate() {
+        return rawDate;
+    }
+
+    public String getDateField() {
+        return dateField.getText().toString();
+    }
+
+    public String getCategoryField() {
+        return categoryField.getText().toString();
+    }
+
+    public String getDescriptionField() {
+        return descriptionField.getText().toString();
+    }
+
+    public void setPriority(String priority) {
+        priorityBool = priority.equals("1");
+    }
+
+    public Boolean getPriority() {
+        return priorityBool;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setRawDate(String rawDate) {
+        this.rawDate = rawDate;
+    }
 
     /**
      * Takes the chosen time and renders it in the given format for the user to see
+     *
      * @param calender the appropriate chosen time for the task
      */
-    private void setDate(Calendar calender){
+    private void setDate(Calendar calender) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         dateField.setText(simpleDateFormat.format(calender.getTime()));
         this.date = dateField.getText().toString();
@@ -210,9 +241,10 @@ public class EditTaskDialog extends DialogFragment {
 
     /**
      * Takes the chosen time for rendering in a hidden field in the db for sorting later
+     *
      * @param calender the appropriate chosen time for the task
      */
-    private void setRawDate(Calendar calender){
+    private void setRawDate(Calendar calender) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         this.rawDate = simpleDateFormat.format(calender.getTime());
     }

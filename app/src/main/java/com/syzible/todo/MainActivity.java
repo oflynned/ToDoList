@@ -11,24 +11,22 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.internal.view.ContextThemeWrapper;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.syzible.todo.todolistgh.R;
 
 import java.util.ArrayList;
 
@@ -44,13 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper databaseHelper;
 
-    Button addButton, memoButton;
     TableLayout tableLayout;
     ArrayList<CheckBox> checkBoxes;
     CheckBox totalCheckBox;
     TextView orderByDate, orderByCategory, orderByDescription, clearButton;
-    com.getbase.floatingactionbutton.FloatingActionButton actionAdd;
-    com.getbase.floatingactionbutton.FloatingActionButton actionMemo;
+    FloatingActionButton addTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +60,8 @@ public class MainActivity extends AppCompatActivity {
         clearButton = (TextView) findViewById(R.id.clearAllTasks);
         tableLayout = (TableLayout) findViewById(R.id.list_table);
         totalCheckBox = (CheckBox) findViewById(R.id.select_all);
-        actionAdd = (com.getbase.floatingactionbutton.FloatingActionButton) findViewById(R.id.action_a);
-        actionMemo = (com.getbase.floatingactionbutton.FloatingActionButton) findViewById(R.id.action_b);
+        addTask = (FloatingActionButton) findViewById(R.id.fab);
 
-
-        checkBoxes = new ArrayList<>();
         checkBoxes = new ArrayList<>();
 
         orderByDate = (TextView) findViewById(R.id.dateTitle);
@@ -225,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        actionAdd.setOnClickListener(new View.OnClickListener() {
+        addTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final AddTaskDialog addTaskDialog = new AddTaskDialog();
@@ -266,27 +259,9 @@ public class MainActivity extends AppCompatActivity {
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
-                        /*NotificationHandler notification = new NotificationHandler(MainActivity.this);
-                        SQLiteDatabase readDb = databaseHelper.getReadableDatabase();
-                        Cursor cursor = readDb.rawQuery(DatabaseHelper.SELECT_ALL_QUERY, null);
-                        for(int i = 1; i <= cursor.getCount(); i++)
-                        {
-                            setData(i, DatabaseHelper.COL_DUE_DATE);
-                            String date = getData();
-                            setData(i, DatabaseHelper.COL_DESCRIPTION);
-                            String description = getData();
-                            notification.showNotification(date, description);
-                        }*/
                     }
                 });
 
-            }
-        });
-
-        actionMemo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getBaseContext(), SyncActivity.class));
             }
         });
     }
@@ -307,6 +282,10 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(getApplicationContext(), About.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.action_google_play) {
             return true;
         }
 
@@ -341,52 +320,36 @@ public class MainActivity extends AppCompatActivity {
         this.allChecked = allChecked;
     }
 
-    public boolean isAllChecked() {
-        return allChecked;
-    }
-
     public void orderTable() {
         this.ordering = sharedPreferences.getInt(getResources().getString(R.string.pref_key_ordering), 8);
+        tableLayout.invalidate();
         switch (ordering) {
             //date descending
             case 0:
-                tableLayout.invalidate();
                 populateTable(DatabaseHelper.SELECT_BY_DATE_DESCENDING);
                 break;
             //date ascending
             case 1:
-                tableLayout.invalidate();
                 populateTable(DatabaseHelper.SELECT_BY_DATE_ASCENDING);
                 break;
             //category descending
             case 2:
-                tableLayout.invalidate();
                 populateTable(DatabaseHelper.SELECT_BY_CATEGORY_DESCENDING);
                 break;
             //category ascending
             case 3:
-                tableLayout.invalidate();
                 populateTable(DatabaseHelper.SELECT_BY_CATEGORY_ASCENDING);
                 break;
             //description descending
             case 4:
-                tableLayout.invalidate();
                 populateTable(DatabaseHelper.SELECT_BY_DESCRIPTION_DESCENDING);
                 break;
             //description ascending
             case 5:
-                tableLayout.invalidate();
                 populateTable(DatabaseHelper.SELECT_BY_DESCRIPTION_ASCENDING);
-                break;
-            //priority descending
-            case 6:
-                break;
-            //priority ascending
-            case 7:
                 break;
             //by id ascending default
             default:
-                tableLayout.invalidate();
                 populateTable(DatabaseHelper.SELECT_ALL_QUERY);
                 break;
         }
@@ -458,13 +421,13 @@ public class MainActivity extends AppCompatActivity {
             checkBoxes.add(checkBox);
             if (cursor.getInt(6) == 1) {
                 checkBox.setChecked(true);
-                strikeThrough(dateField, categoryField, descField, priField, true);
+                strikeThrough(dateField, categoryField, descField, true);
                 //priField.setTextColor(getResources().getColor(R.color.red));
 
                 tableLayout.invalidate();
             } else {
                 checkBox.setChecked(false);
-                strikeThrough(dateField, categoryField, descField, priField, false);
+                strikeThrough(dateField, categoryField, descField, false);
                 tableLayout.invalidate();
             }
 
@@ -472,7 +435,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     databaseHelper.editChecked(row, isChecked);
-                    strikeThrough(dateField, categoryField, descField, priField, isChecked);
+                    strikeThrough(dateField, categoryField, descField, isChecked);
                     databaseHelper.printTableContents(Database.TasksTable.TABLE_NAME);
                 }
             });
@@ -618,12 +581,11 @@ public class MainActivity extends AppCompatActivity {
      * @param completed     toggles whether or not the row is to be struck through or not
      */
     public void strikeThrough(TextView dateField, TextView categoryField,
-                              TextView descField, TextView priField, boolean completed) {
+                              TextView descField, boolean completed) {
         if (completed) {
             dateField.setPaintFlags(dateField.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             categoryField.setPaintFlags(dateField.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             descField.setPaintFlags(dateField.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            //priField.setTextColor(getResources().getColor(R.color.red));
 
         } else {
             dateField.setPaintFlags(dateField.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));

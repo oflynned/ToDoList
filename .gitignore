@@ -1,7 +1,9 @@
 *.iml
-build/
-.gradle/
-.idea/	
+/build/
+/.gradle/
+/.idea/	
+
+.DS_STORE
 
 # Created by https://www.gitignore.io/api/android
 
