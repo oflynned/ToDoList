@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "/Users/ed/Desktop/Projects/Android/ToDoList/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_create_white_24dp.png",
+        "source": "/Users/ed/Desktop/Projects/Android/ToDoList/app/src/main/res/mipmap-xxhdpi/ic_create_white_24dp.png"
+    },
+    {
+        "merged": "/Users/ed/Desktop/Projects/Android/ToDoList/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_assignment_white_24dp.png",
+        "source": "/Users/ed/Desktop/Projects/Android/ToDoList/app/src/main/res/mipmap-xxhdpi/ic_assignment_white_24dp.png"
+    },
+    {
+        "merged": "/Users/ed/Desktop/Projects/Android/ToDoList/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_launcher.png",
+        "source": "/Users/ed/Desktop/Projects/Android/ToDoList/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/ed/Desktop/Projects/Android/ToDoList/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_launcher_new.png",
+        "source": "/Users/ed/Desktop/Projects/Android/ToDoList/app/src/main/res/mipmap-xxhdpi/ic_launcher_new.png"
+    },
+    {
+        "merged": "/Users/ed/Desktop/Projects/Android/ToDoList/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_list_black_24dp.png",
+        "source": "/Users/ed/Desktop/Projects/Android/ToDoList/app/src/main/res/mipmap-xxhdpi/ic_list_black_24dp.png"
+    },
+    {
+        "merged": "/Users/ed/Desktop/Projects/Android/ToDoList/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_fab_star.png",
+        "source": "/Users/ed/Desktop/Projects/Android/ToDoList/app/src/main/res/mipmap-xxhdpi/ic_fab_star.png"
+    },
+    {
+        "merged": "/Users/ed/Desktop/Projects/Android/ToDoList/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_list_white_24dp.png",
+        "source": "/Users/ed/Desktop/Projects/Android/ToDoList/app/src/main/res/mipmap-xxhdpi/ic_list_white_24dp.png"
+    }
+]

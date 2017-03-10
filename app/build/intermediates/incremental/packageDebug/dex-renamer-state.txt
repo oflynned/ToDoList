@@ -1,0 +1,7 @@
+#Fri Mar 10 12:28:21 GMT 2017
+base.0=/Users/ed/Desktop/Projects/Android/ToDoList/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_bc7f44300e197b1a2c2a57473aea4bb0da2ceacc
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=/Users/ed/Desktop/Projects/Android/ToDoList/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_8e15e92c4b8f3bbec122c1346f0cac5ab67f7664/classes.dex
+base.1=/Users/ed/Desktop/Projects/Android/ToDoList/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_8e15e92c4b8f3bbec122c1346f0cac5ab67f7664
+file.0=/Users/ed/Desktop/Projects/Android/ToDoList/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_bc7f44300e197b1a2c2a57473aea4bb0da2ceacc/classes.dex

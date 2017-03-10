@@ -1,0 +1,4 @@
+#Fri Mar 10 12:28:20 GMT 2017
+base.0=/Users/ed/Desktop/Projects/Android/ToDoList/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_2
+renamed.0=classes.dex
+file.0=/Users/ed/Desktop/Projects/Android/ToDoList/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_2/classes.dex
