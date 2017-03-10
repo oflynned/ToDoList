@@ -9,12 +9,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.Menu;
@@ -286,6 +288,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         } else if (id == R.id.action_google_play) {
+            String url = "market://search?q=pub:Syzible";
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(intent);
             return true;
         }
 
@@ -399,7 +404,6 @@ public class MainActivity extends AppCompatActivity {
             final TextView priField = new TextView(this);
             if (cursor.getInt(DatabaseHelper.COL_PRIORITY) == 1) {
                 priField.setText("!");
-                //priField.setTextColor(getResources().getColor(R.color.red));
                 priField.setTypeface(null, Typeface.BOLD);
 
             } else {
