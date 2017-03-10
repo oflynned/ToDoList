@@ -7,6 +7,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import java.util.Calendar;
  * Created by ed on 30/11/15.
  */
 public class EditTaskDialog extends DialogFragment {
+
+    private static final int MARGIN = 24;
 
     private String date, rawDate, category, description;
     private Boolean priorityBool = false;
@@ -74,8 +77,8 @@ public class EditTaskDialog extends DialogFragment {
                 new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT);
         dateParams.addRule(RelativeLayout.ALIGN_START, RelativeLayout.TRUE);
-        dateParams.setMarginStart(10);
-        dateParams.setMarginEnd(10);
+        dateParams.setMarginStart(getDp(MARGIN));
+        dateParams.setMarginEnd(getDp(MARGIN));
         dateField.setSingleLine();
         dateField.setHint("Date");
         dateField.setLayoutParams(dateParams);
@@ -110,8 +113,8 @@ public class EditTaskDialog extends DialogFragment {
                 new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT);
         categoryParams.addRule(RelativeLayout.BELOW, dateField.getId());
-        categoryParams.setMarginStart(10);
-        categoryParams.setMarginEnd(10);
+        categoryParams.setMarginStart(getDp(MARGIN));
+        categoryParams.setMarginEnd(getDp(MARGIN));
         categoryField.setSingleLine();
         categoryField.setInputType(InputType.TYPE_CLASS_TEXT);
         categoryField.setHint("Category");
@@ -123,8 +126,8 @@ public class EditTaskDialog extends DialogFragment {
                 new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT);
         descriptionParams.addRule(RelativeLayout.BELOW, categoryField.getId());
-        descriptionParams.setMarginStart(10);
-        descriptionParams.setMarginEnd(10);
+        descriptionParams.setMarginStart(getDp(MARGIN));
+        descriptionParams.setMarginEnd(getDp(MARGIN));
         descriptionField.setSingleLine();
         descriptionField.setInputType(InputType.TYPE_CLASS_TEXT);
         descriptionField.setHint("Description");
@@ -138,8 +141,8 @@ public class EditTaskDialog extends DialogFragment {
                 new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT);
         priorityParams.addRule(RelativeLayout.BELOW, descriptionField.getId());
-        priorityParams.setMarginStart(10);
-        priorityParams.setMarginEnd(10);
+        priorityParams.setMarginStart(getDp(MARGIN));
+        priorityParams.setMarginEnd(getDp(MARGIN));
         priorityBox.setLayoutParams(priorityParams);
         priorityBox.setId(View.generateViewId());
 
@@ -248,5 +251,11 @@ public class EditTaskDialog extends DialogFragment {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         this.rawDate = simpleDateFormat.format(calender.getTime());
     }
+
+    public int getDp(float pixels) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, pixels,
+                getActivity().getResources().getDisplayMetrics());
+    }
+
 
 }
